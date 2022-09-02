@@ -3,13 +3,13 @@
 import React, { Component } from 'react';
 
 const clockTile = {
-  height: '30px',
-  width: '150px',
+  height: '80px',
+  width: '300px',
   backgroundColor: 'black',
   color: 'white',
   textAlign: 'left',
   fontWeight: 'bold',
-  fontSize: '20px'
+  fontSize: '50px'
 }
 
 const clockSpan = {
