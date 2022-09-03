@@ -28,6 +28,16 @@
   color: #61dafb;
 }
 
+.horoscope-info {
+  height: 100%;
+  width: 50%;
+  background: #5980cf;
+  color: white;
+  text-align: left;
+  font-weight: bold;
+  font-size: 20px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
