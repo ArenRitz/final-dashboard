@@ -28,6 +28,21 @@
   color: #61dafb;
 }
 
+.time-tile {
+  height: 5rem;
+  width: 25rem;
+  background-color: black;
+  color: white;
+  text-align: left;
+  font-weight: bold;
+  font-size: 50px
+}
+
+.time-text {
+  padding: 10px
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

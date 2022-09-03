@@ -1,20 +1,4 @@
-// from source: https://github.com/abdulkhaderp/react-digital-clock
-
 import React, { Component } from 'react';
-
-const clockTile = {
-  height: '80px',
-  width: '300px',
-  backgroundColor: 'black',
-  color: 'white',
-  textAlign: 'left',
-  fontWeight: 'bold',
-  fontSize: '50px'
-}
-
-const clockSpan = {
-  padding: '10px'
-}
 
 let runner;
 
@@ -68,8 +52,8 @@ class Clock extends Component {
 
   render() {
     return (
-      <div style={clockTile}>
-        <span style={clockSpan}>{this.state.time}</span>
+      <div className='time-tile'>
+        <span className='time-text'>{this.state.time}</span>
       </div>
     );
   }
