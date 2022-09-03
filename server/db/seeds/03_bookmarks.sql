@@ -1,0 +1,16 @@
+INSERT INTO bookmarks (id, user_category_id, bookmark_title, bookmark_url) VALUES (1, 1, 'github', 'http//github.com');
+INSERT INTO bookmarks (id, user_category_id, bookmark_title, bookmark_url) VALUES (2, 1, 'stackoverflow', 'http//stackoverflow.com');
+INSERT INTO bookmarks (id, user_category_id, bookmark_title, bookmark_url) VALUES (3, 1, 'reddit', 'http//reddit.com');
+INSERT INTO bookmarks (id, user_category_id, bookmark_title, bookmark_url) VALUES (4, 1, 'youtube', 'http//youtube.com');
+INSERT INTO bookmarks (id, user_category_id, bookmark_title, bookmark_url) VALUES (5, 2, 'twitch', 'http//twitch.com');
+INSERT INTO bookmarks (id, user_category_id, bookmark_title, bookmark_url) VALUES (6, 2, 'twitter', 'http//twitter.com');
+INSERT INTO bookmarks (id, user_category_id, bookmark_title, bookmark_url) VALUES (7, 2, 'instagram', 'http//instagram.com');
+INSERT INTO bookmarks (id, user_category_id, bookmark_title, bookmark_url) VALUES (8, 2, 'facebook', 'http//facebook.com');
+INSERT INTO bookmarks (id, user_category_id, bookmark_title, bookmark_url) VALUES (9, 3, 'linkedin', 'http//linkedin.com');
+INSERT INTO bookmarks (id, user_category_id, bookmark_title, bookmark_url) VALUES (10, 3, 'pinterest', 'http//pinterest.com');
+INSERT INTO bookmarks (id, user_category_id, bookmark_title, bookmark_url) VALUES (11, 3, 'quora', 'http//quora.com');
+INSERT INTO bookmarks (id, user_category_id, bookmark_title, bookmark_url) VALUES (12, 3, 'stackoverflow', 'http//stackoverflow.com');
+INSERT INTO bookmarks (id, user_category_id, bookmark_title, bookmark_url) VALUES (13, 4, 'reddit', 'http//reddit.com');
+INSERT INTO bookmarks (id, user_category_id, bookmark_title, bookmark_url) VALUES (14, 4, 'youtube', 'http//youtube.com');
+INSERT INTO bookmarks (id, user_category_id, bookmark_title, bookmark_url) VALUES (15, 4, 'twitch', 'http//twitch.com');
+INSERT INTO bookmarks (id, user_category_id, bookmark_title, bookmark_url) VALUES (16, 4, 'twitter', 'http//twitter.com');
