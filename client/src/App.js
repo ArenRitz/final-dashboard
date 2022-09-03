@@ -9,8 +9,8 @@ function App() {
     </div>
 
     <div>
-      <div>Weather Widget Placeholder</div>
-      <Weather location={{lat: '48.137154', lon: '11.576124'}}/>
+      <h2>Weather Widget Placeholder</h2>
+      <Weather location={{lat: '43.6532', lon: '-79.3832'}}/>
     </div>
 
 
