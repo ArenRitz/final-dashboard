@@ -14,7 +14,7 @@ export default function Weather(props) {
     lang: 'en',
     unit: 'M', // values are (M,S,I)
   });
-  const loc = data.location
+  const cityName = data.location
 
   return (
     <div>
@@ -23,9 +23,9 @@ export default function Weather(props) {
         errorMessage={errorMessage}
         data={data}
         lang="en"
-        locationLabel={loc} //data.location SOMETIMES works, sometimes TypeErrors
+        locationLabel={cityName} //data.location SOMETIMES works, sometimes TypeErrors
         unitsLabels={{ temperature: 'C', windSpeed: 'Km/h' }}
-        showForecast
+        showForecast={false}
       />
     </div>
   );
