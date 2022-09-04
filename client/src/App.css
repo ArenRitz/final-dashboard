@@ -28,6 +28,27 @@
   color: #61dafb;
 }
 
+.horoscope {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.horoscope-thumbnail {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.horoscope-info {
+  height: 100%;
+  width: 50%;
+  background: #050b1d;
+  color: white;
+  text-align: left;
+  font-weight: bold;
+  font-size: 20px;
+ }
+
 .recipe-main {
   background-color: rgb(213, 122, 65);
   color: rgb(0, 0, 0);
@@ -65,7 +86,6 @@
 
 .time-text {
   padding: 10px
-
 }
 
 @keyframes App-logo-spin {
@@ -76,7 +96,6 @@
   to {
     transform: rotate(360deg);
   }
-
 }
 
 html {
