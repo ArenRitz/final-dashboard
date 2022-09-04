@@ -1,13 +1,17 @@
 import React from 'react';
 import Clock from './components/digitalClock';
 import "./App.css";
+import Weather from "./components/Weather";
 import TwitchWidgetList from "./components/TwitchWidgetList";
+
 function App() {
 
   return (
   <div className="h-screen w-screen">
 
       <Clock />
+
+      <Weather location={{lat: '43.6532', lon: '-79.3832'}}/>
 
       <TwitchWidgetList />
 
