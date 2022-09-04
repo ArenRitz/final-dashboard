@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const userHoroscope = 'Gemini';
+const userHoroscope = 'Taurus';
 
 let userHoroscopeImage = `assets/zodiacs/`;
 

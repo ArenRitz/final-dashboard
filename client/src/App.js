@@ -1,7 +1,6 @@
 import React from 'react';
 import Aztro from './components/horoscopeWidget';
 import WidgetRecipe from "./components/WidgetRecipe";
-import React from 'react';
 import Clock from './components/digitalClock';
 import "./App.css";
 import BookmarkCategory from "./components/BookmarkCategory";
