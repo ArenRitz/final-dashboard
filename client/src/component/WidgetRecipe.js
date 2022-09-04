@@ -3,8 +3,8 @@ import axios from 'axios';
 
 // EDAMAM API DETAILS
 // let userQueryRecipe = "pizza";
-// let appID = "ca9ee7dc";
-// let appKey = "aabc9460c81f9334cc2c38dee5a76698"
+// let appID = PROCESS.ENV.REACT_APP_EDAMAM_APP_ID;
+// let appKey = PROCESS.ENV.REACT_APP_EDAMAM_APP_KEY;
 
 // let apiRecipeURL = `https://api.edamam.com/api/recipes/v2?type=public&q=${userQueryRecipe}&app_id=${appID}&app_key=${appKey}`
 
@@ -53,7 +53,7 @@ const WidgetRecipe = () => {
   return (
     <div className="recipe-main">
       <div className="recipe-title">
-        Recipe Information:
+        <p>RECIPE INFORMATION</p>
       </div>
       <div className="recipe-info">
         <p className="recipe-type">
@@ -70,8 +70,7 @@ const WidgetRecipe = () => {
         </p>
       </div>
     </div>
-
-  )
+  );
 }
 
 export default WidgetRecipe
