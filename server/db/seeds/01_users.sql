@@ -1,6 +1,4 @@
-INSERT INTO users (id, email, password) VALUES (1, 'morty.sandchez@gmail.com', 'picklerick');
-INSERT INTO users (id, email, password) VALUES (2, 'bart.simpson@gmail.com', 'ehhhhh');
-INSERT INTO users (id, email, password) VALUES (3, 'link@yahoo.com', 'hyrule');
-INSERT INTO users (id, email, password) VALUES (4, 'simon_bel123@mail.ca', 'dracula');
-INSERT INTO users (id, email, password) VALUES (5, 'all_might@academia.jp', 'plusUltra');
-INSERT INTO users (id, email, password) VALUES (6, 'mario@mushroomkindom.jp', 'plumber79');
+INSERT INTO users (username, email, password, horoscope_sign, home_location, work_location, twitch_usernames) VALUES ('Morty', 'morty@gmail.com', '1234', 'aquarius', '123 address st', '321 address rd', '{morty, rick, summer}');
+INSERT INTO users (username, email, password, horoscope_sign, home_location, work_location, twitch_usernames) VALUES ('Rick', 'rick@gmail.com', '1234', 'sagittarius', '123 address st', '321 address rd', '{morty, rick, summer}');
+INSERT INTO users (username, email, password, horoscope_sign, home_location, work_location, twitch_usernames) VALUES ('Summer', 'summer@gmail.com', '1234', 'scorpio', '123 address st', '321 address rd', '{morty, rick, summer}');
+INSERT INTO users (username, email, password, horoscope_sign, home_location, work_location, twitch_usernames) VALUES ('Beth', 'beth@gmail.com', '1234', 'leo', '123 address st', '321 address rd', '{morty, rick, summer}');
