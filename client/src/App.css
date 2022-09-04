@@ -28,10 +28,21 @@
   color: #61dafb;
 }
 
+.horoscope {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.horoscope-thumbnail {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .horoscope-info {
   height: 100%;
   width: 50%;
-  background: #5980cf;
+  background: #050b1d;
   color: white;
   text-align: left;
   font-weight: bold;
@@ -42,6 +53,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
