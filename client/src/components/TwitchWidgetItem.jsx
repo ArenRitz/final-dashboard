@@ -5,10 +5,8 @@ import { useEffect, useState} from "react";
 const Twitch = (props) => {
 
   const [state, setState] = useState({
-  
     status: "",
     thumbnail: "",
- 
   });
 
 
@@ -75,7 +73,7 @@ const Twitch = (props) => {
       .catch((err) => {
         console.log(err);
       })
-    }, 10000)
+    }, 60000)
     
     return () => {
       clearInterval(refreshData);
