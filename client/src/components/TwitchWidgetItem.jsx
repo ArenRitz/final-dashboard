@@ -67,7 +67,7 @@ const Twitch = (props) => {
       .catch((err) => {
         console.log(err);
       })
-    }, 20000)
+    }, 60000)
     
     return () => {
       clearInterval(refreshData);
