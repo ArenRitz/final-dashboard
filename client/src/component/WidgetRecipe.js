@@ -17,6 +17,7 @@ const WidgetRecipe = () => {
     category: "",
     theme: "",
     source: "",
+    thumbnail: "",
   });
 
   useEffect(() => {
@@ -34,6 +35,7 @@ const WidgetRecipe = () => {
             category: recipeData.strCategory,
             theme: recipeData.strMeal,
             source: recipeData.strSource,
+            thumbnail: recipeData.strMealThumb,
           });
         } else {
           setRecipe({
@@ -42,6 +44,7 @@ const WidgetRecipe = () => {
             category: "No data",
             theme: "No data",
             source: "No data",
+            thumbnail: "No data",
           });
         }
       })
@@ -56,18 +59,23 @@ const WidgetRecipe = () => {
         <p>RECIPE INFORMATION</p>
       </div>
       <div className="recipe-info">
-        <p className="recipe-type">
-          {recipe.type}
-        </p>
-        <p className="recipe-category">
-          {recipe.category}
-        </p>
-        <p className="recipe-theme">
-          {recipe.theme}
-        </p>
-        <p className="recipe-source">
-          {recipe.source}
-        </p>
+        <div className="recipe-details">
+          <p className="recipe-type">
+            {recipe.type}
+          </p>
+          <p className="recipe-category">
+            {recipe.category}
+          </p>
+          <p className="recipe-theme">
+            {recipe.theme}
+          </p>
+          <p className="recipe-source">
+            {recipe.source}
+          </p>
+        </div>
+        <div>
+          <img className="recipe-thumbnail" src={recipe.thumbnail} alt="thumbnail for recipe" width="200" height="200" />
+        </div>
       </div>
     </div>
   );

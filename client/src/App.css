@@ -42,15 +42,14 @@
 }
 
 .recipe-info {
-  font-style: oblique
+  display: flex;
+  flex-direction: column;
+  font-style: oblique;
+  align-items: center;
 }
 
 .recipe-source {
   font-style: normal;
-  text-decoration: underline;
-}
-
-em {
   text-decoration: underline;
 }
 
