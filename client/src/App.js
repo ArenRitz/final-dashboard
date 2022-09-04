@@ -1,10 +1,10 @@
 import React from 'react';
-import Clock from './Components/digitalClock';
+import Clock from './components/digitalClock';
 import "./App.css";
 import TwitchWidgetList from "./components/TwitchWidgetList";
 function App() {
 
-  return
+  return (
   <div className="h-screen w-screen">
 
       <Clock />
@@ -16,6 +16,7 @@ function App() {
       </div>
 
    </div>
+   );
 }
 
 export default App;
