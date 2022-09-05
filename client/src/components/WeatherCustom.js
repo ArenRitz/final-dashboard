@@ -15,9 +15,6 @@ export default function Weather() {
   })
 
   useEffect(() => {
-
-    const ipifyUrl = `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.REACT_APP_IPIFY_KEY}`
-
     const weatherParams = {
       key: process.env.REACT_APP_WEATHERBIT_KEY,
       days: 5,
@@ -27,11 +24,12 @@ export default function Weather() {
       lat: coords.lat,
     };
 
-    axios.get(ipifyUrl)
-      .then((res) => {
-        console.log("ipify response:",res.data)
-        const latitude = res.data.location.lat
-        const longitude = res.data.location.lng
+    // AbortController prevents multiple useEffect calls with UseStrict
+    const controller = new AbortController() 
+
+    navigator.geolocation.getCurrentPosition(res => {
+        const latitude = res.coords.latitude
+        const longitude = res.coords.longitude
         weatherParams.lat = latitude
         weatherParams.lon = longitude
         setCoords(() => ({
@@ -39,14 +37,25 @@ export default function Weather() {
           lon: longitude
         }))
 
-        const url = `https://api.weatherbit.io/v2.0/current?lat=${weatherParams.lat}&lon=${weatherParams.lon}&key=${weatherParams.key}`
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${weatherParams.lat}&lon=${weatherParams.lon}&appid=${weatherParams.key}&units=metric`
 
-        return axios.get(url)
-      })
+        return axios.get(url, {signal: controller.signal})
       .then((res) => {
-        console.log("weatherbit respsnse:",res.data)
-        setWeatherData(() => (res.data.data[0]))
+        console.log("openweather response:",res.data)
+        const responseData = {
+          temp: Math.round(res.data.main.temp),
+          city_name: res.data.name,
+          weather: {description: res.data.weather[0].description}
+        }
+
+        setWeatherData(() => responseData)
       })
+      .catch((err) => {
+        console.log(err)
+      })
+    })
+    return (() => controller.abort())
+
   }, [coords.lon, coords.lat])
 
 
@@ -55,7 +64,7 @@ export default function Weather() {
 
       <h1 className="text-lg font-medium leading-6 text-neutral-700"> {weatherData.city_name} </h1>
       <div className="border-t border-gray-300"/>
-      <h1 className="text-lg font-medium leading-6 text-neutral-700" > {Math.round(weatherData.temp)} °C</h1>
+      <h1 className="text-lg font-medium leading-6 text-neutral-700" > {weatherData.temp} °C</h1>
       <div className="border-t border-gray-300"/>
       <h1 className="text-lg font-medium leading-6 text-neutral-700"> {weatherData.weather.description}</h1>
     </div>
