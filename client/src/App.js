@@ -4,7 +4,7 @@ import WidgetRecipe from "./components/WidgetRecipe";
 import Clock from './components/digitalClock';
 import "./App.css";
 import BookmarkCategory from "./components/BookmarkCategory";
-import Weather from "./components/Weather";
+// import Weather from "./components/Weather";
 import TwitchWidgetList from "./components/TwitchWidgetList";
 
 function App() {
@@ -13,7 +13,6 @@ function App() {
 
       <Clock />
 
-      <Weather location={{lat: '43.6532', lon: '-79.3832'}}/>
 
       <TwitchWidgetList />
       

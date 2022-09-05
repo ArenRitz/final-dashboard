@@ -80,13 +80,13 @@ const BookmarkCategory = () => {
   };
 
 
-  let category = Object.keys(bookmarks).map((category) => {
+  let category = Object.keys(bookmarks).map((category, index) => {
    
     return (
    
-          <div key={category} className='mx-5 figma-bookmark-back'>
+          <div key={category} className='mx-5 figma-bookmark-back text-center'>
         <h1 className='text-2xl font-bold figma-bookmark-label'>{category}</h1>
-        <BookmarkList key={category} bookmarkItems={bookmarks[category]} />
+        <BookmarkList key={category} category={category} bookmarkItems={bookmarks[category]} index={index} />
       </div>
     );
 
