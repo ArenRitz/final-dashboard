@@ -11,8 +11,9 @@ export default function Weather() {
   const [weatherData, setWeatherData] = useState({
     temp: null,
     city_name: null,
-    weather: {description: null}
+    weather: {description: null, icon: null},
   })
+
 
   useEffect(() => {
     const weatherParams = {
@@ -39,13 +40,13 @@ export default function Weather() {
 
         const url = `https://api.openweathermap.org/data/2.5/weather?lat=${weatherParams.lat}&lon=${weatherParams.lon}&appid=${weatherParams.key}&units=metric`
 
-        return axios.get(url, {signal: controller.signal})
+        return axios.get(url, {signal: controller.signal}) //use signal to prevent multiple useEffect calls with UseStrict
       .then((res) => {
         console.log("openweather response:",res.data)
         const responseData = {
           temp: Math.round(res.data.main.temp),
           city_name: res.data.name,
-          weather: {description: res.data.weather[0].description}
+          weather: {description: res.data.weather[0].description, icon: res.data.weather[0].icon}
         }
 
         setWeatherData(() => responseData)
@@ -54,19 +55,22 @@ export default function Weather() {
         console.log(err)
       })
     })
-    return (() => controller.abort())
+    return (() => controller.abort()) //to prevent multiple useEffect calls with UseStrict
 
   }, [coords.lon, coords.lat])
 
-
   return (
-    <div className="w-fit bg-blue-300 rounded-3xl px-2 py-2 my-1 shadow">
-
-      <h1 className="text-lg font-medium leading-6 text-neutral-700"> {weatherData.city_name} </h1>
-      <div className="border-t border-gray-300"/>
-      <h1 className="text-lg font-medium leading-6 text-neutral-700" > {weatherData.temp} °C</h1>
-      <div className="border-t border-gray-300"/>
-      <h1 className="text-lg font-medium leading-6 text-neutral-700"> {weatherData.weather.description}</h1>
+    <div className="flex w-fit bg-blue-300 rounded-3xl px-2 py-2 my-1 shadow">
+      <div>
+        <h1 className="text-lg font-medium leading-6 text-neutral-700"> {weatherData.city_name} </h1>
+        <div className="border-t border-gray-300"/>
+        <h1 className="text-lg font-medium leading-6 text-neutral-700" > {weatherData.temp} °C</h1>
+        <div className="border-t border-gray-300"/>
+        <h1 className="text-lg font-medium leading-6 text-neutral-700"> {weatherData.weather.description}</h1>
+      </div>
+      <div className=" w-[5rem] flex justify-center items-center">
+        <img alt="icon" src={`http://openweathermap.org/img/w/${weatherData.weather.icon}.png`} />
+      </div>
     </div>
   );
 
