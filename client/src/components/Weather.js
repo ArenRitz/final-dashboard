@@ -9,10 +9,11 @@ import useIpLocation from "../hooks/useIpLocation";
 export default function Weather(props) {
 
   //store location(lat, lon) in state
-  const state = useIpLocation()
-  console.log("state in Weather.js",state)
 
-  console.log("weather widget: running api call")
+
+  const state = useIpLocation()
+
+
   const { data, isLoading, errorMessage } = useWeatherBit({
     key: process.env.REACT_APP_WEATHERBIT_KEY,
     lat: state.lat,
@@ -23,6 +24,7 @@ export default function Weather(props) {
   
   //intermittant issue: data.location returns null. for now, use "Current Weather" if data.location = falsy
   const cityName = data? data.location : "Local Weather"
+  console.log("WeatherBit data: ",data)
 
   return (
     <div>
