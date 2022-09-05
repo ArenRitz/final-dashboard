@@ -88,6 +88,44 @@
   padding: 10px
 }
 
+.spotify-header {
+  color: white;
+  text-align: center;
+  align-items: center;
+  font-size: 30px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.spotify-content {
+  display: flex;
+  color: white;
+  align-items: center;
+  flex-direction: column;
+  font-size: 20px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.spotify-track-layout {
+  width: 600px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.spotify-track-layout .spotify-text-content {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-right: 2rem;
+}
+
+.spotify-track-layout img {
+  width: 200px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
