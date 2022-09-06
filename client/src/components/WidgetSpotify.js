@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import Button from './Button';
 
 const playlist_id = [
   '37i9dQZF1DXcBWIGoYBM5M', 
@@ -47,7 +48,7 @@ const playlist_names = [
   'Happy Hits'
 ];
 
-const WidgetSpotify = () => {
+const WidgetSpotify = (props) => {
 
   const [music, setMusic] = useState({
     currentPlaylistName: '',
@@ -187,7 +188,8 @@ const WidgetSpotify = () => {
   }, []);
 
   return (
-
+    <>
+    <Button click={props.click} name="Spotify" />
     <div className='spotify-main'>
       <div className='spotify-header'>
         <h1>SPOTIFY</h1>
@@ -356,6 +358,7 @@ const WidgetSpotify = () => {
         </div>
       </div>
     </div>
+    </>
 
   )
 }

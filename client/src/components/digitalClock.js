@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Button from './Button';
 let runner;
 
 class Clock extends Component {
@@ -50,11 +50,14 @@ class Clock extends Component {
     }
   }
 
-  render() {
+  render(props) {
     return (
+      <>
+      <Button click={props.click} name="Clock" />
       <div className='time-tile'>
         <span className='time-text'>{this.state.time}</span>
       </div>
+      </>
     );
   }
 }

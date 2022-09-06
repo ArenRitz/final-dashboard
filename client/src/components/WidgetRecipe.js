@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-
+import Button from './Button';
 // EDAMAM API DETAILS
 // let userQueryRecipe = "pizza";
 // let appID = PROCESS.ENV.REACT_APP_EDAMAM_APP_ID;
@@ -55,6 +55,9 @@ const WidgetRecipe = () => {
   }, []);
 
   return (
+    <>
+    <Button click={props.click} name="Recipe" />
+    
     <div className="recipe-main">
       <div className="recipe-title">
         <p>RECIPE INFORMATION</p>
@@ -79,6 +82,8 @@ const WidgetRecipe = () => {
         </div>
       </div>
     </div>
+
+    </>
   );
 }
 
