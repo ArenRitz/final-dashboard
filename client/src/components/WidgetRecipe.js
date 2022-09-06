@@ -10,7 +10,7 @@ import Button from './Button';
 
 //Meal DB API for random recipe (use this one)
 
-const WidgetRecipe = () => {
+const WidgetRecipe = (props) => {
 
   const [recipe, setRecipe] = useState({
     type: "",

@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useEffect, useState} from "react";
 
-const Twitch = (props) => {
+const TwitchWidgetItem = (props) => {
 
   const [state, setState] = useState({
     status: "",
@@ -113,4 +113,4 @@ const Twitch = (props) => {
   );
 };
 
-export default Twitch;
+export default TwitchWidgetItem;

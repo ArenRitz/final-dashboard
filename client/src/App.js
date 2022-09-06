@@ -7,7 +7,7 @@ import BookmarkCategory from "./components/BookmarkCategory";
 import WeatherCustom from "./components/WeatherCustom";
 import TwitchWidgetList from "./components/TwitchWidgetList";
 import WidgetSpotify from './components/WidgetSpotify';
-import Button from './components/Button';
+
 
 function App() {
 
@@ -21,7 +21,8 @@ function App() {
     Spotify: true
   })
 
-  const hideShow =  (e) => {
+  const hideComponenet =  (e) => {
+    console.log('trying to delete')
     const {name} = e.target;
     setShow(prevState => ({
       ...prevState,
@@ -31,28 +32,30 @@ function App() {
 
 
 
+
   return (
     <div className="App">
 
-            {show.Aztro ? <Aztro /> : null}
+            {show.Aztro ? <Aztro click={hideComponenet}/> : null}
             <br></br>
 
-            {show.Recipe ? <WidgetRecipe /> : null}
+            {show.Twitch ? <TwitchWidgetList click={hideComponenet}/> : null}
             <br></br>
 
-            {show.Clock ? <Clock /> : null}
+            {show.Recipe ? <WidgetRecipe click={hideComponenet}/> : null}
+            <br></br>
+
+            {show.Clock ? <Clock click={hideComponenet}/> : null}
             <br></br>
   
-            {show.Bookmarks ? <BookmarkCategory click={hideShow} /> : null}
+            {show.Bookmarks ? <BookmarkCategory click={hideComponenet} /> : null}
             <br></br>
 
-            {show.Weather ? <WeatherCustom /> : null}
+            {show.Weather ? <WeatherCustom click={hideComponenet}/> : null}
             <br></br>
         
-            {show.Twitch ? <TwitchWidgetList /> : null}
-            <br></br>
  
-            {show.Spotify ? <WidgetSpotify /> : null}
+            {show.Spotify ? <WidgetSpotify click={hideComponenet}/> : null}
 
       </div>
   );
