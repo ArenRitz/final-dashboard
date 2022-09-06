@@ -1,7 +1,8 @@
 import React from 'react'
 import BookmarkList from './BookmarkList'
+import Button from './Button';
 
-const BookmarkCategory = () => {
+const BookmarkCategory = (props) => {
 
 
   const bookmarks = {
@@ -83,21 +84,30 @@ const BookmarkCategory = () => {
   let category = Object.keys(bookmarks).map((category, index) => {
    
     return (
-   
+      
+       
           <div key={category} className='mx-5 figma-bookmark-back text-center'>
         <h1 className='text-2xl font-bold figma-bookmark-label'>{category}</h1>
         <BookmarkList key={category} category={category} bookmarkItems={bookmarks[category]} index={index} />
       </div>
+
+
     );
 
   });
 
 
   return (
+    <>   
+    <Button click={props.click} name="Bookmarks" />
     <div className='flex flex-row justify-between w-fit figma-bookmark-container px-5 py-5'>
       {category}
       </div>
-  )
+    
+      
+    </>
+    
+  );
 }
 
 export default BookmarkCategory

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Aztro from './components/horoscopeWidget';
 import WidgetRecipe from "./components/WidgetRecipe";
 import Clock from './components/digitalClock';
@@ -7,31 +7,55 @@ import BookmarkCategory from "./components/BookmarkCategory";
 import WeatherCustom from "./components/WeatherCustom";
 import TwitchWidgetList from "./components/TwitchWidgetList";
 import WidgetSpotify from './components/WidgetSpotify';
+import Button from './components/Button';
 
 function App() {
+
+  const [show , setShow] = useState({
+    Aztro: true,
+    Recipe: true,
+    Clock: true,
+    Bookmarks: true,
+    Weather: true,
+    Twitch: true,
+    Spotify: true
+  })
+
+  const hideShow =  (e) => {
+    const {name} = e.target;
+    setShow(prevState => ({
+      ...prevState,
+      [name]: !prevState[name]
+    }))
+  }
+
+
+
   return (
-   <div className="h-screen w-screen">
+    <div className="App">
 
-      <Clock />
+            {show.Aztro ? <Aztro /> : null}
+            <br></br>
 
-      <WeatherCustom />
+            {show.Recipe ? <WidgetRecipe /> : null}
+            <br></br>
 
-      <TwitchWidgetList />
-      
-      <WidgetRecipe />
-      
-      <BookmarkCategory />
+            {show.Clock ? <Clock /> : null}
+            <br></br>
+  
+            {show.Bookmarks ? <BookmarkCategory click={hideShow} /> : null}
+            <br></br>
 
-      <Aztro />
+            {show.Weather ? <WeatherCustom /> : null}
+            <br></br>
+        
+            {show.Twitch ? <TwitchWidgetList /> : null}
+            <br></br>
+ 
+            {show.Spotify ? <WidgetSpotify /> : null}
 
-      <WidgetSpotify />
-
-      <div className="h-1/4 w-1/4">
-        <button onClick={() => console.log('hello')} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Button </button>
       </div>
-
-   </div>
-   );
+  );
 }
 
 export default App;
