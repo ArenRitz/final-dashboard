@@ -1,23 +1,22 @@
-// Sources
-// Weather bit API: https://www.weatherbit.io/api 
-// ipify "Country + City" API: https://geo.ipify.org/docs
+// Open Weather API: https://openweathermap.org/current
+
 import axios from "axios"
 import { useState, useEffect } from "react";
 import React from "react";
 
-export default function Weather() {
+export default function WeatherCustom() {
 
   const [coords, setCoords] = useState({ lat: 43.26, lon: -80.21 })
+  const [isLoading, setIsLoading] = useState(false);
   const [weatherData, setWeatherData] = useState({
     temp: null,
     city_name: null,
     weather: {description: null, icon: null},
   })
 
-
   useEffect(() => {
     const weatherParams = {
-      key: process.env.REACT_APP_WEATHERBIT_KEY,
+      key: process.env.REACT_APP_OPENWEATHER_KEY,
       days: 5,
       lang: 'en',
       unit: 'M',
@@ -39,7 +38,7 @@ export default function Weather() {
         }))
 
         const url = `https://api.openweathermap.org/data/2.5/weather?lat=${weatherParams.lat}&lon=${weatherParams.lon}&appid=${weatherParams.key}&units=metric`
-
+        setIsLoading(true);
         return axios.get(url, {signal: controller.signal}) //use signal to prevent multiple useEffect calls with UseStrict
       .then((res) => {
         console.log("openweather response:",res.data)
@@ -50,9 +49,11 @@ export default function Weather() {
         }
 
         setWeatherData(() => responseData)
+        setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err)
+        const msg = err.message === "canceled" ? "Preventing useStrict behavior":""
+        console.log(msg, err)
       })
     })
     return (() => controller.abort()) //to prevent multiple useEffect calls with UseStrict
@@ -60,18 +61,25 @@ export default function Weather() {
   }, [coords.lon, coords.lat])
 
   return (
-    <div className="flex w-fit bg-blue-300 rounded-3xl px-2 py-2 my-1 shadow">
-      <div>
-        <h1 className="text-lg font-medium leading-6 text-neutral-700"> {weatherData.city_name} </h1>
-        <div className="border-t border-gray-300"/>
-        <h1 className="text-lg font-medium leading-6 text-neutral-700" > {weatherData.temp} °C</h1>
-        <div className="border-t border-gray-300"/>
-        <h1 className="text-lg font-medium leading-6 text-neutral-700"> {weatherData.weather.description}</h1>
-      </div>
-      <div className=" w-[5rem] flex justify-center items-center">
-        <img alt="icon" src={`http://openweathermap.org/img/w/${weatherData.weather.icon}.png`} />
-      </div>
+    <div>
+      {isLoading && <div>___</div> }
+      {weatherData.weather.icon && 
+        <div className="flex w-fit bg-blue-300 rounded-3xl px-2 py-2 my-1 shadow">
+          <div>
+            <h1 className="text-lg font-medium leading-6 text-neutral-700"> {weatherData.city_name} </h1>
+            <div className="border-t border-gray-300"/>
+            <h1 className="text-lg font-medium leading-6 text-neutral-700" > {weatherData.temp} °C</h1>
+            <div className="border-t border-gray-300"/>
+            <h1 className="text-lg font-medium leading-6 text-neutral-700"> {weatherData.weather.description}</h1>
+          </div>
+          <div className=" w-[5rem] flex justify-center items-center">
+            <img alt="icon" src={`http://openweathermap.org/img/w/${weatherData.weather.icon}.png`} />
+          </div>
+        </div>
+      }
     </div>
+    
+    
   );
 
 };
