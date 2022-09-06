@@ -4,7 +4,6 @@ import WidgetRecipe from "./components/WidgetRecipe";
 import Clock from './components/digitalClock';
 import "./App.css";
 import BookmarkCategory from "./components/BookmarkCategory";
-// import Weather from "./components/Weather";
 import WeatherCustom from "./components/WeatherCustom";
 import TwitchWidgetList from "./components/TwitchWidgetList";
 import WidgetSpotify from './components/WidgetSpotify';
