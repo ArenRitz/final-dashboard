@@ -14,17 +14,13 @@ const BookmarkList = (props) => {
       >
         {(provided) => (
           <div
-            className="my-1 bg-slate-400/20 w-full rounded-full shadow-md shadow-black/50 "
+          className="my-1 bg-slate-400/20 w-full rounded-full shadow-md shadow-black/50 "
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
           >
-            <a
-              className="text-slate-100"
-              href={bookmark.url}
-            >
-              {bookmark.title}
-            </a>
+          <BookmarkItem bookmarkTitle={bookmark.title} bookmarkURL={bookmark.url} />
+            
           </div>
         )}
       </Draggable>

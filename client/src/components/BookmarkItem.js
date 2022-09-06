@@ -4,7 +4,7 @@ const BookmarkItem = (props) => {
 
   return (
 
-    <div className="my-1 bg-slate-400/20 w-full rounded-full shadow-md shadow-black/50 ">
+    <div >
       <a className="text-slate-100" href={props.bookmarkURL}> {props.bookmarkTitle} </a>
       </div>
 
