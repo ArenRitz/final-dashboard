@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 const useIpLocation = () => {
 
-  const [state, setState] = useState({ lat: 0, lon: 0 })
+  const [state, setState] = useState({ lat: 43.6532, lon: -79.3832 })
 
   useEffect(() => {
 
