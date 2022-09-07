@@ -10,6 +10,7 @@ var logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const spotifyRouter = require('./routes/spotify');
+const bookmarksRouter = require('./routes/bookmarks');
 
 var app = express();
 
@@ -23,6 +24,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/spotify', spotifyRouter);
+app.use('/bookmarks', bookmarksRouter);
+
 
 console.log("I am running on backend server before token refresh request");
 
