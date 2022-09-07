@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 
 const playlist_id = [
-  '37i9dQZF1DXcBWIGoYBM5M', 
-  '1KNl4AYfgZtOVm9KHkhPTF', 
-  '37i9dQZF1DX0XUsuxWHRQd', 
+  '37i9dQZF1DXcBWIGoYBM5M',
+  '1KNl4AYfgZtOVm9KHkhPTF',
+  '37i9dQZF1DX0XUsuxWHRQd',
   '37i9dQZF1DX10zKzsJ2jva',
   '37i9dQZF1DWY7IeIP1cdjF',
   '37i9dQZF1DWWMOmoXKqHTD',
@@ -25,9 +25,9 @@ const playlist_id = [
 ];
 
 const playlist_names = [
-  "Today's Top hits", 
-  'Global Top 50', 
-  'Rap Caviar', 
+  "Today's Top hits",
+  'Global Top 50',
+  'Rap Caviar',
   'Viva Latino',
   'Baila Reggaeton',
   'Songs to Sing in the Car',
@@ -63,127 +63,170 @@ const WidgetSpotify = () => {
     trackTen: { name: '', date: '', artist: '', album: '', link: '' },
   });
 
+  const getSpotifyToken = async () => {
+    let tokenObject = localStorage.getItem("spotifyToken");
+    // console.log("-------- Token Object In Storage -------", tokenObject)
+    tokenObject = JSON.parse(tokenObject);
+    // console.log(tokenObject);
+    if (tokenObject) {
+      const currentTime = Date.now();
+      // to test in the case of 45 minutes, use 2700000 milliseconds below for new token interval
+      if ((currentTime - tokenObject.tokenTime) > 2700000) {
+        // console.log('+++++ SECOND IF BLOCK IS RUNNING IN getSpotifyToken +++++');
+        try {
+          const { data } = await axios.get("http://localhost:8080/spotify/refresh");
+          localStorage.setItem("spotifyToken", JSON.stringify(data));
+          tokenObject = localStorage.getItem("spotifyToken");
+          // console.log("NEW TOKEN BEFORE JSON PARSE");
+          // console.log(tokenObject);
+          // console.log("NEW TOKEN AFTER JSON PARSE");
+          tokenObject = JSON.parse(tokenObject);
+          // console.log(tokenObject);
+          return tokenObject;
+        } catch (error) {
+          console.log("------------------------");
+          console.log(error);
+        }
+      }
+      // console.log("TOKEN WAS NOT CHANGED", tokenObject)
+      return tokenObject;
+    }
+  }
+
   useEffect(() => {
 
-    const apiMusicUrl = `https://api.spotify.com/v1/playlists/${playlist_id[1]}/tracks`;
-    const params = { limit: 20, offset: 0 };
-    const headers = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${process.env.REACT_APP_SPOTIFY_TOKEN}`
+    // async function that invokes the getSpotifyToken function and sets local variable via await
+    const apiRunSpotifyCall = async () => {
+      let spotifyToken;
+      spotifyToken = await getSpotifyToken();
+      // console.log(spotifyToken);
+
+      // console.log("TOKEN FROM AWAIT FUNCTION REQUEST BELOW");
+      // console.log(spotifyToken);
+      console.log("BEFORE API CALL")
+      const apiMusicUrl = `https://api.spotify.com/v1/playlists/${playlist_id[2]}/tracks`;
+      const params = { limit: 20, offset: 0 };
+      const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${spotifyToken.token}`
+      }
+
+      axios.get(apiMusicUrl, { params, headers })
+        .then((response) => {
+          const currentPlaylistName = playlist_names[2];
+          // console.log('Playlist Name: ', currentPlaylistName);
+          const musicDataRaw = response.data;
+          console.log('Raw Data: ', musicDataRaw);
+          if (musicDataRaw) {
+            const currentTrackOne = {
+              name: response.data.items[0].track.name,
+              date: response.data.items[0].track.album.release_date,
+              artist: response.data.items[0].track.artists[0].name,
+              album: response.data.items[0].track.album.images[0].url,
+              link: response.data.items[0].track.external_urls.spotify
+            };
+            const currentTrackTwo = {
+              name: response.data.items[1].track.name,
+              date: response.data.items[1].track.album.release_date,
+              artist: response.data.items[1].track.artists[0].name,
+              album: response.data.items[1].track.album.images[0].url,
+              link: response.data.items[1].track.external_urls.spotify
+            };
+            const currentTrackThree = {
+              name: response.data.items[2].track.name,
+              date: response.data.items[2].track.album.release_date,
+              artist: response.data.items[2].track.artists[0].name,
+              album: response.data.items[2].track.album.images[0].url,
+              link: response.data.items[2].track.external_urls.spotify
+            };
+            const currentTrackFour = {
+              name: response.data.items[3].track.name,
+              date: response.data.items[3].track.album.release_date,
+              artist: response.data.items[3].track.artists[0].name,
+              album: response.data.items[3].track.album.images[0].url,
+              link: response.data.items[3].track.external_urls.spotify
+            };
+            const currentTrackFive = {
+              name: response.data.items[4].track.name,
+              date: response.data.items[4].track.album.release_date,
+              artist: response.data.items[4].track.artists[0].name,
+              album: response.data.items[4].track.album.images[0].url,
+              link: response.data.items[4].track.external_urls.spotify
+            };
+            const currentTrackSix = {
+              name: response.data.items[5].track.name,
+              date: response.data.items[5].track.album.release_date,
+              artist: response.data.items[5].track.artists[0].name,
+              album: response.data.items[5].track.album.images[0].url,
+              link: response.data.items[5].track.external_urls.spotify
+            };
+            const currentTrackSeven = {
+              name: response.data.items[6].track.name,
+              date: response.data.items[6].track.album.release_date,
+              artist: response.data.items[6].track.artists[0].name,
+              album: response.data.items[6].track.album.images[0].url,
+              link: response.data.items[6].track.external_urls.spotify
+            };
+            const currentTrackEight = {
+              name: response.data.items[7].track.name,
+              date: response.data.items[7].track.album.release_date,
+              artist: response.data.items[7].track.artists[0].name,
+              album: response.data.items[7].track.album.images[0].url,
+              link: response.data.items[7].track.external_urls.spotify
+            };
+            const currentTrackNine = {
+              name: response.data.items[8].track.name,
+              date: response.data.items[8].track.album.release_date,
+              artist: response.data.items[8].track.artists[0].name,
+              album: response.data.items[8].track.album.images[0].url,
+              link: response.data.items[8].track.external_urls.spotify
+            };
+            const currentTrackTen = {
+              name: response.data.items[9].track.name,
+              date: response.data.items[9].track.album.release_date,
+              artist: response.data.items[9].track.artists[0].name,
+              album: response.data.items[9].track.album.images[0].url,
+              link: response.data.items[9].track.external_urls.spotify
+            };
+            setMusic({
+              ...music,
+              currentPlaylistName: currentPlaylistName,
+              trackOne: currentTrackOne,
+              trackTwo: currentTrackTwo,
+              trackThree: currentTrackThree,
+              trackFour: currentTrackFour,
+              trackFive: currentTrackFive,
+              trackSix: currentTrackSix,
+              trackSeven: currentTrackSeven,
+              trackEight: currentTrackEight,
+              trackNine: currentTrackNine,
+              trackTen: currentTrackTen,
+            });
+          } else {
+            setMusic({
+              ...music,
+              currentPlaylistName: 'Playlist Not Found',
+              trackOne: { name: 'No Data', date: 'No Data', artist: 'No Data', album: 'No Data', link: 'No Data' },
+              trackTwo: { name: 'No Data', date: 'No Data', artist: 'No Data', album: 'No Data', link: 'No Data' },
+              trackThree: { name: 'No Data', date: 'No Data', artist: 'No Data', album: 'No Data', link: 'No Data' },
+              trackFour: { name: 'No Data', date: 'No Data', artist: 'No Data', album: 'No Data', link: 'No Data' },
+              trackFive: { name: 'No Data', date: 'No Data', artist: 'No Data', album: 'No Data', link: 'No Data' },
+              trackSix: { name: 'No Data', date: 'No Data', artist: 'No Data', album: 'No Data', link: 'No Data' },
+              trackSeven: { name: 'No Data', date: 'No Data', artist: 'No Data', album: 'No Data', link: 'No Data' },
+              trackEight: { name: 'No Data', date: 'No Data', artist: 'No Data', album: 'No Data', link: 'No Data' },
+              trackNine: { name: 'No Data', date: 'No Data', artist: 'No Data', album: 'No Data', link: 'No Data' },
+              trackTen: { name: 'No Data', date: 'No Data', artist: 'No Data', album: 'No Data', link: 'No Data' },
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
 
-    axios.get(apiMusicUrl, { params, headers })
-      .then((response) => {
-        const currentPlaylistName = playlist_names[1];
-        console.log('Playlist Name: ', currentPlaylistName);
-        const musicDataRaw = response.data;
-        console.log('Raw Data: ', musicDataRaw);
-        if (musicDataRaw) {
-          const currentTrackOne = { 
-            name: response.data.items[0].track.name, 
-            date: response.data.items[0].track.album.release_date, 
-            artist: response.data.items[0].track.artists[0].name, 
-            album: response.data.items[0].track.album.images[0].url, 
-            link: response.data.items[0].track.external_urls.spotify 
-          };
-          const currentTrackTwo = { 
-            name: response.data.items[1].track.name, 
-            date: response.data.items[1].track.album.release_date, 
-            artist: response.data.items[1].track.artists[0].name, 
-            album: response.data.items[1].track.album.images[0].url, 
-            link: response.data.items[1].track.external_urls.spotify 
-          };
-          const currentTrackThree = { 
-            name: response.data.items[2].track.name, 
-            date: response.data.items[2].track.album.release_date, 
-            artist: response.data.items[2].track.artists[0].name, 
-            album: response.data.items[2].track.album.images[0].url, 
-            link: response.data.items[2].track.external_urls.spotify 
-          };
-          const currentTrackFour = { 
-            name: response.data.items[3].track.name, 
-            date: response.data.items[3].track.album.release_date, 
-            artist: response.data.items[3].track.artists[0].name, 
-            album: response.data.items[3].track.album.images[0].url, 
-            link: response.data.items[3].track.external_urls.spotify 
-          };
-          const currentTrackFive = { 
-            name: response.data.items[4].track.name, 
-            date: response.data.items[4].track.album.release_date, 
-            artist: response.data.items[4].track.artists[0].name, 
-            album: response.data.items[4].track.album.images[0].url, 
-            link: response.data.items[4].track.external_urls.spotify 
-          };
-          const currentTrackSix = { 
-            name: response.data.items[5].track.name, 
-            date: response.data.items[5].track.album.release_date, 
-            artist: response.data.items[5].track.artists[0].name, 
-            album: response.data.items[5].track.album.images[0].url, 
-            link: response.data.items[5].track.external_urls.spotify 
-          };
-          const currentTrackSeven = { 
-            name: response.data.items[6].track.name, 
-            date: response.data.items[6].track.album.release_date, 
-            artist: response.data.items[6].track.artists[0].name, 
-            album: response.data.items[6].track.album.images[0].url, 
-            link: response.data.items[6].track.external_urls.spotify 
-          };
-          const currentTrackEight = { 
-            name: response.data.items[7].track.name, 
-            date: response.data.items[7].track.album.release_date, 
-            artist: response.data.items[7].track.artists[0].name, 
-            album: response.data.items[7].track.album.images[0].url, 
-            link: response.data.items[7].track.external_urls.spotify 
-          };
-          const currentTrackNine = { 
-            name: response.data.items[8].track.name, 
-            date: response.data.items[8].track.album.release_date, 
-            artist: response.data.items[8].track.artists[0].name, 
-            album: response.data.items[8].track.album.images[0].url, 
-            link: response.data.items[8].track.external_urls.spotify 
-          };
-          const currentTrackTen = { 
-            name: response.data.items[9].track.name, 
-            date: response.data.items[9].track.album.release_date, 
-            artist: response.data.items[9].track.artists[0].name, 
-            album: response.data.items[9].track.album.images[0].url, 
-            link: response.data.items[9].track.external_urls.spotify 
-          };
-          setMusic({
-            ...music,
-            currentPlaylistName: currentPlaylistName,
-            trackOne: currentTrackOne,
-            trackTwo: currentTrackTwo,
-            trackThree: currentTrackThree,
-            trackFour: currentTrackFour,
-            trackFive: currentTrackFive,
-            trackSix: currentTrackSix,
-            trackSeven: currentTrackSeven,
-            trackEight: currentTrackEight,
-            trackNine: currentTrackNine,
-            trackTen: currentTrackTen,
-          });
-        } else {
-          setMusic({
-            ...music,
-            currentPlaylistName: 'Playlist Not Found',
-            trackOne: { name: 'No Data', date: 'No Data', artist: 'No Data', album: 'No Data', link: 'No Data' },
-            trackTwo: { name: 'No Data', date: 'No Data', artist: 'No Data', album: 'No Data', link: 'No Data' },
-            trackThree: { name: 'No Data', date: 'No Data', artist: 'No Data', album: 'No Data', link: 'No Data' },
-            trackFour: { name: 'No Data', date: 'No Data', artist: 'No Data', album: 'No Data', link: 'No Data' },
-            trackFive: { name: 'No Data', date: 'No Data', artist: 'No Data', album: 'No Data', link: 'No Data' },
-            trackSix: { name: 'No Data', date: 'No Data', artist: 'No Data', album: 'No Data', link: 'No Data' },
-            trackSeven: { name: 'No Data', date: 'No Data', artist: 'No Data', album: 'No Data', link: 'No Data' },
-            trackEight: { name: 'No Data', date: 'No Data', artist: 'No Data', album: 'No Data', link: 'No Data' },
-            trackNine: { name: 'No Data', date: 'No Data', artist: 'No Data', album: 'No Data', link: 'No Data' },
-            trackTen: { name: 'No Data', date: 'No Data', artist: 'No Data', album: 'No Data', link: 'No Data' },
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    apiRunSpotifyCall();
+
   }, []);
 
   return (
