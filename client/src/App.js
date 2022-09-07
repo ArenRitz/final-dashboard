@@ -37,7 +37,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App" data-theme="dark">
       {show.Aztro ? <Aztro click={hideComponenet} /> : null}
       <br></br>
 
