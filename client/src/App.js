@@ -6,9 +6,12 @@ import "./App.css";
 import BookmarkCategory from "./components/BookmarkCategory";
 import WeatherCustom from "./components/WeatherCustom";
 import TwitchWidgetList from "./components/TwitchWidgetList";
+
 import WidgetSpotify from "./components/WidgetSpotify";
 import Settings from "./components/Settings";
 import Button from "./components/Button";
+import Maps from './components/Maps';
+
 
 function App() {
   const [show, setShow] = useState({
@@ -19,6 +22,7 @@ function App() {
     Weather: true,
     Twitch: true,
     Spotify: true,
+    Maps: true,
     Settings: false,
   });
 
@@ -62,10 +66,17 @@ function App() {
       ) : null}
       <br></br>
 
+
       {show.Spotify ? (
         <WidgetSpotify click={hideComponenet} showBool={show.Spotify} />
       ) : null}
       <br></br>
+
+      {show.Maps ? (
+      <Maps click={hideComponenet} showBool={show.Maps} />
+      ) : null}
+
+
 
       {show.Settings ? (
         <Settings click={hideComponenet} showBools={show} />
