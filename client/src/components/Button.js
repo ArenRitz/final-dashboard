@@ -1,6 +1,12 @@
 import React from "react";
 
+
+
+
+
+
 const Button = (props) => {
+  
   return (
     <>
       {props.type === "hide" && (
@@ -34,7 +40,12 @@ const Button = (props) => {
       {props.type === "hideshow" && (
         <label className="label cursor-pointer">
           <span className="label-text ml-5 w-24 mr-10">{props.name}</span>
-          <input type="checkbox" className="toggle" onClick={props.click} name={props.name} />
+
+          <input type="checkbox" className="toggle" onClick={props.click} name={props.name} checked={props.show}/>
+          
+
+     
+
         </label>
       )}
     </>

@@ -24,6 +24,7 @@ function App() {
   })
 
   const hideComponenet =  (e) => {
+    console.log(show.Bookmarks)
     console.log('trying to delete')
     const {name} = e.target;
     setShow(prevState => ({
@@ -38,28 +39,28 @@ function App() {
   return (
     <div className="App">
 
-            {show.Aztro ? <Aztro click={hideComponenet}/> : null}
+            {show.Aztro ? <Aztro click={hideComponenet} /> : null}
             <br></br>
 
-            {show.Twitch ? <TwitchWidgetList click={hideComponenet}/> : null}
+            {show.Twitch ? <TwitchWidgetList click={hideComponenet} showBool={show.Twitch} /> : null}
             <br></br>
 
-            {show.Recipe ? <WidgetRecipe click={hideComponenet}/> : null}
+            {show.Recipe ? <WidgetRecipe click={hideComponenet} showBool={show.Recipe}/> : null}
             <br></br>
 
-            {show.Clock ? <Clock click={hideComponenet}/> : null}
+            {show.Clock ? <Clock click={hideComponenet} showBool={show.Clock}/> : null}
             <br></br>
   
-            {show.Bookmarks ? <BookmarkCategory click={hideComponenet} /> : null}
+            {show.Bookmarks ? <BookmarkCategory click={hideComponenet} showBool={show.Bookmarks}/> : null}
             <br></br>
 
-            {show.Weather ? <WeatherCustom click={hideComponenet}/> : null}
+            {show.Weather ? <WeatherCustom click={hideComponenet} showBool={show.Weather}/> : null}
             <br></br>
         
-            {show.Spotify ? <WidgetSpotify click={hideComponenet}/> : null}
+            {show.Spotify ? <WidgetSpotify click={hideComponenet} showBool={show.Spotify}/> : null}
             <br></br>
 
-            {show.Settings ? <Settings click={hideComponenet}/> : null}
+            {show.Settings ? <Settings click={hideComponenet} showBools={show}/> : null}
             <div className=" bg-slate-500 fixed top-1/2 right-0 h-20 w-8 rounded-l-2xl flex flex-col justify-around">
             <Button type="settings" click={hideComponenet} name="Settings" />
            
