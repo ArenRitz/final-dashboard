@@ -4,8 +4,8 @@
 import React, { useRef, useState } from "react";
 import { GoogleMap, useJsApiLoader, Marker, Autocomplete, DirectionsRenderer } from "@react-google-maps/api"
 
-const center = { lat: 43.647725, lng: -79.384851 }
-
+const userCentre = { lat: 43.647725, lng: -79.384851 }
+const userRoute = {origin:"Waterloo, ON", destination:"Toronto, ON"}
 
 export default function Maps() {
   const [map, setMap] = useState( /** @type google.maps.Map */(null)) //add autocompletions provided by google maps
@@ -26,9 +26,12 @@ export default function Maps() {
   })
 
   async function calculateRoute() {
+    // if no route inputted, use the users's default route
     if (originRef.current.value === '' || destinationRef.current.value === '') {
-      return
+      originRef.current.value = userRoute.origin
+      destinationRef.current.value = userRoute.destination
     }
+    // get directions, route and distance from DirectionsService
     // eslint-disable-next-line no-undef
     const directionsService = new google.maps.DirectionsService()
     const results = await directionsService.route({
@@ -40,8 +43,8 @@ export default function Maps() {
     setDirectionsResponse(results)
     setDistance(results.routes[0].legs[0].distance.text)
     setDuration(results.routes[0].legs[0].duration.text)
-    console.log("directionsService duration:", results.routes[0].legs[0].duration.text)
-    
+    console.log("directionsService duration(to compare with DistanceMatrix):", results.routes[0].legs[0].duration.text)
+    // get duration with and without traffic from DistanceMatrixService
     // eslint-disable-next-line no-undef
     const distanceMatrixService = new google.maps.DistanceMatrixService()
     const resultsWithTraffic = await distanceMatrixService.getDistanceMatrix({
@@ -49,7 +52,8 @@ export default function Maps() {
       destinations: [destinationRef.current.value],
       // eslint-disable-next-line no-undef
       travelMode: google.maps.TravelMode.DRIVING,
-      drivingOptions: {departureTime: new Date(Date.now())}
+      
+      drivingOptions: {departureTime: new Date(Date.now()), trafficModel: "bestguess"}
     })
     setDurationTraffic(resultsWithTraffic.rows[0].elements[0].duration_in_traffic.text)
     setDurationNoTraffic(resultsWithTraffic.rows[0].elements[0].duration.text)
@@ -83,7 +87,7 @@ export default function Maps() {
           <button
             className="text-slate-400 block bg-white rounded-md py-2 px-2 mr-2 rounded hover:outline-none hover:border-sky-500 hover:ring-sky-500 hover:ring-1"
             name="center-back"
-            onClick={() => map.panTo(center)}
+            onClick={() => map.panTo(userCentre)}
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
@@ -98,16 +102,20 @@ export default function Maps() {
 
       <GoogleMap
         zoom={15}
-        center={center}
+        center={userCentre}
         mapContainerStyle={{ width: '400px', height: '400px' }}
         options={{
           streetViewControl: false,
           mapTypeControl: false
         }}
-        onLoad={(map) => setMap(map)}
+        onLoad={(map) => {
+          setMap(map)
+          calculateRoute()
+        }
+        }
 
       >
-        <Marker position={center} />
+        <Marker position={userCentre} />
         {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
       </GoogleMap>
     </div>
