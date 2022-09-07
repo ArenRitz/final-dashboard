@@ -66,13 +66,13 @@ const WidgetSpotify = (props) => {
 
   const getSpotifyToken = async () => {
     let tokenObject = localStorage.getItem("spotifyToken");
-    // console.log("-------- Token Object In Storage -------", tokenObject)
+    console.log("-------- Token Object In Storage -------", tokenObject)
     tokenObject = JSON.parse(tokenObject);
-    // console.log(tokenObject);
-    if (tokenObject) {
+    console.log(tokenObject);
+    if (tokenObject || tokenObject === null) {
       const currentTime = Date.now();
       // to test in the case of 45 minutes, use 2700000 milliseconds below for new token interval
-      if ((currentTime - tokenObject.tokenTime) > 2700000) {
+      if (tokenObject === null || ((currentTime - tokenObject.tokenTime) > 2700000)) {
         // console.log('+++++ SECOND IF BLOCK IS RUNNING IN getSpotifyToken +++++');
         try {
           const { data } = await axios.get("http://localhost:8080/spotify/refresh");
