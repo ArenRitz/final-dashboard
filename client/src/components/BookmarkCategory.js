@@ -87,9 +87,9 @@ const BookmarkCategory = (props) => {
       
        
           <div key={category} className='mx-5 figma-bookmark-back text-center'>
-        <h1 className='text-2xl font-bold figma-bookmark-label'>{category}</h1>
-        <BookmarkList key={category} category={category} bookmarkItems={bookmarks[category]} index={index} />
-      </div>
+            <h1 className='text-2xl font-bold figma-bookmark-label'>{category}</h1>
+            <BookmarkList key={category} category={category} bookmarkItems={bookmarks[category]} index={index} />
+          </div>
 
 
     );

@@ -38,15 +38,13 @@ const Button = (props) => {
         </button>
       )}
       {props.type === "hideshow" && (
-        <label className="label cursor-pointer">
-          <span className="label-text ml-5 w-24 mr-10">{props.name}</span>
-
+          <div className="flex flex-row mt-2">
+          <p className="text-black ml-5 w-30 mr-10"> Toggle visibility</p>
           <input type="checkbox" className="toggle" onClick={props.click} name={props.name} checked={props.show}/>
-          
-
+          </div>
      
 
-        </label>
+
       )}
     </>
   );
