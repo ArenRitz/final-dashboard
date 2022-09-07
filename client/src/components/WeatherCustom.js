@@ -3,8 +3,9 @@
 import axios from "axios"
 import { useState, useEffect } from "react";
 import React from "react";
+import Button from "./Button";
 
-export default function WeatherCustom() {
+export default function WeatherCustom(props) {
 
   const [coords, setCoords] = useState({ lat: 43.26, lon: -80.21 })
   const [isLoading, setIsLoading] = useState(false);
@@ -61,6 +62,8 @@ export default function WeatherCustom() {
   }, [coords.lon, coords.lat])
 
   return (
+    <>
+    <Button type="hide" click={props.click} name="Weather" />
     <div>
       {isLoading && <div>___</div> }
       {weatherData.weather.icon && 
@@ -78,7 +81,7 @@ export default function WeatherCustom() {
         </div>
       }
     </div>
-    
+    </>
     
   );
 

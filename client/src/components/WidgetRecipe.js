@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-
+import Button from './Button';
 // EDAMAM API DETAILS
 // let userQueryRecipe = "pizza";
 // let appID = PROCESS.ENV.REACT_APP_EDAMAM_APP_ID;
@@ -10,7 +10,7 @@ import axios from 'axios';
 
 //Meal DB API for random recipe (use this one)
 
-const WidgetRecipe = () => {
+const WidgetRecipe = (props) => {
 
   const [recipe, setRecipe] = useState({
     type: "",
@@ -55,6 +55,9 @@ const WidgetRecipe = () => {
   }, []);
 
   return (
+    <>
+    <Button type="hide" click={props.click} name="Recipe" />
+    
     <div className="recipe-main">
       <div className="recipe-title">
         <p>RECIPE INFORMATION</p>
@@ -79,6 +82,8 @@ const WidgetRecipe = () => {
         </div>
       </div>
     </div>
+
+    </>
   );
 }
 

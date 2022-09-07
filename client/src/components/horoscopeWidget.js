@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Button from './Button';
 const userHoroscope = 'Taurus';
 
 let userHoroscopeImage = `assets/zodiacs/`;
@@ -64,6 +64,8 @@ class Aztro extends Component {
 
   render() {
     return (
+      <>
+        <Button type="hide" click={this.props.click} name="Aztro" />
       <div className='horoscope'>
         <div className='horoscope-info'>
           {/* Current Date: {this.state.json.current_date} <br /> */}
@@ -80,6 +82,7 @@ class Aztro extends Component {
           <img src={userHoroscopeImage} alt='zodiac' width="200" height="200" />
         </div>
       </div>
+      </>
     );
   }
 }
