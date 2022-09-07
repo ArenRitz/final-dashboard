@@ -7,7 +7,7 @@ import BookmarkCategory from "./components/BookmarkCategory";
 import WeatherCustom from "./components/WeatherCustom";
 import TwitchWidgetList from "./components/TwitchWidgetList";
 
-import WidgetSpotify from "./components/WidgetSpotify";
+import WidgetSpotifyList from "./components/WidgetSpotifyList";
 import Settings from "./components/Settings";
 import Button from "./components/Button";
 import Maps from './components/Maps';
@@ -68,7 +68,7 @@ function App() {
 
 
       {show.Spotify ? (
-        <WidgetSpotify click={hideComponenet} showBool={show.Spotify} />
+        <WidgetSpotifyList click={hideComponenet} showBool={show.Spotify} />
       ) : null}
       <br></br>
 
