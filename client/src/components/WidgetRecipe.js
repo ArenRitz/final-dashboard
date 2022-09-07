@@ -56,7 +56,7 @@ const WidgetRecipe = (props) => {
 
   return (
     <>
-    <Button click={props.click} name="Recipe" />
+    <Button type="hide" click={props.click} name="Recipe" />
     
     <div className="recipe-main">
       <div className="recipe-title">

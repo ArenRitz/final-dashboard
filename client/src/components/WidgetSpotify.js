@@ -189,7 +189,7 @@ const WidgetSpotify = (props) => {
 
   return (
     <>
-    <Button click={props.click} name="Spotify" />
+    <Button type="hide" click={props.click} name="Spotify" />
     <div className='spotify-main'>
       <div className='spotify-header'>
         <h1>SPOTIFY</h1>

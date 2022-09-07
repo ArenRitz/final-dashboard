@@ -104,7 +104,9 @@ const TwitchWidgetItem = (props) => {
       <div className=" bg-slate-500 w-4 h-4 my-auto rounded-full ml-5 ring-2 ring-slate-200/30 ring-offset-2 ring-offset-slate-200/60"></div>
       )}
       {state.status === "Online" && (
-      <div className=" bg-red-500 w-4 h-4 my-auto rounded-full ml-5 ring-2 ring-red-200/30 ring-offset-2 ring-offset-red-200/60"></div>
+        <div className=" bg-red-500 w-4 h-4 my-auto rounded-full ml-5">
+        <div className='animate-ping w-full h-full bg-red-300 rounded-full'> </div>
+      </div>
       )}
       </a>
       

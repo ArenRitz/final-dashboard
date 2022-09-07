@@ -65,7 +65,7 @@ class Aztro extends Component {
   render() {
     return (
       <>
-        <Button click={this.props.click} name="Aztro" />
+        <Button type="hide" click={this.props.click} name="Aztro" />
       <div className='horoscope'>
         <div className='horoscope-info'>
           {/* Current Date: {this.state.json.current_date} <br /> */}

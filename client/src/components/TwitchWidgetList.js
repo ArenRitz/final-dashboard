@@ -12,7 +12,7 @@ const TwitchWidgetList = (props) => {
 
   return (
     <>
-      <Button click={props.click} name="Twitch"/>
+      <Button type="hide" click={props.click} name="Twitch"/>
       <div className="w-fit bg-purple-900 px-3 py-2 rounded-2xl">
         {streamersList}
       </div>

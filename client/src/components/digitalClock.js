@@ -53,7 +53,7 @@ class Clock extends Component {
   render() {
     return (
       <>
-      <Button click={this.props.click} name="Clock" />
+      <Button type="hide" click={this.props.click} name="Clock" />
       <div className='time-tile'>
         <span className='time-text'>{this.state.time}</span>
       </div>
