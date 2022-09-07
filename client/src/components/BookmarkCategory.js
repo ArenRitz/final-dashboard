@@ -1,113 +1,73 @@
-import React from 'react'
-import BookmarkList from './BookmarkList'
-import Button from './Button';
+import React, { useState, useEffect } from "react";
+import BookmarkList from "./BookmarkList";
+import Button from "./Button";
+import axios from "axios";
+
 
 const BookmarkCategory = (props) => {
+  const [bookmarks, setBookmarks] = useState({});
 
 
-  const bookmarks = {
-    Coding: [
-      {
-        title: "FreeCodeCamp",
-        url: "https://www.freecodecamp.org/",
-      },
-      {
-        title: "Codecademy",
-        url: "https://www.codecademy.com/",
-      },
-      {
-        title: "CodeWars",
-        url: "https://www.codewars.com/",
-      },
-      {
-        title: "CodePen",
-        url: "https://codepen.io/",
-      },
-    ],
-    Design: [
-      {
-        title: "Dribbble",
-        url: "https://dribbble.com/",
-      },
-      {
-        title: "Behance",
-        url: "https://www.behance.net/",
-      },
-      {
-        title: "Pinterest",
-        url: "https://www.pinterest.com/",
-      },
-      {
-        title: "Canva",
-        url: "https://www.canva.com/",
-      },
-    ],
-    Marketing: [
-      {
-        title: "HubSpot",
-        url: "https://www.hubspot.com/",
-      },
-      {
-        title: "Buffer",
-        url: "https://buffer.com/",
-      },
-      {
-        title: "MailChimp",
-        url: "https://mailchimp.com/",
-      },
-      {
-        title: "Hootsuite",
-        url: "https://hootsuite.com/",
-      },
-    ],
-    Productivity: [
-      {
-        title: "Trello",
-        url: "https://trello.com/",
-      },
-      {
-        title: "Todoist",
-        url: "https://todoist.com/",
-      },
-      {
-        title: "Google Calendar",
-        url: "https://calendar.google.com/",
-      },
-      {
-        title: "Google Keep",
-        url: "https://keep.google.com/",
-      },
-    ],
-  };
+
+  useEffect(() => {
+
+
+
+    const formatData = (data) => {
+      let result = {};
+      data.forEach((item) => {
+        if (!result[item.category_name]) {
+          result[item.category_name] = [];
+        }
+        result[item.category_name].push({
+          title: item.bookmark_title,
+          url: item.bookmark_url,
+        });
+      });
+      return result;
+    };
+    
+
+
+    axios
+      .get("http://localhost:8080/bookmarks/1")
+      .then((res) => {
+        setBookmarks({...formatData(res.data)});
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+
+
+    
+
+  }, []);
+  console.log('LOOK HERE LOOK HERE', bookmarks)
 
 
   let category = Object.keys(bookmarks).map((category, index) => {
-   
     return (
-      
-       
-          <div key={category} className='mx-5 figma-bookmark-back text-center'>
-            <h1 className='text-2xl font-bold figma-bookmark-label'>{category}</h1>
-            <BookmarkList key={category} category={category} bookmarkItems={bookmarks[category]} index={index} />
-          </div>
-
-
+      <div key={category} className="mx-5 figma-bookmark-back text-center">
+        <h1 className="text-2xl font-bold figma-bookmark-label">{category}</h1>
+        <BookmarkList
+          key={category}
+          category={category}
+          bookmarkItems={bookmarks[category]}
+          index={index}
+        />
+      </div>
     );
-
   });
 
-
   return (
-    <>   
-    <Button type="hide" click={props.click} name="Bookmarks" />
-    <div className='flex flex-row justify-between w-fit figma-bookmark-container px-5 py-5'>
-      {category}
+    <>
+      <Button type="hide" click={props.click} name="Bookmarks" />
+      <div className="flex flex-row justify-between w-fit figma-bookmark-container px-5 py-5">
+        {category}
       </div>
-    
-      
     </>
-    
   );
-}
+};
 
-export default BookmarkCategory
+export default BookmarkCategory;

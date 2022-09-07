@@ -66,9 +66,9 @@ const WidgetSpotify = (props) => {
 
   const getSpotifyToken = async () => {
     let tokenObject = localStorage.getItem("spotifyToken");
-    console.log("-------- Token Object In Storage -------", tokenObject)
+    // console.log("-------- Token Object In Storage -------", tokenObject)
     tokenObject = JSON.parse(tokenObject);
-    console.log(tokenObject);
+    // console.log(tokenObject);
     if (tokenObject || tokenObject === null) {
       const currentTime = Date.now();
       // to test in the case of 45 minutes, use 2700000 milliseconds below for new token interval
@@ -118,7 +118,7 @@ const WidgetSpotify = (props) => {
           const currentPlaylistName = playlist_names[2];
           // console.log('Playlist Name: ', currentPlaylistName);
           const musicDataRaw = response.data;
-          console.log('Raw Data: ', musicDataRaw);
+          // console.log('Raw Data: ', musicDataRaw);
           if (musicDataRaw) {
             const currentTrackOne = {
               name: response.data.items[0].track.name,
