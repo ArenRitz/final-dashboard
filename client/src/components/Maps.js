@@ -1,5 +1,5 @@
 // install @react-google-maps/api
-// Uses google cloud services: maps, places, directions
+// Uses google cloud services: maps, places, directions, distance matrix
 // disable adblockers
 import React, { useRef, useState } from "react";
 import { GoogleMap, useJsApiLoader, Marker, Autocomplete, DirectionsRenderer } from "@react-google-maps/api"
@@ -11,6 +11,7 @@ export default function Maps() {
   const [map, setMap] = useState( /** @type google.maps.Map */(null)) //add autocompletions provided by google maps
   const [directionsResponse, setDirectionsResponse] = useState(null)
   const [distance, setDistance] = useState(null)
+  // eslint-disable-next-line no-unused-vars
   const [duration, setDuration] = useState(null)
   const [durationTraffic, setDurationTraffic] = useState(null)
   const [durationNoTraffic, setDurationNoTraffic] = useState(null)
@@ -39,7 +40,7 @@ export default function Maps() {
     setDirectionsResponse(results)
     setDistance(results.routes[0].legs[0].distance.text)
     setDuration(results.routes[0].legs[0].duration.text)
-    console.log("directionsService duration:", duration)
+    console.log("directionsService duration:", results.routes[0].legs[0].duration.text)
     
     // eslint-disable-next-line no-undef
     const distanceMatrixService = new google.maps.DistanceMatrixService()
@@ -90,8 +91,8 @@ export default function Maps() {
           </button>
         </div>
         <div className="text-slate-200 mr-4 font-bold">Distance: {distance}</div>
-        <div className="text-slate-200 mr-4 font-bold">No traffic: {durationNoTraffic}</div>
-        <div className="text-slate-200 mr-4 font-bold">With traffic: {durationTraffic}</div>
+        <div className="text-slate-200 mr-4 font-bold">With Traffic: {durationTraffic}</div>
+        <div className="text-slate-200 mr-4 font-bold">No Traffic: {durationNoTraffic}</div>
         
       </section>
 
