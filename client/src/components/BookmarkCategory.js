@@ -99,7 +99,7 @@ const BookmarkCategory = (props) => {
 
   return (
     <>   
-    <Button click={props.click} name="Bookmarks" />
+    <Button type="hide" click={props.click} name="Bookmarks" />
     <div className='flex flex-row justify-between w-fit figma-bookmark-container px-5 py-5'>
       {category}
       </div>

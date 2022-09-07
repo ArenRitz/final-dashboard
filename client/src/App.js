@@ -7,7 +7,8 @@ import BookmarkCategory from "./components/BookmarkCategory";
 import WeatherCustom from "./components/WeatherCustom";
 import TwitchWidgetList from "./components/TwitchWidgetList";
 import WidgetSpotify from './components/WidgetSpotify';
-
+import Settings from './components/Settings';
+import Button from './components/Button';
 
 function App() {
 
@@ -18,7 +19,8 @@ function App() {
     Bookmarks: true,
     Weather: true,
     Twitch: true,
-    Spotify: true
+    Spotify: true,
+    Settings: false
   })
 
   const hideComponenet =  (e) => {
@@ -54,9 +56,15 @@ function App() {
             {show.Weather ? <WeatherCustom click={hideComponenet}/> : null}
             <br></br>
         
- 
             {show.Spotify ? <WidgetSpotify click={hideComponenet}/> : null}
+            <br></br>
 
+            {show.Settings ? <Settings click={hideComponenet}/> : null}
+            <div className=" bg-slate-500 fixed top-1/2 right-0 h-20 w-8 rounded-l-2xl flex flex-col justify-around">
+            <Button type="settings" click={hideComponenet} name="Settings" />
+           
+            <Button type="edit" click={hideComponenet} name="Edit"/>
+            </div>
       </div>
   );
 }
