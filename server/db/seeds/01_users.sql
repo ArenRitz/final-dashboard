@@ -1,4 +1,4 @@
-INSERT INTO users (username, email, password, horoscope_sign, home_location, work_location, twitch_usernames) VALUES ('Morty', 'morty@gmail.com', '1234', 'aquarius', '123 address st', '321 address rd', '{morty, rick, summer}');
+INSERT INTO users (username, email, password, horoscope_sign, home_location, work_location, twitch_usernames) VALUES ('Morty', 'morty@gmail.com', '1234', 'aquarius', '662 King St W Toronto, ON', '50 Erb St W, Waterloo, ON', '{morty, rick, summer}');
 INSERT INTO users (username, email, password, horoscope_sign, home_location, work_location, twitch_usernames) VALUES ('Rick', 'rick@gmail.com', '1234', 'sagittarius', '123 address st', '321 address rd', '{morty, rick, summer}');
 INSERT INTO users (username, email, password, horoscope_sign, home_location, work_location, twitch_usernames) VALUES ('Summer', 'summer@gmail.com', '1234', 'scorpio', '123 address st', '321 address rd', '{morty, rick, summer}');
 INSERT INTO users (username, email, password, horoscope_sign, home_location, work_location, twitch_usernames) VALUES ('Beth', 'beth@gmail.com', '1234', 'leo', '123 address st', '321 address rd', '{morty, rick, summer}');

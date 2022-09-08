@@ -29,8 +29,8 @@ export default function Maps(props) {
   async function calculateRoute() {
     // if no route inputted, use the users's default route
     if (originRef.current.value === '' || destinationRef.current.value === '') {
-      originRef.current.value = userRoute.origin
-      destinationRef.current.value = userRoute.destination
+      originRef.current.value = props.home
+      destinationRef.current.value = props.work
     }
     // get directions, route and distance from DirectionsService
     // eslint-disable-next-line no-undef
@@ -44,7 +44,7 @@ export default function Maps(props) {
     setDirectionsResponse(results)
     setDistance(results.routes[0].legs[0].distance.text)
     setDuration(results.routes[0].legs[0].duration.text)
-    console.log("directionsService duration(to compare with DistanceMatrix):", results.routes[0].legs[0].duration.text)
+    // console.log("directionsService duration(to compare with DistanceMatrix):", results.routes[0].legs[0].duration.text)
     // get duration with and without traffic from DistanceMatrixService
     // eslint-disable-next-line no-undef
     const distanceMatrixService = new google.maps.DistanceMatrixService()
@@ -90,7 +90,7 @@ export default function Maps(props) {
           <button
             className="text-slate-400 block bg-white rounded-md py-2 px-2 mr-2 hover:outline-none hover:border-sky-500 hover:ring-sky-500 hover:ring-1"
             name="center-back"
-            onClick={() => map.panTo(userCentre)}
+            onClick={() => map.panTo(props.home)}
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
@@ -105,7 +105,7 @@ export default function Maps(props) {
 
       <GoogleMap
         zoom={15}
-        center={userCentre}
+        center={props.home}
         mapContainerStyle={{ width: '400px', height: '400px' }}
         options={{
           streetViewControl: false,
@@ -118,7 +118,7 @@ export default function Maps(props) {
         }
 
       >
-        <Marker position={userCentre} />
+        <Marker position={props.home} />
         {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
       </GoogleMap>
     </div>

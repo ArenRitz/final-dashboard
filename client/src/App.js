@@ -11,7 +11,7 @@ import WidgetSpotifyList from "./components/WidgetSpotifyList";
 import Settings from "./components/Settings";
 import Button from "./components/Button";
 import Maps from './components/Maps';
-
+import useUserData from "./hooks/useUserData";
 
 function App() {
   const [theme, setTheme] = useState("dark");
@@ -26,6 +26,9 @@ function App() {
     Maps: true,
     Settings: false,
   });
+
+  const {userData, setUserData} = useUserData(1);
+  console.log("Current userData: ", userData)
 
   const hideComponenet = (e) => {
     console.log(show.Bookmarks);
@@ -81,7 +84,7 @@ function App() {
       <br></br>
 
       {show.Maps ? (
-      <Maps click={hideComponenet} showBool={show.Maps} />
+      <Maps home={userData.home_location} work={userData.work_location} click={hideComponenet} showBool={show.Maps} />
       ) : null}
 
 
