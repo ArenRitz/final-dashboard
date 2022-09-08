@@ -14,9 +14,7 @@ const getUserById = id => {
 
 
 // widget names = Aztro, Twitch, Recipe, Clock, Bookmarks, Weather, Spotify, Maps
-
-// function to create new user in database and then create all widgets for that user in database, returns user id to client, or error if user with that email already exists
-
+// function to create new user in database and then create all widgets for that user in database, returns user id to client
 const createUser = (user) => {
 	console.log('creating user');
 	return db.query("INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id;", [user.username, user.email, user.password]).then(data => {
@@ -35,27 +33,23 @@ const createUser = (user) => {
 }
 
 
+const loginUser = (user) => {
+	return db.query("SELECT id FROM users WHERE email = $1 AND password = $2;", [user.email, user.password]).then(data => {	
+		return data.rows[0].id;
+	}).catch(err => {
+		return err;
+	})
+}
 
 
 
 
-
-
-
-
-
-// const createUser = (user) => {
-// 	return db.query("INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id;", [user.username, user.email, user.password]).then(data => {
-// 		return data.rows[0].id;
-// 	}).catch(err => {
-// 		return err;
-// 	})
-// }
 
 module.exports = {
 	getAllUsers,
 	getUserById,
-	createUser
+	createUser,
+	loginUser
 }
 
 

@@ -4,7 +4,7 @@ import React, {useState} from "react";
 
 const SignUp = (props) => {
 
-  const [tempUser, setTempUser] = useState({
+  const [signupUser, setSignupUser] = useState({
     username: "",
     email: "",
     password: "",
@@ -18,9 +18,9 @@ const SignUp = (props) => {
     e.preventDefault();
     //send post request to backend to create new user
     axios.put("http://localhost:8080/api/users", {
-      username: tempUser.username,
-      email: tempUser.email,
-      password: tempUser.password,
+      username: signupUser.username,
+      email: signupUser.email,
+      password: signupUser.password,
     })
     .then((res) => {
       props.handleLogin(res.data.id);
@@ -35,7 +35,7 @@ const SignUp = (props) => {
     // handle input change
     const handleChange = (e) => {
       const { name, value } = e.target;
-      setTempUser((prevState) => ({
+      setSignupUser((prevState) => ({
         ...prevState,
         [name]: value,
       }));
@@ -59,7 +59,7 @@ const SignUp = (props) => {
               placeholder="Example: JohnDoe"
               className="input input-bordered w-full max-w-xs"
               name="username"
-              value={tempUser.username}
+              value={signupUser.username}
               onChange={handleChange}
 
               
@@ -74,7 +74,7 @@ const SignUp = (props) => {
               placeholder="Example: JohnDoe@email.com "
               className="input input-bordered w-full max-w-xs"
               name="email"
-              value={tempUser.email}
+              value={signupUser.email}
               onChange={handleChange}
             />
           </div>
@@ -87,7 +87,7 @@ const SignUp = (props) => {
               placeholder="Type here"
               className="input input-bordered w-full max-w-xs"
               name="password"
-              value={tempUser.password}
+              value={signupUser.password}
               onChange={handleChange}
             />
           </div>

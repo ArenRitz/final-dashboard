@@ -77,6 +77,7 @@ function App() {
             <BookmarkCategory
               click={hideComponenet}
               showBool={show.Bookmarks}
+              userID={userID}
             />
           )}
           <br></br>
