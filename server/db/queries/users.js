@@ -12,4 +12,51 @@ const getUserById = id => {
 	})
 }
 
-module.exports = {getAllUsers, getUserById}
+
+// widget names = Aztro, Twitch, Recipe, Clock, Bookmarks, Weather, Spotify, Maps
+
+// function to create new user in database and then create all widgets for that user in database, returns user id to client, or error if user with that email already exists
+
+const createUser = (user) => {
+	console.log('creating user');
+	return db.query("INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id;", [user.username, user.email, user.password]).then(data => {
+		console.log('user created');
+		return data.rows[0].id;
+	}).then(id => {
+		console.log('creating widgets');
+		return db.query("INSERT INTO widgets (user_id, name, visibility) VALUES ($1, $2, $3), ($1, $4, $5), ($1, $6, $7), ($1, $8, $9), ($1, $10, $11), ($1, $12, $13), ($1, $14, $15), ($1, $16, $17);", [id, "Aztro", false, "Twitch", true, "Recipe", false, "Clock", true, "Bookmarks", true, "Weather", true, "Spotify", false, "Maps", false]).then(data => {
+			console.log('widgets created');
+			return id;
+		})
+	}).catch(err => {
+		return err;
+	})
+
+}
+
+
+
+
+
+
+
+
+
+
+
+// const createUser = (user) => {
+// 	return db.query("INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id;", [user.username, user.email, user.password]).then(data => {
+// 		return data.rows[0].id;
+// 	}).catch(err => {
+// 		return err;
+// 	})
+// }
+
+module.exports = {
+	getAllUsers,
+	getUserById,
+	createUser
+}
+
+
+

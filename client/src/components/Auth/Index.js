@@ -3,40 +3,28 @@ import classnames from "classnames";
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
 
-const Index = () => {
-  const [loginState, setLoginState] = useState({
-    username: "",
-    email: "",
-    password: "",
-    status: "login",
-    error: "",
-  });
+const Index = (props) => {
+
+
+  const [selection, setSelection] = useState("login");
 
   const signUpClass = classnames({
     "w-1/2 pt-4 pb-2  border-b border-l border-solid  hover:bg-neutral-focus rounded-tr-3xl": true,
-    "bg-neutral-focus": loginState.status === "signup",
+    "bg-neutral-focus": selection === "signup",
   });
   const loginClass = classnames({
     "w-1/2 pt-4 pb-2  border-b border-r border-solid  hover:bg-neutral-focus rounded-tl-3xl": true,
-    "bg-neutral-focus": loginState.status === "login",
+    "bg-neutral-focus": selection === "login",
   });
 
-  // change status to "login" or "signup" on click when clicking on the login or signup button
+  // change selection to "login" or "signup" on click when clicking on the login or signup button
 
   const changeStatus = (status) => {
-    setLoginState({
-      ...loginState,
-      status,
-    });
+    setSelection(status);
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setLoginState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+
+
 
   return (
     <div className=" flex flex-row justify-center mt-52">
@@ -52,8 +40,8 @@ const Index = () => {
             SignUp
           </button>
         </div>
-        {loginState.status === "login" && <LogIn />}
-        {loginState.status === "signup" && <SignUp />}
+        {selection === "login" && <LogIn  userID={props.userID} handleLogin={props.handleLogin} />}
+        {selection === "signup" && <SignUp userID={props.userID} handleLogin={props.handleLogin} />}
       </div>
     </div>
   );

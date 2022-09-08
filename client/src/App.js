@@ -27,6 +27,14 @@ function App() {
     Maps: true,
     Settings: false,
   });
+  const [userID, setUserID] = useState(null);
+
+  //function to update userID state when user logs in
+  const handleLogin = (id) => {
+    setUserID(id);
+  };
+
+
 
   const hideComponenet = (e) => {
     console.log(show.Bookmarks);
@@ -44,11 +52,10 @@ function App() {
     setTheme(value);
   };
 
-  const [loggedInStatus, setLoggedInStatus] = useState(false);
 
   return (
     <div className="App" data-theme={theme}>
-      {loggedInStatus && (
+      {userID && (
         <>
           {show.Aztro && <Aztro click={hideComponenet} />}
           <br></br>
@@ -103,9 +110,9 @@ function App() {
           </div>
         </>
       )} 
-       {!loggedInStatus && (
+       {!userID && (
         <>
-          <Auth></Auth>
+          <Auth userID={userID} handleLogin={handleLogin} />
         </>
       )}
     </div>
