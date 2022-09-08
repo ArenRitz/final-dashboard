@@ -27,7 +27,7 @@ function App() {
     Maps: true,
     Settings: false,
   });
-  const [userID, setUserID] = useState(null);
+  const [userID, setUserID] = useState(1); // ******* CHANGE THIS TO NULL TO TEST LOGIN *******
 
   //function to update userID state when user logs in
   const handleLogin = (id) => {
