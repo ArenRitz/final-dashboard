@@ -31,7 +31,7 @@ const TwitchWidgetItem = (props) => {
       getUserData()
     ])
     .then((results) => {
-      console.log('fetched initial streamer data')
+      // console.log('fetched initial streamer data')
       const streamData = results[0].data.data[0];
       const userData = results[1].data.data[0];
       if (streamData) {
@@ -55,7 +55,7 @@ const TwitchWidgetItem = (props) => {
     const refreshData = setInterval(() => {
       getStreamData()
       .then((results) => {
-        console.log('refreshed streamer data')
+        // console.log('refreshed streamer data')
         const streamData = results.data.data[0];
         if (streamData) {
           setState(prev => ({

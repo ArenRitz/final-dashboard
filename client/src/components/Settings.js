@@ -10,10 +10,21 @@ const Settings = (props) => {
     console.log(selected);
   };
 
+  const themeOptions = ['light', 'dark', 'cupcake', 'bumblebee', 'emerald', 'corporate', 'synthwave', 'retro', 'cyberpunk', 'valentine', 'halloween', 'garden', 'forest', 'aqua', 'lofi', 'pastel', 'fantasy', 'wireframe', 'black', 'luxury', 'dracula', 'cymk', 'autumn', 'business', 'acid', 'lemonade', 'night', 'coffe', 'winter'];
+
   return (
     <>
-      <div className=" absolute top-1/4 left-1/4 bg-slate-100/95 w-1/2 rounded-3xl flex flex-row">
+      <div className=" fixed top-1/4 left-1/4 bg-neutral-content w-1/2 rounded-3xl flex flex-row">
         <div className="w-1/4 h-full ">
+          <div className="navbar bg-neutral text-neutral-content">
+            <button
+              className="btn btn-ghost normal-case text-xl"
+              onClick={handleClick}
+              name="general"
+            >
+              General
+            </button>
+          </div>
           <div className="navbar bg-neutral text-neutral-content">
             <button
               className="btn btn-ghost normal-case text-xl"
@@ -88,6 +99,20 @@ const Settings = (props) => {
           </div>
         </div>
         <div className="w-full">
+          {selected === "general" && (
+            <>
+              <div className="bg-neutral text-neutral-content">General</div>
+              <p className="text-primary">Select Theme</p>
+              <select className="select select-bordered w-full max-w-xs" onChange={props.themeChange}>
+                <option disabled selected>
+                  Theme
+                </option>
+                {themeOptions.map((theme) => (
+                  <option value={theme}>{theme}</option>
+                ))}
+              </select>
+            </>
+          )}
           {selected === "bookmarks" && (
             <>
               <div className="bg-neutral text-neutral-content">Bookmarks</div>

@@ -7,13 +7,14 @@ import BookmarkCategory from "./components/BookmarkCategory";
 import WeatherCustom from "./components/WeatherCustom";
 import TwitchWidgetList from "./components/TwitchWidgetList";
 
-import WidgetSpotify from "./components/WidgetSpotify";
+import WidgetSpotifyList from "./components/WidgetSpotifyList";
 import Settings from "./components/Settings";
 import Button from "./components/Button";
 import Maps from './components/Maps';
 
 
 function App() {
+  const [theme, setTheme] = useState("dark");
   const [show, setShow] = useState({
     Aztro: true,
     Recipe: true,
@@ -36,8 +37,15 @@ function App() {
     }));
   };
 
+
+  //handle theme change via drop down menu
+  const handleThemeChange = (e) => {
+    const { value } = e.target;
+    setTheme(value);
+  };
+
   return (
-    <div className="App" data-theme="dark">
+    <div className="App" data-theme={theme}>
       {show.Aztro ? <Aztro click={hideComponenet} /> : null}
       <br></br>
 
@@ -68,7 +76,7 @@ function App() {
 
 
       {show.Spotify ? (
-        <WidgetSpotify click={hideComponenet} showBool={show.Spotify} />
+        <WidgetSpotifyList click={hideComponenet} showBool={show.Spotify} />
       ) : null}
       <br></br>
 
@@ -79,7 +87,7 @@ function App() {
 
 
       {show.Settings ? (
-        <Settings click={hideComponenet} showBools={show} />
+        <Settings click={hideComponenet} themeChange={handleThemeChange} theme={theme} showBools={show} />
       ) : null}
 
       <div className="fixed top-1/3 right-0 h-1/3 w-1/6 group">
