@@ -10,7 +10,37 @@ const Settings = (props) => {
     console.log(selected);
   };
 
-  const themeOptions = ['light', 'dark', 'cupcake', 'bumblebee', 'emerald', 'corporate', 'synthwave', 'retro', 'cyberpunk', 'valentine', 'halloween', 'garden', 'forest', 'aqua', 'lofi', 'pastel', 'fantasy', 'wireframe', 'black', 'luxury', 'dracula', 'cymk', 'autumn', 'business', 'acid', 'lemonade', 'night', 'coffe', 'winter'];
+  const themeOptions = [
+    "light",
+    "dark",
+    "cupcake",
+    "bumblebee",
+    "emerald",
+    "corporate",
+    "synthwave",
+    "retro",
+    "cyberpunk",
+    "valentine",
+    "halloween",
+    "garden",
+    "forest",
+    "aqua",
+    "lofi",
+    "pastel",
+    "fantasy",
+    "wireframe",
+    "black",
+    "luxury",
+    "dracula",
+    "cymk",
+    "autumn",
+    "business",
+    "acid",
+    "lemonade",
+    "night",
+    "coffe",
+    "winter",
+  ];
 
   return (
     <>
@@ -103,7 +133,10 @@ const Settings = (props) => {
             <>
               <div className="bg-neutral text-neutral-content">General</div>
               <p className="text-primary">Select Theme</p>
-              <select className="select select-bordered w-full max-w-xs" onChange={props.themeChange}>
+              <select
+                className="select select-bordered w-full max-w-xs"
+                onChange={props.themeChange}
+              >
                 <option disabled selected>
                   Theme
                 </option>
@@ -208,40 +241,3 @@ const Settings = (props) => {
 };
 
 export default Settings;
-
-{
-  /* <div className='my-2 flex flex-row'>
-
-          <Button show={props.showBools.Bookmarks} type="hideshow" click={props.click} name="Bookmarks"/>
-          </div>
-          <div className='my-2 flex flex-row'>
-
-          <Button show={props.showBools.Twitch} type="hideshow" click={props.click} name="Twitch"/>
-          </div>
-          <div className='my-2 flex flex-row'>
-
-          <Button show={props.showBools.Weather} type="hideshow" click={props.click} name="Weather"/>
-          </div>
-          <div className='my-2 flex flex-row'>
-
-          <Button show={props.showBools.Spotify} type="hideshow" click={props.click} name="Spotify"/>
-          </div>
-          <div className='my-2 flex flex-row'>
-
-          <Button show={props.showBools.Clock} type="hideshow" click={props.click} name="Clock"/>
-          </div>
-          <div className='my-2 flex flex-row'>
-
-          <Button show={props.showBools.Recipe} type="hideshow" click={props.click} name="Recipe"/>
-          </div>
-          <div className='my-2 flex flex-row'>
-
-          <Button show={props.showBools.Aztro} type="hideshow" click={props.click} name="Aztro"/>
-          </div> */
-}
-//       </div>
-//     </>
-//   );
-// };
-
-// export default Settings;

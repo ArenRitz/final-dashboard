@@ -33,7 +33,9 @@ function App() {
   const handleLogin = (id) => {
     setUserID(id);
   };
-
+  
+  const html = document.querySelector('html');
+  html.setAttribute('data-theme', `${theme}`);
 
 
   const hideComponenet = (e) => {
@@ -54,7 +56,7 @@ function App() {
 
 
   return (
-    <div className="App" data-theme={theme}>
+    <div className="App">
       {userID && (
         <>
           {show.Aztro && <Aztro click={hideComponenet} />}
@@ -104,7 +106,7 @@ function App() {
           )}
 
           <div className="fixed top-1/3 right-0 h-1/3 w-1/6 group">
-            <div className="bg-slate-500 fixed top-1/2 -right-8 h-20 w-8 rounded-l-2xl flex flex-col justify-around invisible transition transform group-hover:visible group-hover:transform group-hover:transition-all group-hover:-translate-x-8">
+            <div className="bg-slate-500 fixed top-1/2 -right-8 h-20 w-8 rounded-l-2xl flex flex-col justify-around tranform transition-all group-hover:transform group-hover:transition-all group-hover:-translate-x-8 group-hover:after:translate-x-8">
               <Button type="settings" click={hideComponenet} name="Settings" />
               <Button type="edit" click={hideComponenet} name="Edit" />
             </div>
