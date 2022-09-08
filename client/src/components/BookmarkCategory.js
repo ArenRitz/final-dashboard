@@ -30,7 +30,7 @@ const BookmarkCategory = (props) => {
 
 
     axios
-      .get("http://localhost:8080/bookmarks/1")
+      .get(`http://localhost:8080/bookmarks/${props.userID}`)
       .then((res) => {
         setBookmarks({...formatData(res.data)});
       })
