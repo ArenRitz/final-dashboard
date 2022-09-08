@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, } from "react";
 import Aztro from "./components/horoscopeWidget";
 import WidgetRecipe from "./components/WidgetRecipe";
 import Clock from "./components/digitalClock";
@@ -12,7 +12,7 @@ import Settings from "./components/Settings";
 import Button from "./components/Button";
 import Maps from "./components/Maps";
 
-import Login from "./components/Login";
+import {default as Auth} from "./components/Auth/Index";
 
 function App() {
   const [theme, setTheme] = useState("dark");
@@ -105,7 +105,7 @@ function App() {
       )} 
        {!loggedInStatus && (
         <>
-          <Login></Login>
+          <Auth></Auth>
         </>
       )}
     </div>
