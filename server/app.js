@@ -12,6 +12,15 @@ const usersRouter = require('./routes/users');
 const spotifyRouter = require('./routes/spotify');
 const bookmarksRouter = require('./routes/bookmarks');
 const apiRouter = require('./routes/api');
+const horoscopesRouter = require('./routes/horoscopes');
+
+
+
+
+
+
+
+
 var app = express();
 
 app.use(cors());
@@ -25,7 +34,17 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/spotify', spotifyRouter);
 app.use('/bookmarks', bookmarksRouter);
+app.use('/horoscopes', horoscopesRouter);
+
+
+
+
+
+
+
+
 app.use('/api', apiRouter);
+
 
 console.log("I am running on backend server before token refresh request");
 

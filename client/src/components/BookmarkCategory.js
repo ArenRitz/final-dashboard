@@ -38,10 +38,6 @@ const BookmarkCategory = (props) => {
         console.log(err);
       });
 
-
-
-    
-
   }, []);
   console.log('LOOK HERE LOOK HERE', bookmarks)
 
