@@ -53,8 +53,8 @@ export default function WeatherCustom(props) {
         setIsLoading(false);
       })
       .catch((err) => {
-        const msg = err.message === "canceled" ? "Preventing useStrict behavior":""
-        console.log(msg, err)
+        // const msg = err.message === "canceled" ? "Preventing useStrict behavior":""
+        // console.log(msg, err)
       })
     })
     return (() => controller.abort()) //to prevent multiple useEffect calls with UseStrict
