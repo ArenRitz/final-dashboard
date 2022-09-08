@@ -3,50 +3,27 @@ import axios from 'axios';
 import Button from './Button';
 import WidgetSpotifyItem from './WidgetSpotifyItem';
 
-const playlist_id = [
-  '37i9dQZF1DXcBWIGoYBM5M',
-  '1KNl4AYfgZtOVm9KHkhPTF',
-  '37i9dQZF1DX0XUsuxWHRQd',
-  '37i9dQZF1DX10zKzsJ2jva',
-  '37i9dQZF1DWY7IeIP1cdjF',
-  '37i9dQZF1DWWMOmoXKqHTD',
-  '37i9dQZF1DX4o1oenSJRJd',
-  '37i9dQZF1DWXRqgorJj26U',
-  '37i9dQZF1DX4UtSsGT1Sbe',
-  '37i9dQZF1DX76Wlfdnj7AP',
-  '37i9dQZF1DXbTxeAdrVG2l',
-  '37i9dQZF1DX4WYpdgoIcn6',
-  '37i9dQZF1DX4sWSpwq3LiO',
-  '37i9dQZF1DX1lVhptIYRda',
-  '37i9dQZF1DWY4xHQp97fN6',
-  '37i9dQZF1DX3rxVfibe1L0',
-  '37i9dQZF1DWSqmBTGDYngZ',
-  '37i9dQZF1DX4dyzvuaRJ0n',
-  '37i9dQZF1DXdSjVZQzv2tl',
-  '37i9dQZF1DXdPec7aLTmlC'
-];
-
-const playlist_names = [
-  "Today's Top hits",
-  'Global Top 50',
-  'Rap Caviar',
-  'Viva Latino',
-  'Baila Reggaeton',
-  'Songs to Sing in the Car',
-  'All Out 2000s',
-  'Rock Classics',
-  'All Out 80s',
-  'Beast Mode',
-  'All Out 90s',
-  'Chill Hits',
-  'Peaceful Piano',
-  'Hot Country',
-  'Get Turnt',
-  'Mood Booster',
-  'Songs to Sing in the Shower',
-  'mint',
-  'Esquenta Sertanejo',
-  'Happy Hits'
+const playlistInfo = [
+  ["Today's Top Hits", "37i9dQZF1DXcBWIGoYBM5M"],
+  ["Global Top 50", "1KNl4AYfgZtOVm9KHkhPTF"],
+  ["Rap Caviar", "37i9dQZF1DX0XUsuxWHRQd"],
+  ["Viva Latino", "37i9dQZF1DX10zKzsJ2jva"],
+  ["Baila Reggaeton", "37i9dQZF1DWY7IeIP1cdjF"],
+  ["Songs to Sing in the Car", "37i9dQZF1DWXRqgorJj26U"],
+  ["All Out 2000s", "37i9dQZF1DX4o1oenSJRJd"],
+  ["Rock Classics", "37i9dQZF1DWY4xHQp97fN6"],
+  ["All Out 80s", "37i9dQZF1DX4UtSsGT1Sbe"],
+  ["Beast Mode", "37i9dQZF1DX76Wlfdnj7AP"],
+  ["All Out 90s", "37i9dQZF1DXbTxeAdrVG2l"],
+  ["Chill Hits", "37i9dQZF1DX4WYpdgoIcn6"],
+  ["Peaceful Piano", "37i9dQZF1DX4sWSpwq3LiO"],
+  ["Hot Country", "37i9dQZF1DX1lVhptIYRda"],
+  ["Get Turnt", "37i9dQZF1DWY4xHQp97fN6"],
+  ["Mood Booster", "37i9dQZF1DX3rxVfibe1L0"],
+  ["Songs to Sing in the Shower", "37i9dQZF1DWSqmBTGDYngZ"],
+  ["mint", "37i9dQZF1DXdSjVZQzv2tl"],
+  ["Esquenta Sertanejo", "37i9dQZF1DXdPec7aLTmlC"],
+  ["Happy Hits", "37i9dQZF1DXcBWIGoYBM5M"]
 ];
 
 const WidgetSpotifyList = (props) => {
@@ -56,11 +33,30 @@ const WidgetSpotifyList = (props) => {
     tracks: [],
   });
 
+  const [playlist, setPlaylist] = useState({
+    playlist: "Today's Top Hits",
+    id: "37i9dQZF1DXcBWIGoYBM5M",
+  });
+
+  // console.log("------------------CHECKING PLAYLIST STATE-----------------");
+
+  const pickPlaylist = (e) => {
+    // console.log("------------------RUNNING pickPlaylist-----------------");
+    const selectedPlaylistName = e.target.value;
+    const selectedPlaylistId = playlistInfo.find((item) => item[0] === selectedPlaylistName)[1];
+    // console.log(selectedPlaylistName);
+    // console.log(selectedPlaylistId);
+    setPlaylist({
+      playlist: selectedPlaylistName,
+      id: selectedPlaylistId,
+    });
+  };
+
   const getSpotifyToken = async () => {
     let tokenObject = localStorage.getItem("spotifyToken");
-    console.log("-------- Token Object In Storage -------", tokenObject)
+    // console.log("-------- Token Object In Storage -------", tokenObject)
     tokenObject = JSON.parse(tokenObject);
-    console.log(tokenObject);
+    // console.log(tokenObject);
     if (tokenObject || tokenObject === null) {
       const currentTime = Date.now();
       // to test in the case of 45 minutes, use 2700000 milliseconds below for new token interval
@@ -97,7 +93,7 @@ const WidgetSpotifyList = (props) => {
       // console.log("TOKEN FROM AWAIT FUNCTION REQUEST BELOW");
       // console.log(spotifyToken);
       console.log("BEFORE API CALL")
-      const apiMusicUrl = `https://api.spotify.com/v1/playlists/${playlist_id[2]}/tracks`;
+      const apiMusicUrl = `https://api.spotify.com/v1/playlists/${playlist.id}/tracks`;
       const params = { limit: 10, offset: 0 };
       const headers = {
         'Accept': 'application/json',
@@ -107,7 +103,7 @@ const WidgetSpotifyList = (props) => {
 
       axios.get(apiMusicUrl, { params, headers })
         .then((response) => {
-          const currentPlaylistName = playlist_names[2];
+          const currentPlaylistName = playlist.playlist;
           // console.log('Playlist Name: ', currentPlaylistName);
           const musicDataRaw = response.data;
           console.log('Raw Data: ', musicDataRaw);
@@ -132,7 +128,7 @@ const WidgetSpotifyList = (props) => {
 
     apiRunSpotifyCall();
 
-  }, []);
+  }, [playlist]);
 
   return (
     <>
@@ -142,6 +138,18 @@ const WidgetSpotifyList = (props) => {
           <h1>SPOTIFY</h1>
           <h2>Playlist Name: {music.currentPlaylistName} - Top 10 Tracks</h2>
         </div>
+        <>
+          <div className="bg-neutral text-neutral-content"></div>
+          <p className="text-primary">Select Playlist</p>
+          <select className="select select-bordered w-full max-w-xs" onChange={pickPlaylist}>
+            <option disabled selected>
+              Playlist
+            </option>
+            {playlistInfo.map((name) => (
+              <option key={name[0]} value={name[0]}>{name[0]}</option>
+            ))}
+          </select>
+        </>
         <div className='spotify-content'>
           {music.tracks.map((item) => {
             return <WidgetSpotifyItem key={item.track.name} item={item} />
@@ -150,8 +158,7 @@ const WidgetSpotifyList = (props) => {
         </div>
       </div>
     </>
-
-  )
+  );
 }
 
 export default WidgetSpotifyList
