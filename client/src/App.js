@@ -65,7 +65,7 @@ function App() {
     <div className="App">
       {userID && (
         <>
-          {show.Aztro && <Aztro click={hideComponenet} />}
+          {show.Aztro && <Aztro click={hideComponenet} showBool={show.Aztro}/>}
           <br></br>
 
           {show.Twitch && (
