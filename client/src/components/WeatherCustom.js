@@ -76,13 +76,11 @@ export default function WeatherCustom(props) {
             <h1 className="text-lg font-medium leading-6"> {weatherData.weather.description}</h1>
           </div>
           <div className=" w-[5rem] flex justify-center items-center">
-            <img alt="icon" src={`http://openweathermap.org/img/w/${weatherData.weather.icon}.png`} />
+            <img alt="icon" className=" w-[5rem]" src={`http://openweathermap.org/img/w/${weatherData.weather.icon}.png`} />
           </div>
         </div>
       }
     </div>
     </>
-    
   );
-
 };
