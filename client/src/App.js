@@ -12,6 +12,7 @@ import Settings from "./components/Settings";
 import Button from "./components/Button";
 import Maps from './components/Maps';
 import useUserData from "./hooks/useUserData";
+import useLocation from "./hooks/useLocation";
 
 function App() {
   const [theme, setTheme] = useState("dark");
@@ -27,8 +28,10 @@ function App() {
     Settings: false,
   });
 
-  const {userData, setUserData} = useUserData(1);
+  const {userData} = useUserData(1); //getter and setter for the current user's data in state(currently defaulted to user_id 1)
   console.log("Current userData: ", userData)
+  const {currLocation} = useLocation();
+  console.log("Current Location: ", currLocation)
 
   const hideComponenet = (e) => {
     console.log(show.Bookmarks);
@@ -73,7 +76,7 @@ function App() {
       <br></br>
 
       {show.Weather ? (
-        <WeatherCustom click={hideComponenet} showBool={show.Weather} />
+        <WeatherCustom currentLocation={currLocation} click={hideComponenet} showBool={show.Weather} />
       ) : null}
       <br></br>
 
@@ -84,7 +87,7 @@ function App() {
       <br></br>
 
       {show.Maps ? (
-      <Maps home={userData.home_location} work={userData.work_location} click={hideComponenet} showBool={show.Maps} />
+      <Maps home={userData.home_location} work={userData.work_location} currentLocation={currLocation} click={hideComponenet} showBool={show.Maps} />
       ) : null}
 
 
