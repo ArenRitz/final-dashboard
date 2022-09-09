@@ -5,8 +5,7 @@ import React, { useRef, useState } from "react";
 import { GoogleMap, useJsApiLoader, Marker, Autocomplete, DirectionsRenderer } from "@react-google-maps/api"
 import Button from "./Button";
 
-const userCentre = { lat: 43.647725, lng: -79.384851 }
-const userRoute = {origin:"Waterloo, ON", destination:"Toronto, ON"}
+// const userRoute = {origin:"Waterloo, ON", destination:"Toronto, ON"}
 
 export default function Maps(props) {
   const [map, setMap] = useState( /** @type google.maps.Map */(null)) //add autocompletions provided by google maps
@@ -29,8 +28,8 @@ export default function Maps(props) {
   async function calculateRoute() {
     // if no route inputted, use the users's default route
     if (originRef.current.value === '' || destinationRef.current.value === '') {
-      originRef.current.value = userRoute.origin
-      destinationRef.current.value = userRoute.destination
+      originRef.current.value = props.home
+      destinationRef.current.value = props.work
     }
     // get directions, route and distance from DirectionsService
     // eslint-disable-next-line no-undef
@@ -44,7 +43,6 @@ export default function Maps(props) {
     setDirectionsResponse(results)
     setDistance(results.routes[0].legs[0].distance.text)
     setDuration(results.routes[0].legs[0].duration.text)
-    console.log("directionsService duration(to compare with DistanceMatrix):", results.routes[0].legs[0].duration.text)
     // get duration with and without traffic from DistanceMatrixService
     // eslint-disable-next-line no-undef
     const distanceMatrixService = new google.maps.DistanceMatrixService()
@@ -58,6 +56,7 @@ export default function Maps(props) {
     })
     setDurationTraffic(resultsWithTraffic.rows[0].elements[0].duration_in_traffic.text)
     setDurationNoTraffic(resultsWithTraffic.rows[0].elements[0].duration.text)
+
   }
 
   function clearRoute() {
@@ -71,7 +70,7 @@ export default function Maps(props) {
   }
 
   if (!isLoaded) {
-    return <div>Maps Loading...</div>
+    return <div>Map Loading...</div>
   }
   return (
     <>
@@ -87,14 +86,13 @@ export default function Maps(props) {
         <div className='flex'>
           <button className="text-slate-400 block bg-white rounded-md py-2 px-2 mr-2 hover:outline-none hover:border-sky-500 hover:ring-sky-500 hover:ring-1" onClick={calculateRoute}>Show Route</button>
           <button className="text-slate-400 block bg-white rounded-md py-2 px-2 mr-2 hover:outline-none hover:border-sky-500 hover:ring-sky-500 hover:ring-1" onClick={clearRoute}>Clear</button>
-          <button
+          <button 
+            alt="Current Location"
             className="text-slate-400 block bg-white rounded-md py-2 px-2 mr-2 hover:outline-none hover:border-sky-500 hover:ring-sky-500 hover:ring-1"
             name="center-back"
-            onClick={() => map.panTo(userCentre)}
+            onClick={() => map.panTo(props.currentLocation)}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16.2 7.8l-2 6.3-6.4 2.1 2-6.3z"/></svg>
           </button>
         </div>
         <div className="text-slate-200 mr-4 font-bold">Distance: {distance}</div>
@@ -105,7 +103,7 @@ export default function Maps(props) {
 
       <GoogleMap
         zoom={15}
-        center={userCentre}
+        center={props.currentLocation}
         mapContainerStyle={{ width: '400px', height: '400px' }}
         options={{
           streetViewControl: false,
@@ -118,7 +116,7 @@ export default function Maps(props) {
         }
 
       >
-        <Marker position={userCentre} />
+        <Marker position={props.currentLocation} />
         {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
       </GoogleMap>
     </div>

@@ -10,9 +10,11 @@ import TwitchWidgetList from "./components/TwitchWidgetList";
 import WidgetSpotifyList from "./components/WidgetSpotifyList";
 import Settings from "./components/Settings";
 import Button from "./components/Button";
-import Maps from "./components/Maps";
-
+import Maps from './components/Maps';
+import useUserData from "./hooks/useUserData";
+import useLocation from "./hooks/useLocation";
 import {default as Auth} from "./components/Auth/Index";
+
 
 function App() {
   const [theme, setTheme] = useState("dark");
@@ -38,6 +40,11 @@ function App() {
   html.setAttribute('data-theme', `${theme}`);
 
 
+  const {userData} = useUserData(1); //getter and setter for the current user's data in state(currently defaulted to user_id 1)
+  console.log("Current userData: ", userData)
+  const {currLocation} = useLocation();
+  console.log("Current Location: ", currLocation)
+
   const hideComponenet = (e) => {
     console.log(show.Bookmarks);
     console.log("trying to delete");
@@ -53,7 +60,6 @@ function App() {
     const { value } = e.target;
     setTheme(value);
   };
-
 
   return (
     <div className="App">
@@ -85,7 +91,7 @@ function App() {
           <br></br>
 
           {show.Weather && (
-            <WeatherCustom click={hideComponenet} showBool={show.Weather} />
+            <WeatherCustom currentLocation={currLocation} click={hideComponenet} showBool={show.Weather} />
           )}
           <br></br>
 
@@ -94,7 +100,7 @@ function App() {
           )}
           <br></br>
 
-          {show.Maps && <Maps click={hideComponenet} showBool={show.Maps} />}
+          {show.Maps && <Maps home={userData.home_location} work={userData.work_location} currentLocation={currLocation} click={hideComponenet} showBool={show.Maps} />}
 
           {show.Settings && (
             <Settings
