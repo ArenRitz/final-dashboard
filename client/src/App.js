@@ -1,4 +1,4 @@
-import React, { useState, } from "react";
+import React, { useState, useEffect } from "react";
 import Aztro from "./components/horoscopeWidget";
 import WidgetRecipe from "./components/WidgetRecipe";
 import Clock from "./components/digitalClock";
@@ -13,7 +13,7 @@ import Button from "./components/Button";
 import Maps from './components/Maps';
 import useUserData from "./hooks/useUserData";
 import useLocation from "./hooks/useLocation";
-import {default as Auth} from "./components/Auth/Index";
+import { default as Auth } from "./components/Auth/Index";
 
 
 function App() {
@@ -35,14 +35,17 @@ function App() {
   const handleLogin = (id) => {
     setUserID(id);
   };
-  
+
   const html = document.querySelector('html');
   html.setAttribute('data-theme', `${theme}`);
 
+  const { userData, setUserData } = useUserData(1); //getter and setter for the current user's data in state(currently defaulted to user_id 1)
 
-  const {userData} = useUserData(1); //getter and setter for the current user's data in state(currently defaulted to user_id 1)
-  console.log("Current userData: ", userData)
-  const {currLocation} = useLocation();
+  useEffect(() => {
+    // console.log("Current userData: ", userData);
+  }, [userID, userData]);
+
+  const { currLocation } = useLocation();
   console.log("Current Location: ", currLocation)
 
   const hideComponenet = (e) => {
@@ -61,11 +64,13 @@ function App() {
     setTheme(value);
   };
 
+  // console.log("This is line 71: ", userData);
+
   return (
     <div className="App">
       {userID && (
         <>
-          {show.Aztro && <Aztro click={hideComponenet} showBool={show.Aztro}/>}
+          {show.Aztro && <Aztro horoscope={userData.horoscope_sign} click={hideComponenet} showBool={show.Aztro} />}
           <br></br>
 
           {show.Twitch && (
@@ -118,8 +123,8 @@ function App() {
             </div>
           </div>
         </>
-      )} 
-       {!userID && (
+      )}
+      {!userID && (
         <>
           <Auth userID={userID} handleLogin={handleLogin} />
         </>
