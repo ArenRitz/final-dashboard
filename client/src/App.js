@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, } from "react";
 import Aztro from "./components/horoscopeWidget";
 import WidgetRecipe from "./components/WidgetRecipe";
 import Clock from "./components/digitalClock";
@@ -13,6 +13,8 @@ import Button from "./components/Button";
 import Maps from './components/Maps';
 import useUserData from "./hooks/useUserData";
 import useLocation from "./hooks/useLocation";
+import {default as Auth} from "./components/Auth/Index";
+
 
 function App() {
   const [theme, setTheme] = useState("dark");
@@ -27,6 +29,16 @@ function App() {
     Maps: true,
     Settings: false,
   });
+  const [userID, setUserID] = useState(1); // ******* CHANGE THIS TO NULL TO TEST LOGIN *******
+
+  //function to update userID state when user logs in
+  const handleLogin = (id) => {
+    setUserID(id);
+  };
+  
+  const html = document.querySelector('html');
+  html.setAttribute('data-theme', `${theme}`);
+
 
   const {userData} = useUserData(1); //getter and setter for the current user's data in state(currently defaulted to user_id 1)
   console.log("Current userData: ", userData)
@@ -43,7 +55,6 @@ function App() {
     }));
   };
 
-
   //handle theme change via drop down menu
   const handleThemeChange = (e) => {
     const { value } = e.target;
@@ -51,57 +62,68 @@ function App() {
   };
 
   return (
-    <div className="App" data-theme={theme}>
-      {show.Aztro ? <Aztro click={hideComponenet} /> : null}
-      <br></br>
+    <div className="App">
+      {userID && (
+        <>
+          {show.Aztro && <Aztro click={hideComponenet} />}
+          <br></br>
 
-      {show.Twitch ? (
-        <TwitchWidgetList click={hideComponenet} showBool={show.Twitch} />
-      ) : null}
-      <br></br>
+          {show.Twitch && (
+            <TwitchWidgetList click={hideComponenet} showBool={show.Twitch} />
+          )}
+          <br></br>
 
-      {show.Recipe ? (
-        <WidgetRecipe click={hideComponenet} showBool={show.Recipe} />
-      ) : null}
-      <br></br>
+          {show.Recipe && (
+            <WidgetRecipe click={hideComponenet} showBool={show.Recipe} />
+          )}
+          <br></br>
 
-      {show.Clock ? (
-        <Clock click={hideComponenet} showBool={show.Clock} />
-      ) : null}
-      <br></br>
+          {show.Clock && <Clock click={hideComponenet} showBool={show.Clock} />}
+          <br></br>
 
-      {show.Bookmarks ? (
-        <BookmarkCategory click={hideComponenet} showBool={show.Bookmarks} />
-      ) : null}
-      <br></br>
+          {show.Bookmarks && (
+            <BookmarkCategory
+              click={hideComponenet}
+              showBool={show.Bookmarks}
+              userID={userID}
+            />
+          )}
+          <br></br>
 
-      {show.Weather ? (
-        <WeatherCustom currentLocation={currLocation} click={hideComponenet} showBool={show.Weather} />
-      ) : null}
-      <br></br>
+          {show.Weather && (
+            <WeatherCustom currentLocation={currLocation} click={hideComponenet} showBool={show.Weather} />
+          )}
+          <br></br>
 
+          {show.Spotify && (
+            <WidgetSpotifyList click={hideComponenet} showBool={show.Spotify} />
+          )}
+          <br></br>
 
-      {show.Spotify ? (
-        <WidgetSpotifyList click={hideComponenet} showBool={show.Spotify} />
-      ) : null}
-      <br></br>
+          {show.Maps && <Maps home={userData.home_location} work={userData.work_location} currentLocation={currLocation} click={hideComponenet} showBool={show.Maps} />}
 
-      {show.Maps ? (
-      <Maps home={userData.home_location} work={userData.work_location} currentLocation={currLocation} click={hideComponenet} showBool={show.Maps} />
-      ) : null}
+          {show.Settings && (
+            <Settings
+              click={hideComponenet}
+              themeChange={handleThemeChange}
+              theme={theme}
+              showBools={show}
+            />
+          )}
 
-
-
-      {show.Settings ? (
-        <Settings click={hideComponenet} themeChange={handleThemeChange} theme={theme} showBools={show} />
-      ) : null}
-
-      <div className="fixed top-1/3 right-0 h-1/3 w-1/6 group">
-        <div className="bg-slate-500 fixed top-1/2 -right-8 h-20 w-8 rounded-l-2xl flex flex-col justify-around invisible transition transform group-hover:visible group-hover:transform group-hover:transition-all group-hover:-translate-x-8">
-          <Button type="settings" click={hideComponenet} name="Settings" />
-          <Button type="edit" click={hideComponenet} name="Edit" />
-        </div>
-      </div>
+          <div className="fixed top-1/3 right-0 h-1/3 w-1/6 group">
+            <div className="bg-slate-500 fixed top-1/2 -right-8 h-20 w-8 rounded-l-2xl flex flex-col justify-around tranform transition-all group-hover:transform group-hover:transition-all group-hover:-translate-x-8 group-hover:after:translate-x-8">
+              <Button type="settings" click={hideComponenet} name="Settings" />
+              <Button type="edit" click={hideComponenet} name="Edit" />
+            </div>
+          </div>
+        </>
+      )} 
+       {!userID && (
+        <>
+          <Auth userID={userID} handleLogin={handleLogin} />
+        </>
+      )}
     </div>
   );
 }
