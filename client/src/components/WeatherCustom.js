@@ -67,13 +67,13 @@ export default function WeatherCustom(props) {
     <div>
       {isLoading && <div>___</div> }
       {weatherData.weather.icon && 
-        <div className="flex w-fit bg-blue-300 rounded-3xl px-2 py-2 my-1 shadow">
+        <div className="flex w-fit bg-base-200 rounded-3xl px-2 py-2 my-1 shadow">
           <div>
-            <h1 className="text-lg font-medium leading-6 text-neutral-700"> {weatherData.city_name} </h1>
+            <h1 className="text-lg font-medium leading-6"> {weatherData.city_name} </h1>
             <div className="border-t border-gray-300"/>
-            <h1 className="text-lg font-medium leading-6 text-neutral-700" > {weatherData.temp} °C</h1>
+            <h1 className="text-lg font-medium leading-6" > {weatherData.temp} °C</h1>
             <div className="border-t border-gray-300"/>
-            <h1 className="text-lg font-medium leading-6 text-neutral-700"> {weatherData.weather.description}</h1>
+            <h1 className="text-lg font-medium leading-6"> {weatherData.weather.description}</h1>
           </div>
           <div className=" w-[5rem] flex justify-center items-center">
             <img alt="icon" src={`http://openweathermap.org/img/w/${weatherData.weather.icon}.png`} />
