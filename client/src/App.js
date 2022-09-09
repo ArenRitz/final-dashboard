@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Aztro from "./components/horoscopeWidget";
+import Horoscope from "./components/horoscopeWidget";
 import WidgetRecipe from "./components/WidgetRecipe";
 import Clock from "./components/digitalClock";
 import "./App.css";
@@ -70,7 +70,7 @@ function App() {
     <div className="App">
       {userID && (
         <>
-          {show.Aztro && <Aztro horoscope={userData.horoscope_sign} click={hideComponenet} showBool={show.Aztro} />}
+          {show.Aztro && <Horoscope horoscope={userData.horoscope_sign} click={hideComponenet} showBool={show.Aztro} />}
           <br></br>
 
           {show.Twitch && (
