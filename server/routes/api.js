@@ -35,7 +35,7 @@ router.delete('/bookmarks/:id/:category_id/:title', (req, res) => {
 
 
 // function to add bookmark to database for specific user by category ID and bookmark title
-router.post('/bookmarks/:id/:category_id', (req, res) => {
+router.put('/bookmarks/:id/:category_id', (req, res) => {
   bookmarks.addBookmark(req.params.category_id, req.body.title, req.body.url).then(data => {
     //get all bookmarks for user after adding bookmark
     bookmarks.getAllBookmarksForUser(req.params.id).then(data => {
@@ -44,6 +44,15 @@ router.post('/bookmarks/:id/:category_id', (req, res) => {
   })
 })
 
+// function to edit bookmark url and title in database by user ID, category ID, and bookmark id
+router.put('/bookmarks/:bookmark_id', (req, res) => {
+  bookmarks.editBookmark(req.params.bookmark_id, req.body.title, req.body.url).then(data => {
+    //get all bookmarks for user after editing bookmark
+    bookmarks.getAllBookmarksForUser(req.body.user_id).then(data => {
+      res.json(data);
+    })
+  })
+})
 
 
 

@@ -28,6 +28,7 @@ const deleteBookmark = (category_id, title) => {
 	})
 }
 
+
 //query to add new bookmark to database for specific user by category ID and bookmark title
 const addBookmark = (category_id, title, url) => {
 	return db.query("INSERT INTO bookmarks (user_category_id, bookmark_title, bookmark_url) VALUES ($1, $2, $3);", [category_id, title, url]).then(data => {
@@ -35,9 +36,9 @@ const addBookmark = (category_id, title, url) => {
 	})
 }
 
-//querty to edit bookmark url and title in database for specific user by category ID and bookmark id
-const editBookmark = (category_id, id, title, url) => {
-	return db.query("UPDATE bookmarks SET user_category_id = $1, bookmark_title = $2, bookmark_url = $3 WHERE id = $4;", [category_id, title, url, id]).then(data => {
+// postGres querty to edit bookmark url and title in database by category ID and bookmark id 
+const editBookmark = ( bookmark_id, title, url) => {
+	return db.query("UPDATE bookmarks SET bookmark_title = $1, bookmark_url = $2 WHERE id = $3;", [title, url, bookmark_id]).then(data => {
 		return data.rows;
 	})
 }
@@ -48,4 +49,5 @@ const editBookmark = (category_id, id, title, url) => {
 
 
 
-module.exports = {getAllBookmarksForUser, deleteBookmark, addBookmark};
+
+module.exports = {getAllBookmarksForUser, deleteBookmark, addBookmark, editBookmark}
