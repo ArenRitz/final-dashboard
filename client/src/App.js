@@ -46,7 +46,6 @@ function App() {
   }, [userID, userData]);
 
   const { currLocation } = useLocation();
-  console.log("Current Location: ", currLocation)
 
   const hideComponenet = (e) => {
     console.log(show.Bookmarks);
