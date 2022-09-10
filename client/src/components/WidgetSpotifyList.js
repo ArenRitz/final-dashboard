@@ -11,14 +11,13 @@ const playlistInfo = [
   ["Baila Reggaeton", "37i9dQZF1DWY7IeIP1cdjF"],
   ["Songs to Sing in the Car", "37i9dQZF1DWXRqgorJj26U"],
   ["All Out 2000s", "37i9dQZF1DX4o1oenSJRJd"],
-  ["Rock Classics", "37i9dQZF1DWY4xHQp97fN6"],
+  ["Rock Classics", "37i9dQZF1DWXRqgorJj26U"],
   ["All Out 80s", "37i9dQZF1DX4UtSsGT1Sbe"],
   ["Beast Mode", "37i9dQZF1DX76Wlfdnj7AP"],
   ["All Out 90s", "37i9dQZF1DXbTxeAdrVG2l"],
   ["Chill Hits", "37i9dQZF1DX4WYpdgoIcn6"],
   ["Peaceful Piano", "37i9dQZF1DX4sWSpwq3LiO"],
   ["Hot Country", "37i9dQZF1DX1lVhptIYRda"],
-  ["Get Turnt", "37i9dQZF1DWY4xHQp97fN6"],
   ["Mood Booster", "37i9dQZF1DX3rxVfibe1L0"],
   ["Songs to Sing in the Shower", "37i9dQZF1DWSqmBTGDYngZ"],
   ["mint", "37i9dQZF1DXdSjVZQzv2tl"],
@@ -92,7 +91,7 @@ const WidgetSpotifyList = (props) => {
 
       // console.log("TOKEN FROM AWAIT FUNCTION REQUEST BELOW");
       // console.log(spotifyToken);
-      console.log("BEFORE API CALL")
+      // console.log("BEFORE API CALL")
       const apiMusicUrl = `https://api.spotify.com/v1/playlists/${playlist.id}/tracks`;
       const params = { limit: 10, offset: 0 };
       const headers = {
@@ -106,7 +105,7 @@ const WidgetSpotifyList = (props) => {
           const currentPlaylistName = playlist.playlist;
           // console.log('Playlist Name: ', currentPlaylistName);
           const musicDataRaw = response.data;
-          console.log('Raw Data: ', musicDataRaw);
+          // console.log('Raw Data: ', musicDataRaw);
           if (musicDataRaw) {
             setMusic({
               ...music,
@@ -131,33 +130,54 @@ const WidgetSpotifyList = (props) => {
   }, [playlist]);
 
   return (
-    <>
+    <div className="w-[400px] mx-auto overflow-hidden">
       <Button type="hide" click={props.click} name="Spotify" />
-      <div className='spotify-main'>
-        <div className='spotify-header'>
-          <h1>SPOTIFY</h1>
-          <h2>Playlist Name: {music.currentPlaylistName} - Top 10 Tracks</h2>
-        </div>
-        <>
-          <div className="bg-neutral text-neutral-content"></div>
-          <p className="text-primary">Select Playlist</p>
-          <select className="select select-bordered w-full max-w-xs" onChange={pickPlaylist}>
-            <option disabled selected>
-              Playlist
-            </option>
-            {playlistInfo.map((name) => (
-              <option key={name[0]} value={name[0]}>{name[0]}</option>
-            ))}
-          </select>
-        </>
-        <div className='spotify-content'>
-          {music.tracks.map((item) => {
-            return <WidgetSpotifyItem key={item.track.name} item={item} />
+      {/* <div className='spotify-main'> */}
+      {/* <div className='spotify-header'> */}
+      <h1>SPOTIFY</h1>
+      <h2>{music.currentPlaylistName} - Top 10 Tracks</h2>
+      {/* </div> */}
+      <>
+        <div className="bg-neutral text-neutral-content"></div>
+        {/* <p className="text-primary">Select Playlist</p> */}
+        <select className="select select-bordered w-full max-w-xs" onChange={pickPlaylist}>
+          <option disabled selected>
+            Select Playlist
+          </option>
+          {playlistInfo.map((name) => (
+            <option key={name[0]} value={name[0]}>{name[0]}</option>
+          ))}
+        </select>
+      </>
+      <div className="carousel w-screen">
+        {/* <div className='spotify-content'> */}
+          {music.tracks.map((item, index) => {
+            return (
+              <div id={"item" + index} className="carousel-item w-full">
+                <div className="w-full">
+                  <WidgetSpotifyItem key={item.track.name} item={item} id={"item" + index} />
+                </div>
+              </div>
+            )
           })
           }
-        </div>
+        {/* </div> */}
       </div>
-    </>
+      <div className="flex justify-center w-full py-2 gap-2">
+        <a href="#item0" className="btn btn-xs">1</a>
+        <a href="#item1" className="btn btn-xs">2</a>
+        <a href="#item2" className="btn btn-xs">3</a>
+        <a href="#item3" className="btn btn-xs">4</a>
+        <a href="#item4" className="btn btn-xs">5</a>
+        <a href="#item5" className="btn btn-xs">6</a>
+        <a href="#item6" className="btn btn-xs">7</a>
+        <a href="#item7" className="btn btn-xs">8</a>
+        <a href="#item8" className="btn btn-xs">9</a>
+        <a href="#item9" className="btn btn-xs">10</a>
+      </div>
+      {/* </div> */}
+      {/* </div> */}
+    </div>
   );
 }
 

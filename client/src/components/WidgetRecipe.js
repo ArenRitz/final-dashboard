@@ -51,37 +51,37 @@ const WidgetRecipe = (props) => {
       .catch((error) => {
         console.log(error);
       });
-      // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   return (
     <>
-    <Button type="hide" click={props.click} name="Recipe" />
-    
-    <div className="recipe-main">
-      <div className="recipe-title">
-        <p>RECIPE INFORMATION</p>
-      </div>
-      <div className="recipe-info">
-        <div className="recipe-details">
-          <p className="recipe-type">
-            {recipe.type}
-          </p>
-          <p className="recipe-category">
-            {recipe.category}
-          </p>
-          <p className="recipe-theme">
-            {recipe.theme}
-          </p>
-          <p className="recipe-source">
-            {recipe.source}
-          </p>
+      <Button type="hide" click={props.click} name="Recipe" />
+
+      <div className="recipe-main">
+        <div className="recipe-title">
+          <p>RECIPE INFORMATION</p>
         </div>
-        <div>
-          <img className="recipe-thumbnail" src={recipe.thumbnail} alt="thumbnail for recipe" width="200" height="200" />
+        <div className="recipe-info">
+          <div className="recipe-details">
+            <p className="recipe-type">
+              Type: {recipe.type}
+            </p>
+            <p className="recipe-category">
+              Category: {recipe.category}
+            </p>
+            <p className="recipe-theme">
+              Theme: {recipe.theme}
+            </p>
+            <a href={recipe.source} className="recipe-source">
+              {recipe.source}
+            </a>
+          </div>
+          <div>
+            <img className="recipe-thumbnail" src={recipe.thumbnail} alt="thumbnail for recipe" width="200" height="200" />
+          </div>
         </div>
       </div>
-    </div>
 
     </>
   );
