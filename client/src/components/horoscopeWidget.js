@@ -1,69 +1,53 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from './Button';
-import axios from 'axios';
 
-// Path for horoscope assets `assets/zodiacs/`;
-// local variable at the top level for full access
-let userHoroscope;
+const Horoscope = (props) => {
 
-// Get user horoscope data from database by wrapping axios request into function
-// horoscopeUrl will be updated to include user id as props from app.js
-let horoscopeUrl = `http://localhost:8080/horoscopes/2`;
+  const [horoscope, setHoroscope] = useState({
+    response: {}
+  });
 
-const getHoroscope = () => {
-  return axios.get(horoscopeUrl)
-    .catch((err) => {
-      console.log(err);
-    });
-}
+  const currentHoroscope = props.horoscope;
+  // console.log("BEFORE USEFFECT", currentHoroscope);
 
-class Aztro extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      json: {}
-    }
-  }
+  useEffect(() => {
+    // console.log("INSIDE USEFFECT", currentHoroscope);
 
-  componentDidMount() {
-    Promise.all([getHoroscope()])
-      .then((results) => {
-        // console.log(results);
-        userHoroscope = results[0].data.data[0].horoscope_sign;
-        // console.log(userHoroscope);
-        const URL = `https://aztro.sameerkumar.website/?sign=${userHoroscope}&day=today`;
-        fetch(URL, {
-          method: 'POST'
-        }).then(response => response.json())
-          .then(json => {
-            this.setState({ json, userHoroscope });
-          });
+    const URL = `https://aztro.sameerkumar.website/?sign=${currentHoroscope}&day=today`;
+    fetch(URL, {
+      method: 'POST'
+    }).then(response => response.json())
+      .then(json => {
+        setHoroscope({
+          response: json,
+        });
       });
-  }
 
-  render() {
-    return (
-      <>
-        <Button type="hide" click={this.props.click} name="Aztro" />
-        <div className='horoscope'>
-          <div className='horoscope-info'>
-            {/* Current Date: {this.state.json.current_date} <br /> */}
-            Your Horoscope: {this.state.userHoroscope} <br />
-            Highly Compatible With: {this.state.json.compatibility} <br />
-            Lucky Number: {this.state.json.lucky_number} <br />
-            Lucky Time: {this.state.json.lucky_time} <br />
-            Color: {this.state.json.color} <br />
-            Date Range: {this.state.json.date_range} <br />
-            Mood: {this.state.json.mood} <br />
-            Description: {this.state.json.description} <br />
-          </div>
-          <div className='horoscope-thumbnail'>
-            <img src={`assets/zodiacs/${userHoroscope}.jpeg`} alt='zodiac' width="200" height="200" />
-          </div>
+  }, [currentHoroscope]);
+
+  // console.log(horoscope)
+
+  return (
+    <>
+      <Button type="hide" click={props.click} name="Aztro" />
+      <div className='horoscope'>
+        <div className='horoscope-info'>
+          {/* Current Date: {horoscope.response.current_date} <br /> */}
+          Your Horoscope: {currentHoroscope} <br />
+          Highly Compatible With: {horoscope.response.compatibility} <br />
+          Lucky Number: {horoscope.response.lucky_number} <br />
+          Lucky Time: {horoscope.response.lucky_time} <br />
+          Color: {horoscope.response.color} <br />
+          Date Range: {horoscope.response.date_range} <br />
+          Mood: {horoscope.response.mood} <br />
+          Description: {horoscope.response.description} <br />
         </div>
-      </>
-    );
-  }
+        <div className='horoscope-thumbnail'>
+          <img src={`assets/zodiacs/${currentHoroscope}.jpeg`} alt='zodiac' width="200" height="200" />
+        </div>
+      </div>
+    </>
+  );
 }
 
-export default Aztro;
+export default Horoscope;

@@ -92,7 +92,7 @@ const WidgetSpotifyList = (props) => {
 
       // console.log("TOKEN FROM AWAIT FUNCTION REQUEST BELOW");
       // console.log(spotifyToken);
-      console.log("BEFORE API CALL")
+      // console.log("BEFORE API CALL")
       const apiMusicUrl = `https://api.spotify.com/v1/playlists/${playlist.id}/tracks`;
       const params = { limit: 10, offset: 0 };
       const headers = {
@@ -106,7 +106,7 @@ const WidgetSpotifyList = (props) => {
           const currentPlaylistName = playlist.playlist;
           // console.log('Playlist Name: ', currentPlaylistName);
           const musicDataRaw = response.data;
-          console.log('Raw Data: ', musicDataRaw);
+          // console.log('Raw Data: ', musicDataRaw);
           if (musicDataRaw) {
             setMusic({
               ...music,
