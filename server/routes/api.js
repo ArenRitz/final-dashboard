@@ -27,7 +27,6 @@ router.put('/users', (req, res) => {
     console.log("req.body", req.body)
     users.saveWorkHome(req.body)
     .then(data => {
-      console.log("data :", data)
       res.json({data});
     }).catch(err => {
       res.json({error: err});

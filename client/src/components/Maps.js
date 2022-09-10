@@ -88,7 +88,7 @@ export default function Maps(props) {
     const data = {home_location, work_location, id:userData.id.toString()}
     axios.put(`http://localhost:8080/api/users/${data.id}`, data)
     .then ((res) => 
-      console.log("saved. response:", res)
+      console.log("saved home and work location. response:", res)
     )
     .catch((err) => {
       console.log(err);
