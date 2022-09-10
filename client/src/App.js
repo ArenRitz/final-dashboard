@@ -42,7 +42,7 @@ function App() {
   const { userData, setUserData } = useUserData(userID); //getter and setter for the current user's data in state(currently defaulted to user_id 1)
 
   useEffect(() => {
-    // console.log("Current userData: ", userData);
+    console.log("Current userData: ", userData);
   }, [userID, userData]);
 
   const { currLocation } = useLocation();
@@ -105,7 +105,7 @@ function App() {
           )}
           <br></br>
 
-          {show.Maps && <Maps home={userData.home_location} work={userData.work_location} currentLocation={currLocation} click={hideComponenet} showBool={show.Maps} />}
+          {show.Maps && <Maps userData={userData} currentLocation={currLocation} click={hideComponenet} showBool={show.Maps} />}
 
           {show.Settings && (
             <Settings
