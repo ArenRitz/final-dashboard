@@ -1,11 +1,10 @@
 // install @react-google-maps/api
 // Uses google cloud services: maps, places, directions, distance matrix
 // disable adblockers
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { GoogleMap, useJsApiLoader, Marker, Autocomplete, DirectionsRenderer } from "@react-google-maps/api"
 import Button from "./Button";
 
-// const userRoute = {origin:"Waterloo, ON", destination:"Toronto, ON"}
 
 export default function Maps(props) {
   const [map, setMap] = useState( /** @type google.maps.Map */(null)) //add autocompletions provided by google maps
@@ -20,17 +19,21 @@ export default function Maps(props) {
   const originRef = useRef() //useRef persists data after rerender
   const destinationRef = useRef()
 
+  console.log("props.home :", props.home)
+  console.log("originRef.current.value :", originRef)
+  
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY,
     libraries,
   })
 
   async function calculateRoute() {
-    // if no route inputted, use the users's default route
+    // if no route user input, use the users's default route. If no default route, set to empty
     if (originRef.current.value === '' || destinationRef.current.value === '') {
-      originRef.current.value = props.home
-      destinationRef.current.value = props.work
+      originRef.current.value = (props.home) ? props.home : ""
+      destinationRef.current.value = (props.work) ? props.work : ""
     }
+
     // get directions, route and distance from DirectionsService
     // eslint-disable-next-line no-undef
     const directionsService = new google.maps.DirectionsService()
@@ -112,9 +115,7 @@ export default function Maps(props) {
         onLoad={(map) => {
           setMap(map)
           calculateRoute()
-        }
-      }
-
+        }}
       >
         <Marker position={props.currentLocation} />
         {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
