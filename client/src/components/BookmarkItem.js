@@ -1,13 +1,23 @@
+import { useState } from "react";
+
 const BookmarkItem = (props) => {
-
-  //render a component containing the bookmarks for each category
-
+  
+  const [showEdit, setShowEdit] = useState(false);
+  
   return (
-    <div >
-      <a className="text-slate-100" href={props.bookmarkURL}> {props.bookmarkTitle} </a>
+    <>
+
+       <div>
+        <a className="text-slate-100" href={props.URL} target="_blank">
+
+          {props.title}
+        </a>
       </div>
 
-  )
-}
 
-export default BookmarkItem
+
+    </>
+  );
+};
+
+export default BookmarkItem;
