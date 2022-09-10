@@ -31,9 +31,12 @@ const Horoscope = (props) => {
     <>
       <Button type="hide" click={props.click} name="Aztro" />
       <div className='horoscope'>
+        <div className='horoscope-thumbnail'>
+          <img src={`assets/zodiacs/${currentHoroscope}.jpeg`} alt='zodiac' width="200" height="200" />
+        </div>
         <div className='horoscope-info'>
           {/* Current Date: {horoscope.response.current_date} <br /> */}
-          Your Horoscope: {currentHoroscope} <br />
+          {/* Your Horoscope: {currentHoroscope} <br /> */}
           Highly Compatible With: {horoscope.response.compatibility} <br />
           Lucky Number: {horoscope.response.lucky_number} <br />
           Lucky Time: {horoscope.response.lucky_time} <br />
@@ -41,9 +44,6 @@ const Horoscope = (props) => {
           Date Range: {horoscope.response.date_range} <br />
           Mood: {horoscope.response.mood} <br />
           Description: {horoscope.response.description} <br />
-        </div>
-        <div className='horoscope-thumbnail'>
-          <img src={`assets/zodiacs/${currentHoroscope}.jpeg`} alt='zodiac' width="200" height="200" />
         </div>
       </div>
     </>
