@@ -121,6 +121,7 @@ function App() {
               theme={theme}
               showBools={show}
               mode={mode}
+              setUserData={setUserData}
             />
           )}
 

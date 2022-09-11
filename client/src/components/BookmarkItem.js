@@ -18,6 +18,7 @@ const BookmarkItem = (props) => {
           className="text-slate-100 w-96 overflow-x-hidden "
           href={props.URL}
           target="_blank"
+          rel="noreferrer"
         >
           {props.title}
         </a>
@@ -42,6 +43,7 @@ const BookmarkItem = (props) => {
               className="text-slate-100 w-96 overflow-x-hidden "
               href={props.URL}
               target="_blank"
+              rel="noreferrer"
             >
               {props.title}
             </a>
