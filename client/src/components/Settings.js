@@ -4,12 +4,6 @@ import { useState } from "react";
 const Settings = (props) => {
   const [selected, setSelected] = useState("bookmarks");
 
-  const handleClick = (e) => {
-    const { name } = e.target;
-    setSelected(name);
-    console.log(selected);
-  };
-
   const themeOptions = [
     "light",
     "dark",
@@ -44,196 +38,141 @@ const Settings = (props) => {
 
   return (
     <>
-      <div className=" fixed top-1/4 left-1/4 bg-neutral-content w-1/2 rounded-3xl flex flex-row">
-        <div className="w-1/4 h-full ">
-          <div className="navbar bg-neutral text-neutral-content">
-            <button
-              className="btn btn-ghost normal-case text-xl"
-              onClick={handleClick}
-              name="general"
-            >
-              General
-            </button>
-          </div>
-          <div className="navbar bg-neutral text-neutral-content">
-            <button
-              className="btn btn-ghost normal-case text-xl"
-              onClick={handleClick}
-              name="bookmarks"
-            >
-              Bookmarks
-            </button>
-          </div>
-          <div className="navbar bg-neutral">
-            <a
-              className="btn btn-ghost normal-case text-xl "
-              onClick={handleClick}
-              name="twitch"
-            >
-              Twitch
-            </a>
-          </div>
-          <div className="navbar bg-neutral text-primary-content">
-            <a
-              className="btn btn-ghost normal-case text-xl"
-              onClick={handleClick}
-              name="weather"
-            >
-              Weather
-            </a>
-          </div>
-          <div className="navbar bg-neutral text-neutral-content">
-            <a
-              className="btn btn-ghost normal-case text-xl"
-              onClick={handleClick}
-              name="clock"
-            >
-              Clock
-            </a>
-          </div>
-          <div className="navbar bg-neutral text-neutral-content">
-            <a
-              className="btn btn-ghost normal-case text-xl"
-              onClick={handleClick}
-              name="spotify"
-            >
-              Spotify
-            </a>
-          </div>
-          <div className="navbar bg-neutral text-neutral-content">
-            <a
-              className="btn btn-ghost normal-case text-xl"
-              onClick={handleClick}
-              name="recipe"
-            >
-              Recipe
-            </a>
-          </div>
-          <div className="navbar bg-neutral text-neutral-content">
-            <a
-              className="btn btn-ghost normal-case text-xl"
-              onClick={handleClick}
-              name="aztro"
-            >
-              Aztro
-            </a>
-          </div>
-          <div className="navbar bg-neutral text-neutral-content">
-            <a
-              className="btn btn-ghost normal-case text-xl"
-              onClick={handleClick}
-              name="maps"
-            >
-              Maps
-            </a>
-          </div>
-        </div>
+      <div className="z-40 fixed top-1/4 left-1/4 bg-base-300 w-[450px] rounded-3xl flex flex-row ">
         <div className="w-full">
-          {selected === "general" && (
-            <>
-              <div className="bg-neutral text-neutral-content">General</div>
-              <p className="text-primary">Select Theme</p>
-              <select
-                className="select select-bordered w-full max-w-xs"
-                onChange={props.themeChange}
-              >
-                <option disabled selected>
-                  Theme
-                </option>
-                {themeOptions.map((theme) => (
-                  <option value={theme}>{theme}</option>
-                ))}
-              </select>
-            </>
-          )}
-          {selected === "bookmarks" && (
-            <>
-              <div className="bg-neutral text-neutral-content">Bookmarks</div>
-              <Button
-                show={props.showBools.Bookmarks}
-                type="hideshow"
-                click={props.click}
-                name="Bookmarks"
-              />
-            </>
-          )}
-          {selected === "twitch" && (
-            <>
-              <div className="bg-neutral text-neutral-content">Twitch</div>
-              <Button
-                show={props.showBools.Twitch}
-                type="hideshow"
-                click={props.click}
-                name="Twitch"
-              />
-            </>
-          )}
-          {selected === "weather" && (
-            <>
-              <div className="bg-neutral text-neutral-content">Weather</div>
-              <Button
-                show={props.showBools.Weather}
-                type="hideshow"
-                click={props.click}
-                name="Weather"
-              />
-            </>
-          )}
-          {selected === "clock" && (
-            <>
-              <div className="bg-neutral text-neutral-content">Clock</div>
-              <Button
-                show={props.showBools.Clock}
-                type="hideshow"
-                click={props.click}
-                name="Clock"
-              />
-            </>
-          )}
-          {selected === "spotify" && (
-            <>
-              <div className="bg-neutral text-neutral-content">Spotify</div>
-              <Button
-                show={props.showBools.Spotify}
-                type="hideshow"
-                click={props.click}
-                name="Spotify"
-              />
-            </>
-          )}
-          {selected === "recipe" && (
-            <>
-              <div className="bg-neutral text-neutral-content">Recipe</div>
-              <Button
-                show={props.showBools.Recipe}
-                type="hideshow"
-                click={props.click}
-                name="Recipe"
-              />
-            </>
-          )}
-          {selected === "aztro" && (
-            <>
-              <div className="bg-neutral text-neutral-content">Aztro</div>
-              <Button
-                show={props.showBools.Aztro}
-                type="hideshow"
-                click={props.click}
-                name="Aztro"
-              />
-            </>
-          )}
-          {selected === "maps" && (
-            <>
-              <div className="bg-neutral text-neutral-content">Maps</div>
-              <Button
-                show={props.showBools.Maps}
-                type="hideshow"
-                click={props.click}
-                name="Maps"
-              />
-            </>
-          )}
+          <>
+            <div className="bg-neutral text-neutral-content rounded-t-2xl h-8 pt-[4px]">
+              <p className="text-center text-accent">Settings</p>
+            </div>
+            <select
+              className="select select-bordered w-full max-w-xs mt-4"
+              onChange={props.themeChange}
+            >
+              <option disabled selected>
+                Select Theme
+              </option>
+              {themeOptions.map((theme) => (
+                <option value={theme}>{theme}</option>
+              ))}
+            </select>
+          </>
+          <h2 className="text-center w-full mt-2 text-accent">
+            Toggle Visibility
+          </h2>
+          <div className="w-full flex-col mx-36">
+            <div className="w-20 flex flex-row items-center relative my-4">
+              <p className="w-20 mr-20"> Bookmarks </p>
+              <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
+                <input
+                  type="checkbox"
+                  className="toggle"
+                  onClick={() =>
+                    props.setVisibility("Bookmarks", props.showBools.Bookmarks)
+                  }
+                  name="Bookmarks"
+                  checked={props.showBools.Bookmarks}
+                />
+              </div>
+            </div>
+            <div className="w-20 flex flex-row items-center relative my-4">
+              <p className="w-20 mr-20"> Clock </p>
+              <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
+                <input
+                  type="checkbox"
+                  className="toggle"
+                  onClick={() =>
+                    props.setVisibility("Clock", props.showBools.Clock)
+                  }
+                  name="Clock"
+                  checked={props.showBools.Clock}
+                />
+              </div>
+            </div>
+            <div className="w-20 flex flex-row items-center relative my-4">
+              <p className="w-20 mr-20"> Twitch </p>
+              <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
+                <input
+                  type="checkbox"
+                  className="toggle"
+                  onClick={() =>
+                    props.setVisibility("Twitch", props.showBools.Twitch)
+                  }
+                  name="Twitch"
+                  checked={props.showBools.Twitch}
+                />
+              </div>
+            </div>
+            <div className="w-20 flex flex-row items-center relative my-4">
+              <p className="w-20 mr-20"> Horoscope </p>
+              <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
+                <input
+                  type="checkbox"
+                  className="toggle"
+                  onClick={() =>
+                    props.setVisibility("Horoscope", props.showBools.Horoscope)
+                  }
+                  name="Horoscope"
+                  checked={props.showBools.Horoscope}
+                />
+              </div>
+            </div>
+            <div className="w-20 flex flex-row items-center relative my-4">
+              <p className="w-20 mr-20"> Recipe </p>
+              <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
+                <input
+                  type="checkbox"
+                  className="toggle"
+                  onClick={() =>
+                    props.setVisibility("Recipe", props.showBools.Recipe)
+                  }
+                  name="Recipe"
+                  checked={props.showBools.Recipe}
+                />
+              </div>
+            </div>
+            <div className="w-20 flex flex-row items-center relative my-4">
+              <p className="w-20 mr-20"> Weather </p>
+              <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
+                <input
+                  type="checkbox"
+                  className="toggle"
+                  onClick={() =>
+                    props.setVisibility("Weather", props.showBools.Weather)
+                  }
+                  name="Weather"
+                  checked={props.showBools.Weather}
+                />
+              </div>
+            </div>
+            <div className="w-20 flex flex-row items-center relative my-4">
+              <p className="w-20 mr-20"> Spotify </p>
+              <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
+                <input
+                  type="checkbox"
+                  className="toggle"
+                  onClick={() =>
+                    props.setVisibility("Spotify", props.showBools.Spotify)
+                  }
+                  name="Spotify"
+                  checked={props.showBools.Spotify}
+                />
+              </div>
+            </div>
+            <div className="w-20 flex flex-row items-center relative my-4">
+              <p className="w-20 mr-20"> Maps </p>
+              <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
+                <input
+                  type="checkbox"
+                  className="toggle"
+                  onClick={() =>
+                    props.setVisibility("Maps", props.showBools.Maps)
+                  }
+                  name="Maps"
+                  checked={props.showBools.Maps}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

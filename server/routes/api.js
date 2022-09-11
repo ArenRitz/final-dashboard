@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const users = require('../db/queries/users');
 const bookmarks = require('../db/queries/bookmarks');
+const widgets = require('../db/queries/widgets');
 
 
 // put request for creating new user in database, returns user id to client or error if user with that email already exists
@@ -97,6 +98,22 @@ router.put('/categories/:id/:category_id', (req, res) => {
     })
   })
 })
+
+//function to return the name and visibility of all widgets by user ID
+router.get('/widgets/:id', (req, res) => {
+  widgets.getAllWidgetsByUserID(req.params.id).then(data => {
+    res.json(data);
+  })
+})
+
+//function to update the visibility widget by name and user ID
+router.put('/widgets/:id', (req, res) => {
+  widgets.updateWidgetVisibility( req.body.name, req.body.visibility, req.params.id,).then(data => {
+    res.json(data);
+  })
+})
+
+
 
 
 module.exports = router;
