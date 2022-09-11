@@ -1,58 +1,75 @@
 import BookmarkItem from "./BookmarkItem";
 import React, { useState } from "react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import NewBookmark from "./NewBookmark";
+import classNames from "classnames";
 
 const BookmarkList = (props) => {
-  const [bookmarks, setBookmarks] = useState(props.bookmarkItems);
+  const [bookmarksItems, setBookmarksItems] = useState(props.bookmarkItems);
+  const [showEdit, setShowEdit] = useState(false);
+  const [showNewBookmark, setShowNewBookmark] = useState(false);
 
-  let bookmarkList = bookmarks.map((bookmark, index) => {
+
+
+
+    
+
+  //function to toggle showEdit state on mouseEnter
+  const toggleEdit = () => {
+    setShowEdit(!showEdit);
+  };
+
+
+
+
+  let bookmarkList = bookmarksItems.map((bookmark, index) => {
     return (
-      <Draggable
-        key={bookmark.title}
-        draggableId={bookmark.title}
-        index={index}
-      >
-        {(provided) => (
-          <div
-          className="my-1 bg-slate-400/20 w-full rounded-full shadow-md shadow-black/50 "
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            ref={provided.innerRef}
-          >
-          <BookmarkItem bookmarkTitle={bookmark.title} bookmarkURL={bookmark.url} />
-            
-          </div>
-        )}
-      </Draggable>
+      <>
+      <div className="relative w-full">
+            <div key={index} className="my-1 bg-slate-400/20 rounded-full shadow-md shadow-black/50 group overflow-hidden w-full" onMouseEnter={toggleEdit}>
+              <BookmarkItem
+              key={index}
+                title={bookmark.title}
+                URL={bookmark.url}
+                mode={props.mode}
+                userID={props.id}
+                bookmarkId={bookmark.bookmarkID}
+                categoryID={bookmark.categoryID}
+                deleteSingle={props.deleteSingle}
+                editSingle={props.editSingle}
+              />
+
+            </div>
+            </div>
+
+      </>
     );
-  })
-function handleOnDragEnd(result) {
-    if (!result.destination) return;
-    const items = Array.from(bookmarks);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    setBookmarks(items);
-  }
+  });
+
 
   return (
     <>
-      <DragDropContext onDragEnd={handleOnDragEnd}>
-        <Droppable droppableId="bookmarks">
-          {(provided) => (
-            <div
-              className="flex flex-col items-center justify-center"
-              {...provided.droppableProps}
-              ref={provided.innerRef}
+      <div className="flex flex-col items-center justify-center ">
+        {bookmarkList}
+
+        {props.mode === "edit" && (
+          <>
+            <button
+              className="btn btn-primary btn-sm my-4"
+              onClick={() => setShowNewBookmark(!showNewBookmark)}
             >
-              {bookmarkList}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-      
- 
-    
+              +
+            </button>
+            {showNewBookmark && (
+              <NewBookmark
+                addBookmark={props.addSingle}
+                id={props.id}
+                categoryID={props.categoryID}
+                type="new"
+              />
+            )}
+          </>
+        )}
+      </div>
     </>
   );
 };

@@ -15,8 +15,7 @@ const Button = (props) => {
           onClick={props.click}
           name={props.name}
         >
-          {" "}
-          X{" "}
+          X
         </button>
       )}
       {props.type === "settings" && (
@@ -31,10 +30,19 @@ const Button = (props) => {
       {props.type === "edit" && (
         <button
           className="w-full rounded-bl-2xl h-1/2 click:bg-slate-200/30 hover:shadow-inner hover:shadow-black/60 active:bg-white/20"
-          onClick={props.click}
+          onClick={() => props.click("edit")}
           name={props.name}
         >
           ✏️
+        </button>
+      )}
+            {props.type === "stopedit" && (
+        <button
+          className="w-full rounded-bl-2xl h-1/2 click:bg-slate-200/30 hover:shadow-inner hover:shadow-black/60 active:bg-white/20"
+          onClick={() => props.click("view")}
+          name={props.name}
+        >
+          ✅
         </button>
       )}
       {props.type === "hideshow" && (
