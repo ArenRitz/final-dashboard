@@ -3,12 +3,17 @@ import React from "react";
 
 
 
-
-
 const Button = (props) => {
   
+//update visibility on click
+const updateWidgetVisibility = (name, visibility, id) => {
+
+  props.setVisibility(id, name, visibility);
+};
+
+
   return (
-    <>
+    <div >
       {props.type === "hide" && (
         <button
           className="bg-red-600 w-6 rounded-full hover:bg-red-400"
@@ -46,15 +51,14 @@ const Button = (props) => {
         </button>
       )}
       {props.type === "hideshow" && (
-          <div className="flex flex-row mt-2">
-          <p className="text-black ml-5 w-30 mr-10"> Toggle visibility</p>
-          <input type="checkbox" className="toggle" onClick={props.click} name={props.name} checked={props.show}/>
+          <div className="flex flex-row mt-2 px-8 absolute -top-2">
+          <input type="checkbox" className="toggle" onChange={() => updateWidgetVisibility(props.name, props.show, props.userID)}  name={props.name} checked={props.show}/>
           </div>
      
 
 
       )}
-    </>
+    </div>
   );
 };
 
