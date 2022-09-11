@@ -6,4 +6,10 @@ const getHoroscopeByUserId = (id) => {
 	})
 }
 
-module.exports = { getHoroscopeByUserId }
+const updateHoroscopeByUserId = (id, horoscope) => {
+	return db.query("UPDATE users SET horoscope_sign = $1 WHERE id = $2;", [horoscope, id]).then(data => {
+		return data.rows;
+	})
+}
+
+module.exports = { getHoroscopeByUserId, updateHoroscopeByUserId };

@@ -109,18 +109,18 @@ export default function Maps(props) {
         <Autocomplete>
           <input className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 px-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" placeholder="Destination" type="text" name="destination" ref={destinationRef} />
         </Autocomplete>
-        <div className='flex'>
-          <button className="text-slate-400 block bg-white rounded-md py-2 px-2 mr-2 hover:outline-none hover:border-sky-500 hover:ring-sky-500 hover:ring-1" onClick={calculateRoute}>Show Route</button>
-          <button className="text-slate-400 block bg-white rounded-md py-2 px-2 mr-2 hover:outline-none hover:border-sky-500 hover:ring-sky-500 hover:ring-1" onClick={clearRoute}>Clear</button>
+        <div className='flex justify-between'>
+          <button className="text-slate-400 block bg-white rounded-md py-2 px-2 hover:outline-none hover:border-sky-500 hover:ring-sky-500 hover:ring-1" onClick={calculateRoute}>Show Route</button>
+          <button className="text-slate-400 block bg-white rounded-md py-2 px-2 hover:outline-none hover:border-sky-500 hover:ring-sky-500 hover:ring-1" onClick={clearRoute}>Clear</button>
           <button 
             alt="Pan to Current Location"
-            className="text-slate-400 block bg-white rounded-md py-2 px-2 mr-2 hover:outline-none hover:border-sky-500 hover:ring-sky-500 hover:ring-1"
+            className="text-slate-400 block bg-white rounded-md py-2 px-2 hover:outline-none hover:border-sky-500 hover:ring-sky-500 hover:ring-1"
             name="center-back"
             onClick={() => map.panTo(currentLocation)}
           >
             <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"><path fill="currentcolor" d="M21,11H19.93A8,8,0,0,0,13,4.07V3a1,1,0,0,0-2,0V4.07A8,8,0,0,0,4.07,11H3a1,1,0,0,0,0,2H4.07A8,8,0,0,0,11,19.93V21a1,1,0,0,0,2,0V19.93A8,8,0,0,0,19.93,13H21a1,1,0,0,0,0-2Zm-9,7a6,6,0,1,1,6-6A6,6,0,0,1,12,18Zm0-9a3,3,0,1,0,3,3A3,3,0,0,0,12,9Zm0,4a1,1,0,1,1,1-1A1,1,0,0,1,12,13Z"/></svg> 
           </button>
-          <button className="text-slate-400 block bg-white rounded-md py-2 px-2 mr-2 hover:outline-none hover:border-sky-500 hover:ring-sky-500 hover:ring-1" onClick={saveHomeAndWork}>Save Route</button>
+          <button className="text-slate-400 block bg-white rounded-md py-2 px-2 mr-2 hover:outline-none hover:border-sky-500 hover:ring-sky-500 hover:ring-1" onClick={saveHomeAndWork}>Save Default Route</button>
         </div>
         <div className="text-slate-200 mr-4 font-bold">Distance: {distance}</div>
         <div className="text-slate-200 mr-4 font-bold">With Traffic: {durationTraffic}</div>
@@ -132,6 +132,7 @@ export default function Maps(props) {
         zoom={15}
         center={currentLocation}
         mapContainerStyle={{ width: '400px', height: '400px' }}
+        mapContainerClassName={"rounded-[2rem]"}
         options={{
           streetViewControl: false,
           mapTypeControl: false
