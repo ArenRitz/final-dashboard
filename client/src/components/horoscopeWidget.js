@@ -66,10 +66,9 @@ const Horoscope = (props) => {
 
   return (
     <>
-      <Button type="hide" click={props.click} name="Aztro" />
       <div className='horoscope'>
+        {props.mode === "edit" && (
         <div className="horoscope-dropdown">
-          <div className="bg-neutral text-neutral-content"></div>
           <select className="select select-bordered w-full max-w-xs" onChange={pickHoroscope}>
             <option disabled selected>
               Select Horoscope
@@ -79,6 +78,7 @@ const Horoscope = (props) => {
             ))}
           </select>
         </div>
+        )}
         <div className="horoscope-bottom">
           <div className='horoscope-thumbnail'>
             <img src={`assets/zodiacs/${currentHoroscope}.jpeg`} alt='zodiac' width="200" height="200" />

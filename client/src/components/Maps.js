@@ -100,7 +100,6 @@ export default function Maps(props) {
   }
   return (
     <>
-    <Button type="hide" click={click} name="Maps" />
     <div className='card bg-neutral flex flex-col justify-between w-fit px-5 py-5'>
       <section>
         
