@@ -6,16 +6,16 @@ const db = require('../../configs/db.config');
 
 // query to get all bookmarks for specific user by user ID returning bookmark id, bookmark title, bookmark url, category name, and category ID
 // tables; users_categories, bookmarks
-const getAllBookmarksForUser = (id) => {
-	return db.query(`
-	SELECT bookmarks.id, bookmarks.bookmark_title, bookmarks.bookmark_url, users_categories.category_name, users_categories.id AS user_category_id
-	FROM bookmarks
-	JOIN users_categories ON users_categories.id = bookmarks.user_category_id
-	WHERE users_categories.user_id = $1
-	`, [id]).then(data => {
-		return data.rows;
-	})
-};
+// const getAllBookmarksForUser = (id) => {
+// 	return db.query(`
+// 	SELECT bookmarks.id, bookmarks.bookmark_title, bookmarks.bookmark_url, users_categories.category_name, users_categories.id AS user_category_id
+// 	FROM bookmarks
+// 	JOIN users_categories ON users_categories.id = bookmarks.user_category_id
+// 	WHERE users_categories.user_id = $1
+// 	`, [id]).then(data => {
+// 		return data.rows;
+// 	})
+// };
 
 
 
@@ -60,15 +60,26 @@ const addCategory = (user_id, category_name) => {
 }
 
 //edit category via user id and category name
-const editCategory = (user_id, category_id, category_name) => {
+const editCategory = (user_id, category_name, category_id) => {
 	return db.query("UPDATE users_categories SET category_name = $1 WHERE user_id = $2 AND id = $3;", [category_name, user_id, category_id]).then(data => {
 		return data.rows;
 	})
 }
 
 
+const getAllBookmarksForUser = (id) => {
+	return db.query(`
+	SELECT bookmarks.id, bookmarks.bookmark_title, bookmarks.bookmark_url, users_categories.category_name, users_categories.id AS user_category_id
+	FROM bookmarks
+	RIGHT JOIN users_categories ON users_categories.id = bookmarks.user_category_id
+	WHERE users_categories.user_id = $1
+	`, [id]).then(data => {
+		return data.rows;
+	})
+};
 
 
 
 
-module.exports = {getAllBookmarksForUser, deleteBookmark, addBookmark, editBookmark}
+
+module.exports = {getAllBookmarksForUser, deleteBookmark, addBookmark, editBookmark, deleteCategory, addCategory, editCategory};

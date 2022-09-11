@@ -1,4 +1,4 @@
-import Reac, {useState} from "react";
+import {useState} from "react";
 
 const NewBookmark = (props) => {
 

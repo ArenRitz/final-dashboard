@@ -75,15 +75,17 @@ router.put('/categories/:id', (req, res) => {
   })
 })
 
-//function to edit category name in database for specific user id by category id
+//function to edit category name in database by category ID
 router.put('/categories/:id/:category_id', (req, res) => {
-  bookmarks.editCategory(req.params.category_id, req.body.category_name).then(data => {
+  bookmarks.editCategory(req.params.id, req.body.category_name, req.params.category_id).then(data => {
     //get all bookmarks for user after editing category
     bookmarks.getAllBookmarksForUser(req.params.id).then(data => {
       res.json(data);
     })
   })
 })
+
+
 
 
 
