@@ -100,7 +100,6 @@ export default function Maps(props) {
   }
   return (
     <>
-    <Button type="hide" click={click} name="Maps" />
     <div className='flex flex-col justify-between w-fit figma-bookmark-container px-5 py-5'>
       <section>
         <Autocomplete>

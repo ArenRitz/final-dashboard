@@ -171,7 +171,6 @@ const BookmarkCategory = (props) => {
   return (
     <>
       <div className="">
-        <Button type="hide" click={props.click} name="Bookmarks" />
         <div className="flex flex-row justify-between w-fit figma-bookmark-container px-5 py-5">
           {category}
          
