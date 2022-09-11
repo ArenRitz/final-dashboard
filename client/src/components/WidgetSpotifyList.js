@@ -131,15 +131,10 @@ const WidgetSpotifyList = (props) => {
 
   return (
     <div className="w-[400px] mx-auto overflow-hidden">
-      <Button type="hide" click={props.click} name="Spotify" />
-      {/* <div className='spotify-main'> */}
-      {/* <div className='spotify-header'> */}
       <h1>SPOTIFY</h1>
       <h2>{music.currentPlaylistName} - Top 10 Tracks</h2>
-      {/* </div> */}
+      {props.mode === "edit" && (
       <>
-        <div className="bg-neutral text-neutral-content"></div>
-        {/* <p className="text-primary">Select Playlist</p> */}
         <select className="select select-bordered w-full max-w-xs" onChange={pickPlaylist}>
           <option disabled selected>
             Select Playlist
@@ -149,8 +144,8 @@ const WidgetSpotifyList = (props) => {
           ))}
         </select>
       </>
+      )}
       <div className="carousel w-screen">
-        {/* <div className='spotify-content'> */}
           {music.tracks.map((item, index) => {
             return (
               <div id={"item" + index} className="carousel-item w-full">
@@ -161,7 +156,6 @@ const WidgetSpotifyList = (props) => {
             )
           })
           }
-        {/* </div> */}
       </div>
       <div className="flex justify-center w-full py-2 gap-2">
         <a href="#item0" className="btn btn-xs">1</a>
@@ -175,8 +169,6 @@ const WidgetSpotifyList = (props) => {
         <a href="#item8" className="btn btn-xs">9</a>
         <a href="#item9" className="btn btn-xs">10</a>
       </div>
-      {/* </div> */}
-      {/* </div> */}
     </div>
   );
 }

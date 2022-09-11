@@ -1,17 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios';
-import Button from './Button';
-// EDAMAM API DETAILS
-// let userQueryRecipe = "pizza";
-// let appID = PROCESS.ENV.REACT_APP_EDAMAM_APP_ID;
-// let appKey = PROCESS.ENV.REACT_APP_EDAMAM_APP_KEY;
-
-// let apiRecipeURL = `https://api.edamam.com/api/recipes/v2?type=public&q=${userQueryRecipe}&app_id=${appID}&app_key=${appKey}`
-
-//Meal DB API for random recipe (use this one)
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Button from "./Button";
 
 const WidgetRecipe = (props) => {
-
   const [recipe, setRecipe] = useState({
     type: "",
     category: "",
@@ -21,10 +12,10 @@ const WidgetRecipe = (props) => {
   });
 
   useEffect(() => {
+    const apiRandomRecipeUrl = `https://www.themealdb.com/api/json/v1/1/random.php`;
 
-    const apiRandomRecipeUrl = `https://www.themealdb.com/api/json/v1/1/random.php`
-
-    axios.get(apiRandomRecipeUrl)
+    axios
+      .get(apiRandomRecipeUrl)
       .then((response) => {
         const recipeData = response.data.meals[0];
         console.log(recipeData);
@@ -55,36 +46,32 @@ const WidgetRecipe = (props) => {
   }, []);
 
   return (
-    <>
-      <Button type="hide" click={props.click} name="Recipe" />
-
-      <div className="recipe-main">
-        <div className="recipe-title">
-          <p>RECIPE INFORMATION</p>
+    <div className="text-center px-4 py-4 border-solid border-2 border-base-content w-fit rounded-3xl">
+      <div className="flex flex-row items-center">
+        <div>
+          <p>Type: {recipe.type}</p>
+          <p>Category: {recipe.category}</p>
+          <p>
+            Theme:{" "}
+            {recipe.theme.length > 15
+              ? recipe.theme.substring(0, 15) + "..."
+              : recipe.theme}
+          </p>
         </div>
-        <div className="recipe-info">
-          <div className="recipe-details">
-            <p className="recipe-type">
-              Type: {recipe.type}
-            </p>
-            <p className="recipe-category">
-              Category: {recipe.category}
-            </p>
-            <p className="recipe-theme">
-              Theme: {recipe.theme}
-            </p>
-            <a href={recipe.source} className="recipe-source">
-              {recipe.source}
-            </a>
-          </div>
-          <div>
-            <img className="recipe-thumbnail" src={recipe.thumbnail} alt="thumbnail for recipe" width="200" height="200" />
-          </div>
+        <div className="px-8">
+          <a href={recipe.source} className="masker mask-squircle">
+            <div>
+              <img
+                src={recipe.thumbnail}
+                alt="thumbnail for recipe"
+                className="w-[100px] h-[100px] "
+              />
+            </div>
+          </a>
         </div>
       </div>
-
-    </>
+    </div>
   );
-}
+};
 
-export default WidgetRecipe
+export default WidgetRecipe;
