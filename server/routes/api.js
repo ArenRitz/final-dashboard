@@ -23,6 +23,18 @@ router.put('/users', (req, res) => {
     })
   })
 
+
+// put request for user's home and work location
+router.put('/users/:id', (req, res) => {
+  console.log("req.body", req.body)
+  users.saveWorkHome(req.body)
+  .then(data => {
+    res.json({data});
+  }).catch(err => {
+    res.json({error: err});
+  })
+})
+
 //function to delete bookmark from database for specific user id by bookmark title and category name
 router.delete('/bookmarks/:id/:category_id/:title', (req, res) => {
   bookmarks.deleteBookmark(req.params.category_id, req.params.title).then(data => {
@@ -55,6 +67,7 @@ router.put('/bookmarks/:bookmark_id', (req, res) => {
 })
 
 
+
 //function to delete category from database for specific user id by category id
 router.delete('/categories/:id/:category_id', (req, res) => {
   bookmarks.deleteCategory(req.params.id, req.params.category_id).then(data => {
@@ -84,10 +97,6 @@ router.put('/categories/:id/:category_id', (req, res) => {
     })
   })
 })
-
-
-
-
 
 
 module.exports = router;

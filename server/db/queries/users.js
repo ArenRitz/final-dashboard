@@ -41,7 +41,20 @@ const loginUser = (user) => {
 	})
 }
 
+const saveWorkHome = (data) => {
+	return db.query(
+		`
+		UPDATE users SET home_location = $1, work_location = $2
+		WHERE id = $3;
+		`,
+		[data.home_location, data.work_location, data.id]
+	).then(data => {
+		return data.rows[0];
+	}).catch(err => {
+		return err;
+	})
 
+}
 
 
 
@@ -49,7 +62,8 @@ module.exports = {
 	getAllUsers,
 	getUserById,
 	createUser,
-	loginUser
+	loginUser,
+	saveWorkHome
 }
 
 
