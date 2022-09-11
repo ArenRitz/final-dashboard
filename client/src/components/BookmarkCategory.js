@@ -81,6 +81,11 @@ const BookmarkCategory = (props) => {
       });
   };
 
+  
+
+
+
+
   let category = Object.keys(bookmarks).map((category, index) => {
     return (
       <div key={category} className="mx-5 figma-bookmark-back text-center">
@@ -111,6 +116,7 @@ const BookmarkCategory = (props) => {
         <Button type="hide" click={props.click} name="Bookmarks" />
         <div className="flex flex-row justify-between w-fit figma-bookmark-container px-5 py-5">
           {category}
+          
         </div>
       </div>
     </>

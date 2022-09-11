@@ -44,6 +44,27 @@ const editBookmark = ( bookmark_id, title, url) => {
 }
 
 
+//delete category via user id and category id
+const deleteCategory = (user_id, category_id) => {
+	return db.query("DELETE FROM users_categories WHERE user_id = $1 AND id = $2;", [user_id, category_id]).then(data => {
+		return data.rows;
+	})
+}
+
+
+//add category via user id and category name
+const addCategory = (user_id, category_name) => {
+	return db.query("INSERT INTO users_categories (user_id, category_name) VALUES ($1, $2);", [user_id, category_name]).then(data => {
+		return data.rows;
+	})
+}
+
+//edit category via user id and category name
+const editCategory = (user_id, category_id, category_name) => {
+	return db.query("UPDATE users_categories SET category_name = $1 WHERE user_id = $2 AND id = $3;", [category_name, user_id, category_id]).then(data => {
+		return data.rows;
+	})
+}
 
 
 

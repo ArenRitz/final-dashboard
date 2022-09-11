@@ -55,6 +55,38 @@ router.put('/bookmarks/:bookmark_id', (req, res) => {
 })
 
 
+//function to delete category from database for specific user id by category id
+router.delete('/categories/:id/:category_id', (req, res) => {
+  bookmarks.deleteCategory(req.params.id, req.params.category_id).then(data => {
+    //get all bookmarks for user after deleting category
+    bookmarks.getAllBookmarksForUser(req.params.id).then(data => {
+      res.json(data);
+    })
+  })
+})
+
+//function to add category to database for specific user id by category name
+router.put('/categories/:id', (req, res) => {
+  bookmarks.addCategory(req.params.id, req.body.category_name).then(data => {
+    //get all bookmarks for user after adding category
+    bookmarks.getAllBookmarksForUser(req.params.id).then(data => {
+      res.json(data);
+    })
+  })
+})
+
+//function to edit category name in database for specific user id by category id
+router.put('/categories/:id/:category_id', (req, res) => {
+  bookmarks.editCategory(req.params.category_id, req.body.category_name).then(data => {
+    //get all bookmarks for user after editing category
+    bookmarks.getAllBookmarksForUser(req.params.id).then(data => {
+      res.json(data);
+    })
+  })
+})
+
+
+
 
 module.exports = router;
 
