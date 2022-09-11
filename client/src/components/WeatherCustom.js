@@ -63,7 +63,6 @@ export default function WeatherCustom(props) {
 
   return (
     <>
-    <Button type="hide" click={props.click} name="Weather" />
     <div>
       {isLoading && <div>___</div> }
       {weatherData.weather.icon && 

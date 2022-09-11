@@ -37,18 +37,14 @@
   mask-size: 100%;
 }
 
-.time-tile {
-  height: 5rem;
-  width: 25rem;
-  background-color: black;
-  color: white;
-  text-align: left;
-  font-weight: bold;
-  font-size: 50px
-}
+@font-face {
+  font-family: 'technology';
+  src: url('../public/fonts/Technology.ttf') format('truetype');
+} 
 
-.time-text {
-  padding: 10px
+.clock {
+  font-family: 'technology';
+  font-size: 80px;
 }
 
 .spotify-header {
@@ -68,17 +64,7 @@
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.spotify-track-layout {
-  width: 400px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  border: solid solid solid solid;
-  border-radius: 10%;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-}
+
 
 .spotify-track-layout .spotify-text-content {
   width: 100%;
@@ -87,10 +73,7 @@
   align-items: flex-start;
 }
 
-.spotify-image {
-  width: 150px;
-  padding-right: 10px;
-}
+
 
 @keyframes App-logo-spin {
   from {
