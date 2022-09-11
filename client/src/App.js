@@ -77,7 +77,7 @@ function App() {
       {userID && (
         <>
 
-          {show.Aztro && <Horoscope horoscope={userData.horoscope_sign} click={hideComponenet} showBool={show.Aztro} mode={mode} />}
+          {show.Aztro && <Horoscope userID={userID} horoscope={userData.horoscope_sign} click={hideComponenet} showBool={show.Aztro} mode={mode} />}
           <br></br>
 
           {show.Twitch && (
