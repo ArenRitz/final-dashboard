@@ -70,7 +70,7 @@ function App() {
     <div className="App">
       {userID && (
         <>
-          {show.Aztro && <Horoscope horoscope={userData.horoscope_sign} click={hideComponenet} showBool={show.Aztro} />}
+          {show.Aztro && <Horoscope userID={userID} horoscope={userData.horoscope_sign} click={hideComponenet} showBool={show.Aztro} />}
           <br></br>
 
           {show.Twitch && (
