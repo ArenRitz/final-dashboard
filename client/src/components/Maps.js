@@ -28,9 +28,17 @@ export default function Maps(props) {
     libraries,
   })
  
+ 
+  useEffect(() => {
+    calculateRoute()
+
+
+ }, [userData])
+
+
   async function calculateRoute() {
     // if no route user input, use the users's default route. If no default route, set to empty
-
+    console.log("********", userData)
     if (originRef.current.value === '' || destinationRef.current.value === '') {
       originRef.current.value = (userData.home_location) ? userData.home_location : ""
       destinationRef.current.value = (userData.work_location) ? userData.work_location : ""
