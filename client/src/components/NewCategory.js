@@ -34,7 +34,7 @@ const NewCategory = (props) => {
     <>
     {props.type === "addCat" && (
 
-    <div className="h-10 w-64 absolute -top-[5rem] -right-[7rem]">
+    <div className="h-10 w-64 absolute top-[2rem] -right-[7rem]">
     <div className="flex flex-col items-center justify-center bg-base-200 w-fit px-4 py-2 rounded-3xl shadow-md shadow-black border border-base-content hover:border-2 ">
       <form onSubmit={addCategory}>
       <div className="form-control w-full max-w-xs">
