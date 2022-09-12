@@ -54,13 +54,15 @@ const BookmarkList = (props) => {
       <div className="flex flex-col items-center justify-center relative">
         {props.mode === "edit" && (
           <>
+           <div className="absolute right-2 -top-[4.5rem] -left-0 z-20 h-[25px] w-[45px] rounded-full bg-success" >
             <button
-              className="btn btn-success btn-xs absolute -top-[5rem] -left-0 z-20"
+              className=" text-sm text-success-content"
               onClick={toggleEditCatMode}
             >
               {" "}
               EDIT{" "}
             </button>
+            </div>
             {editCatMode && (
               <NewCategory
                 type="editCat"

@@ -166,14 +166,16 @@ const handleMouseOut = () => {
             {category}
           </h1>
           {props.mode === "edit" && (
+            <div className="absolute right-2 -top-8 h-[25px] w-[45px] rounded-full bg-error" >
             <button
-              className="absolute right-0 -top-10 btn btn-error btn-xs  "
+              className=" text-sm text-error-content font-bold"
               onClick={() =>
                 deleteCategory(props.userID, bookmarks[category][0].categoryID)
               }
             >
-              <image src={`${iconPath}delete.svg`} alt="delete" />
+              Del
             </button>
+            </div>
           )}
         </div>
         {isLoading && <p>Loading...</p>}
