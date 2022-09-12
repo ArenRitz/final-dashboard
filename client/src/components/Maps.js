@@ -100,7 +100,7 @@ export default function Maps(props) {
   }
   return (
     <>
-    <div className='card bg-neutral flex flex-col justify-between w-fit px-5 py-5'>
+    <div className='card bg-base-200 border-2 border-base-content flex flex-col justify-between w-fit px-5 py-5'>
       <section>
         
         <div className='flex justify-between'>
@@ -117,17 +117,17 @@ export default function Maps(props) {
           </Autocomplete>
         </div>
         <div className='flex justify-between'>
-          <button className="btn btn-outline btn-info btn-sm hover:outline-none hover:border-primary hover:ring-2 font-normal normal-case mb-1" onClick={calculateRoute}>Show Route</button>
-          <button className="btn btn-outline btn-info btn-sm hover:outline-none hover:border-primary hover:ring-2 font-normal normal-case mb-1" onClick={clearRoute}>Clear</button>
+          <button className="btn btn-outline btn-accent btn-sm hover:outline-none font-normal normal-case mb-1" onClick={calculateRoute}>Show Route</button>
+          <button className="btn btn-outline btn-accent btn-sm hover:outline-none font-normal normal-case mb-1" onClick={clearRoute}>Clear</button>
           <button 
             alt="Pan to Current Location"
-            className="btn btn-outline btn-info btn-sm hover:outline-none hover:border-primary hover:ring-2 font-normal normal-case mb-1"
+            className="btn btn-outline btn-accent btn-sm hover:outline-none font-normal normal-case mb-1"
             name="center-back"
             onClick={() => map.panTo(currentLocation)}
           >
             <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"><path fill="currentcolor" d="M21,11H19.93A8,8,0,0,0,13,4.07V3a1,1,0,0,0-2,0V4.07A8,8,0,0,0,4.07,11H3a1,1,0,0,0,0,2H4.07A8,8,0,0,0,11,19.93V21a1,1,0,0,0,2,0V19.93A8,8,0,0,0,19.93,13H21a1,1,0,0,0,0-2Zm-9,7a6,6,0,1,1,6-6A6,6,0,0,1,12,18Zm0-9a3,3,0,1,0,3,3A3,3,0,0,0,12,9Zm0,4a1,1,0,1,1,1-1A1,1,0,0,1,12,13Z"/></svg> 
           </button>
-          <button className="btn btn-outline btn-info btn-sm hover:outline-none hover:border-primary hover:ring-2 font-normal normal-case mb-1" onClick={saveHomeAndWork}>Save Default Route</button>
+          <button className="btn btn-outline btn-accent btn-sm hover:outline-none font-normal normal-case mb-1" onClick={saveHomeAndWork}>Save Default Route</button>
         </div>
       </section>
 
