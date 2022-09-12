@@ -30,20 +30,22 @@ function App() {
     Settings: false,
   });
 
-  const [userID, setUserID] = useState(1); // ******* CHANGE THIS TO NULL TO TEST LOGIN *******
   const [mode, setMode] = useState("view");
 
+  const [focusTrack, setFocusTrack] = useState({})
+  
   //function to update userID state when user logs in
   const handleLogin = (id) => {
     setUserID(id);
   };
-
+  
   const html = document.querySelector("html");
   html.setAttribute("data-theme", `${theme}`);
-
-
-const { userData, setUserData } = useUserData(userID); //getter and setter for the current user's data in state(currently defaulted to user_id 1)
-
+  
+  const [userID, setUserID] = useState(null); // ******* CHANGE THIS TO NULL TO TEST LOGIN *******
+  
+  const { userData, setUserData } = useUserData(userID); //getter and setter for the current user's data in state(currently defaulted to user_id 1)
+  
   useEffect(() => {
     console.log("Current userData: ", userData);
     const getVisibility = (userID) => {
@@ -52,12 +54,18 @@ const { userData, setUserData } = useUserData(userID); //getter and setter for t
         setShow({ ...formattedVisibility });
       });
     };
-
-    getVisibility(userID);
+    let user_id = localStorage.getItem("user_id");
+    if (!user_id) {
+      // redirect to login and
+      return;
+    }
+    setUserID(user_id)
+    getVisibility(user_id);
+    
   }, [userID, userData]);
-
+  
   const { currLocation } = useLocation();
-
+  
   const hideComponent = (e) => {
     console.log(show.Bookmarks);
     console.log("trying to delete");
@@ -175,6 +183,7 @@ const { userData, setUserData } = useUserData(userID); //getter and setter for t
                       click={hideComponent}
                       showBool={show.Spotify}
                       mode={mode}
+                      setFocusTrack={setFocusTrack}
                     />
                   )}
                 </div>
@@ -208,13 +217,10 @@ const { userData, setUserData } = useUserData(userID); //getter and setter for t
               click={hideComponent}
               showBool={show.Twitch}
               mode={mode}
+              streamers={userData.twitch_usernames}
             />
           )}
-          <br></br>
-
-          <br></br>
-
-          <br></br>
+  
 
           {show.Settings && (
             <Settings

@@ -37,6 +37,8 @@ const WidgetSpotifyList = (props) => {
     id: "37i9dQZF1DXcBWIGoYBM5M",
   });
 
+  const [musicCount, setMusicCount] = useState([0,1,2,3,4,5,6,7,8,9])
+
   // console.log("------------------CHECKING PLAYLIST STATE-----------------");
 
   const pickPlaylist = (e) => {
@@ -50,6 +52,12 @@ const WidgetSpotifyList = (props) => {
       id: selectedPlaylistId,
     });
   };
+
+  const setTopSong = (index) => {
+    props.setFocusTrack(music.tracks[index])
+  }
+
+
 
   const getSpotifyToken = async () => {
     let tokenObject = localStorage.getItem("spotifyToken");
@@ -160,7 +168,13 @@ const WidgetSpotifyList = (props) => {
       </div>
       </div>
       <div className="flex justify-center w-full py-1 gap-2">
-        <a href="#item0" className="btn btn-xs">1</a>
+        { musicCount.map((item) => {
+          return (
+            <a href={`#item${item}`} className="btn btn-xs" onClick={() => setTopSong(item)}>{item + 1}</a>
+          )
+         })
+        }
+        {/* <a href="#item0" className="btn btn-xs">1</a>
         <a href="#item1" className="btn btn-xs">2</a>
         <a href="#item2" className="btn btn-xs">3</a>
         <a href="#item3" className="btn btn-xs">4</a>
@@ -169,7 +183,7 @@ const WidgetSpotifyList = (props) => {
         <a href="#item6" className="btn btn-xs">7</a>
         <a href="#item7" className="btn btn-xs">8</a>
         <a href="#item8" className="btn btn-xs">9</a>
-        <a href="#item9" className="btn btn-xs">10</a>
+        <a href="#item9" className="btn btn-xs">10</a> */}
       </div>
     </div>
   );
