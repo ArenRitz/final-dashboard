@@ -100,7 +100,7 @@ export default function Maps(props) {
   }
   return (
     <>
-    <div className='card bg-base-200 border-2 border-base-content flex flex-col justify-between w-fit px-5 py-5'>
+    <div className='card bg-base-200 border-2 border-base-content flex flex-col justify-between w-fit px-3 py-3'>
       <section>
         
         <div className='flex justify-between'>
@@ -156,7 +156,7 @@ export default function Maps(props) {
         <GoogleMap
           zoom={15}
           center={currentLocation}
-          mapContainerStyle={{ width: '400px', height: '400px' }}
+          mapContainerStyle={{ width: '400px', height: '288px' }}
           mapContainerClassName={"rounded-[2rem]"}
           options={{
             streetViewControl: false,
