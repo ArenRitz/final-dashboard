@@ -100,7 +100,7 @@ export default function Maps(props) {
   }
   return (
     <>
-    <div className='card bg-base-200 border-2 border-base-content flex flex-col justify-between w-fit px-3 py-3'>
+    <div className='card bg-base-200 border-2 border-base-content flex flex-col justify-between w-fit px-3 py-3 rounded-[40px]'>
       <section>
         
         <div className='flex justify-between'>

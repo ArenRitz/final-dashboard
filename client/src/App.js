@@ -48,13 +48,11 @@ function App() {
     const getVisibility = (userID) => {
       axios.get(`http://localhost:8080/api/widgets/${userID}`).then((res) => {
         const formattedVisibility = formatVisibility(res.data);
-        setShow({...formattedVisibility});
+        setShow({ ...formattedVisibility });
       });
     };
 
-
     getVisibility(userID);
-
   }, [userID, userData]);
 
   const { currLocation } = useLocation();
@@ -80,9 +78,6 @@ function App() {
     setMode(value);
   };
 
-
-
-
   const formatVisibility = (visibility) => {
     const formattedVisibility = {};
     visibility.forEach((widget) => {
@@ -91,48 +86,121 @@ function App() {
     return formattedVisibility;
   };
 
+  //function to update the visibility of widgets in the database
+  const setVisibility = (name, value) => {
+    axios
+      .put(`http://localhost:8080/api/widgets/${userID}`, {
+        name,
+        visibility: value,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-
-//function to update the visibility of widgets in the database
-const setVisibility = (name, value) => {
-
-  axios
-    .put(`http://localhost:8080/api/widgets/${userID}`, {name, visibility: value})
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
-//handle visibility change via toggle button in settings to update database and state
-const handleVisibilityChange = (widget, currentShowStatus) => {
-  const name = widget;
-  const value = !currentShowStatus;
-  setShow((prevState) => ({
-    ...prevState,
-    [name]: value,
-  }));
-  setVisibility(name, value);
-};
-
-
+  //handle visibility change via toggle button in settings to update database and state
+  const handleVisibilityChange = (widget, currentShowStatus) => {
+    const name = widget;
+    const value = !currentShowStatus;
+    setShow((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+    setVisibility(name, value);
+  };
 
   return (
     <div className="App">
       {userID && (
         <>
-          {show.Horoscope && (
-            <Horoscope
-              userID={userID}
-              horoscope={userData.horoscope_sign}
-              click={hideComponent}
-              showBool={show.Horoscope}
-              mode={mode}
-            />
-          )}
-          <br></br>
+          <div className="flex flex-row  w-[100%] h-[100vh] mt-2">
+            <div className="flex flex-col  w-[25%] h-max">
+              <div>
+                {show.Clock && (
+                  <Clock
+                    click={hideComponent}
+                    showBool={show.Clock}
+                    mode={mode}
+                  />
+                )}
+              </div>
+              <br></br>
+            </div>
+
+            <div className="flex flex-col items-center justify-center w-[50%] h-max">
+              <div className="flex flex-row mt-[7.5rem]">
+                <div className="mr-2">
+                  {show.Bookmarks && (
+                    <BookmarkCategory
+                      click={hideComponent}
+                      showBool={show.Bookmarks}
+                      userID={userID}
+                      mode={mode}
+                    />
+                  )}
+                </div>
+                <br></br>
+                <div className="ml-2">
+                  {show.Maps && (
+                    <Maps
+                      userData={userData}
+                      currentLocation={currLocation}
+                      click={hideComponent}
+                      showBool={show.Maps}
+                      mode={mode}
+                    />
+                  )}
+                </div>
+              </div>
+
+              <div className="flex flex-row w-[800px] justify-around mt-2">
+                <div className="mx-2">
+                  {show.Horoscope && (
+                    <Horoscope
+                      userID={userID}
+                      horoscope={userData.horoscope_sign}
+                      click={hideComponent}
+                      showBool={show.Horoscope}
+                      mode={mode}
+                    />
+                  )}
+                </div>
+                <div className="mx-2">
+                  {show.Spotify && (
+                    <WidgetSpotifyList
+                      click={hideComponent}
+                      showBool={show.Spotify}
+                      mode={mode}
+                    />
+                  )}
+                </div>
+                <div className="mx-2">
+                  {show.Recipe && (
+                    <WidgetRecipe
+                      click={hideComponent}
+                      showBool={show.Recipe}
+                      mode={mode}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col items-center justify-center w-[25%] h-max">
+              <div>
+                {show.Weather && (
+                  <WeatherCustom
+                    currentLocation={currLocation}
+                    click={hideComponent}
+                    showBool={show.Weather}
+                    mode={mode}
+                  />
+                )}
+              </div>
+            </div>
+          </div>
 
           {show.Twitch && (
             <TwitchWidgetList
@@ -143,58 +211,9 @@ const handleVisibilityChange = (widget, currentShowStatus) => {
           )}
           <br></br>
 
-          {show.Recipe && (
-            <WidgetRecipe
-              click={hideComponent}
-              showBool={show.Recipe}
-              mode={mode}
-            />
-          )}
           <br></br>
 
-          {show.Clock && (
-            <Clock click={hideComponent} showBool={show.Clock} mode={mode} />
-          )}
           <br></br>
-
-          {show.Bookmarks && (
-            <BookmarkCategory
-              click={hideComponent}
-              showBool={show.Bookmarks}
-              userID={userID}
-              mode={mode}
-            />
-          )}
-          <br></br>
-
-          {show.Weather && (
-            <WeatherCustom
-              currentLocation={currLocation}
-              click={hideComponent}
-              showBool={show.Weather}
-              mode={mode}
-            />
-          )}
-          <br></br>
-
-          {show.Spotify && (
-            <WidgetSpotifyList
-              click={hideComponent}
-              showBool={show.Spotify}
-              mode={mode}
-            />
-          )}
-          <br></br>
-
-          {show.Maps && (
-            <Maps
-              userData={userData}
-              currentLocation={currLocation}
-              click={hideComponent}
-              showBool={show.Maps}
-              mode={mode}
-            />
-          )}
 
           {show.Settings && (
             <Settings
