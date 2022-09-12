@@ -3,9 +3,14 @@ import { useState, useEffect } from "react";
 
 const useUserData = (user_id) => {
 
+  
+
+
+
   const [userData, setUserData] = useState({})
 
   useEffect(() => {
+    if (user_id) {
     axios.get(`http://localhost:8080/users/${user_id}`)
       .then((res) => {
         setUserData(() => (
@@ -15,7 +20,9 @@ const useUserData = (user_id) => {
       .catch((err) => {
         console.log(err);
       });
-
+    } else {
+      return;
+    }
   }, [user_id])
 
   return {

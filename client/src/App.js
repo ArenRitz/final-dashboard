@@ -41,7 +41,8 @@ function App() {
   const html = document.querySelector("html");
   html.setAttribute("data-theme", `${theme}`);
 
-  const { userData, setUserData } = useUserData(userID); //getter and setter for the current user's data in state(currently defaulted to user_id 1)
+
+const { userData, setUserData } = useUserData(userID); //getter and setter for the current user's data in state(currently defaulted to user_id 1)
 
   useEffect(() => {
     console.log("Current userData: ", userData);
