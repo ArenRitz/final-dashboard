@@ -53,7 +53,7 @@ class Clock extends Component {
   render() {
     return (
       <>
-      <div className='text-6xl font-bold  bg-base-200 clock ml-16 pt-[12px] border-2 border-base-content rounded-3xl whitespace-nowrap w-96 '>
+      <div className='text-5xl font-bold  bg-base-200 clock ml-16 pt-[12px] border-2 border-base-content rounded-3xl whitespace-nowrap w-fit pr-6 '>
         <span className=''>{this.state.time}</span>
       </div>
       </>
