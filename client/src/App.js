@@ -101,7 +101,6 @@ function App() {
       });
   };
 
-
   //handle visibility change via toggle button in settings to update database and state
   const handleVisibilityChange = (widget, currentShowStatus) => {
     const name = widget;
@@ -117,7 +116,7 @@ function App() {
     <div className="App">
       {userID && (
         <>
-          <div className="flex flex-row  w-[100%] h-[100vh]">
+          <div className="flex flex-row  w-[100%] h-[100vh] mt-2">
             <div className="flex flex-col  w-[25%] h-max">
               <div>
                 {show.Clock && (
@@ -132,31 +131,62 @@ function App() {
             </div>
 
             <div className="flex flex-col items-center justify-center w-[50%] h-max">
-              <div className="flex flex-row mt-32">
-              <div className="mr-2">
-                {show.Bookmarks && (
-                  <BookmarkCategory
-                    click={hideComponent}
-                    showBool={show.Bookmarks}
-                    userID={userID}
-                    mode={mode}
-                  />
-                )}
-              </div>
-              <br></br>
-              <div className="ml-2">
-                {show.Maps && (
-                  <Maps
-                    userData={userData}
-                    currentLocation={currLocation}
-                    click={hideComponent}
-                    showBool={show.Maps}
-                    mode={mode}
-                  />
-                )}
-              </div>
+              <div className="flex flex-row mt-[7.5rem]">
+                <div className="mr-2">
+                  {show.Bookmarks && (
+                    <BookmarkCategory
+                      click={hideComponent}
+                      showBool={show.Bookmarks}
+                      userID={userID}
+                      mode={mode}
+                    />
+                  )}
+                </div>
+                <br></br>
+                <div className="ml-2">
+                  {show.Maps && (
+                    <Maps
+                      userData={userData}
+                      currentLocation={currLocation}
+                      click={hideComponent}
+                      showBool={show.Maps}
+                      mode={mode}
+                    />
+                  )}
+                </div>
               </div>
 
+              <div className="flex flex-row w-[800px] justify-around mt-2">
+                <div className="mx-2">
+                  {show.Horoscope && (
+                    <Horoscope
+                      userID={userID}
+                      horoscope={userData.horoscope_sign}
+                      click={hideComponent}
+                      showBool={show.Horoscope}
+                      mode={mode}
+                    />
+                  )}
+                </div>
+                <div className="mx-2">
+                  {show.Spotify && (
+                    <WidgetSpotifyList
+                      click={hideComponent}
+                      showBool={show.Spotify}
+                      mode={mode}
+                    />
+                  )}
+                </div>
+                <div className="mx-2">
+                  {show.Recipe && (
+                    <WidgetRecipe
+                      click={hideComponent}
+                      showBool={show.Recipe}
+                      mode={mode}
+                    />
+                  )}
+                </div>
+              </div>
             </div>
             <div className="flex flex-col items-center justify-center w-[25%] h-max">
               <div>
@@ -169,9 +199,6 @@ function App() {
                   />
                 )}
               </div>
-
-              <br></br>
-
             </div>
           </div>
 
@@ -184,35 +211,8 @@ function App() {
           )}
           <br></br>
 
-
-
-          {show.Horoscope && (
-            <Horoscope
-              userID={userID}
-              horoscope={userData.horoscope_sign}
-              click={hideComponent}
-              showBool={show.Horoscope}
-              mode={mode}
-            />
-          )}
           <br></br>
 
-          {show.Recipe && (
-            <WidgetRecipe
-              click={hideComponent}
-              showBool={show.Recipe}
-              mode={mode}
-            />
-          )}
-          <br></br>
-
-          {show.Spotify && (
-            <WidgetSpotifyList
-              click={hideComponent}
-              showBool={show.Spotify}
-              mode={mode}
-            />
-          )}
           <br></br>
 
           {show.Settings && (

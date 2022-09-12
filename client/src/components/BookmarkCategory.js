@@ -138,7 +138,7 @@ const BookmarkCategory = (props) => {
 
   let category = Object.keys(bookmarks).map((category, index) => {
     return (
-      <div key={index} className="mx-2 figma-bookmark-back text-center h-[400px] ">
+      <div key={index} className="mx-2 figma-bookmark-back text-center h-[380px] ">
         <div  className="relative">
 
         <h1 className="text-2xl font-bold figma-bookmark-label">{category}</h1>

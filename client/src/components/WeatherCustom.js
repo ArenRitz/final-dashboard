@@ -63,10 +63,10 @@ export default function WeatherCustom(props) {
 
   return (
     <>
-    <div>
+    <div className="">
       {isLoading && <div>___</div> }
       {weatherData.weather.icon && 
-        <div className="flex w-fit bg-base-200 rounded-3xl px-2 py-2 my-1 shadow">
+        <div className="flex w-fit bg-base-200 rounded-3xl px-2 py-2 my-1 shadow border-solid border-2 border-base-content">
           <div>
             <h1 className="text-lg font-medium leading-6"> {weatherData.city_name} </h1>
             <div className="border-t border-gray-300"/>
