@@ -13,12 +13,7 @@ const spotifyRouter = require('./routes/spotify');
 const bookmarksRouter = require('./routes/bookmarks');
 const apiRouter = require('./routes/api');
 const horoscopesRouter = require('./routes/horoscopes');
-
-
-
-
-
-
+const twitterRouter = require('./routes/twitter');
 
 
 var app = express();
@@ -35,12 +30,7 @@ app.use('/users', usersRouter);
 app.use('/spotify', spotifyRouter);
 app.use('/bookmarks', bookmarksRouter);
 app.use('/horoscopes', horoscopesRouter);
-
-
-
-
-
-
+app.use('/twitter', twitterRouter);
 
 
 app.use('/api', apiRouter);
