@@ -34,6 +34,7 @@ function App() {
 
   const [focusTrack, setFocusTrack] = useState({});
 
+
   //function to update userID state when user logs in
   const handleLogin = (id) => {
     setUserID(id);
@@ -61,6 +62,7 @@ function App() {
     }
     setUserID(user_id);
     getVisibility(user_id);
+
   }, [userID, userData]);
 
   const { currLocation } = useLocation();
@@ -118,6 +120,12 @@ function App() {
       [name]: value,
     }));
     setVisibility(name, value);
+  };
+
+  //function to clear the local storage item for user_id
+  const clearUserSession = () => {
+    localStorage.removeItem("user_id");
+    setUserID(null);
   };
 
   return (
@@ -223,10 +231,9 @@ function App() {
 
 
 
-         
-
           {show.Settings && (
             <Settings
+              userData={userData}
               click={hideComponent}
               themeChange={handleThemeChange}
               theme={theme}
@@ -235,11 +242,12 @@ function App() {
               setUserData={setUserData}
               setVisibility={handleVisibilityChange}
               userID={userID}
+              logout={clearUserSession}
             />
           )}
 
           <div className="fixed top-1/3 right-0 h-1/3 w-1/6 group">
-            <div className="bg-slate-500 fixed top-1/2 -right-8 h-20 w-8 rounded-l-2xl flex flex-col justify-around tranform transition-all group-hover:transform group-hover:transition-all group-hover:-translate-x-8 group-hover:after:translate-x-8">
+            <div className="bg-slate-500 fixed top-1/2 text-center justify-content -right-8 h-20 w-8 rounded-l-2xl flex flex-col justify-around tranform transition-all group-hover:transform group-hover:transition-all group-hover:-translate-x-8 group-hover:after:translate-x-8">
               <Button type="settings" click={hideComponent} name="Settings" />
               {mode === "view" && (
                 <Button type="edit" click={changeMode} name="edit" />
