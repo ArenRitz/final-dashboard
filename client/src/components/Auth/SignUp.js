@@ -8,6 +8,8 @@ const SignUp = (props) => {
     username: "",
     email: "",
     password: "",
+    home_location: "",
+    work_location: "",
   });
 
 
