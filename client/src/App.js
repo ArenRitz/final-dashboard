@@ -33,19 +33,19 @@ function App() {
   const [mode, setMode] = useState("view");
 
   const [focusTrack, setFocusTrack] = useState({})
-  
+
   //function to update userID state when user logs in
   const handleLogin = (id) => {
     setUserID(id);
   };
-  
+
   const html = document.querySelector("html");
   html.setAttribute("data-theme", `${theme}`);
-  
+
   const [userID, setUserID] = useState(null); // ******* CHANGE THIS TO NULL TO TEST LOGIN *******
-  
+
   const { userData, setUserData } = useUserData(userID); //getter and setter for the current user's data in state(currently defaulted to user_id 1)
-  
+
   useEffect(() => {
     console.log("Current userData: ", userData);
     const getVisibility = (userID) => {
@@ -61,11 +61,11 @@ function App() {
     }
     setUserID(user_id)
     getVisibility(user_id);
-    
+
   }, [userID, userData]);
-  
+
   const { currLocation } = useLocation();
-  
+
   const hideComponent = (e) => {
     console.log(show.Bookmarks);
     console.log("trying to delete");
@@ -119,6 +119,12 @@ function App() {
       [name]: value,
     }));
     setVisibility(name, value);
+  };
+
+  //function to clear the local storage item for user_id
+  const clearUserSession = () => {
+    localStorage.removeItem("user_id");
+    setUserID(null);
   };
 
   return (
@@ -220,10 +226,11 @@ function App() {
               streamers={userData.twitch_usernames}
             />
           )}
-  
+
 
           {show.Settings && (
             <Settings
+              userData={userData}
               click={hideComponent}
               themeChange={handleThemeChange}
               theme={theme}
@@ -232,11 +239,12 @@ function App() {
               setUserData={setUserData}
               setVisibility={handleVisibilityChange}
               userID={userID}
+              logout={clearUserSession}
             />
           )}
 
           <div className="fixed top-1/3 right-0 h-1/3 w-1/6 group">
-            <div className="bg-slate-500 fixed top-1/2 -right-8 h-20 w-8 rounded-l-2xl flex flex-col justify-around tranform transition-all group-hover:transform group-hover:transition-all group-hover:-translate-x-8 group-hover:after:translate-x-8">
+            <div className="bg-slate-500 fixed top-1/2 text-center justify-content -right-8 h-20 w-8 rounded-l-2xl flex flex-col justify-around tranform transition-all group-hover:transform group-hover:transition-all group-hover:-translate-x-8 group-hover:after:translate-x-8">
               <Button type="settings" click={hideComponent} name="Settings" />
               {mode === "view" && (
                 <Button type="edit" click={changeMode} name="edit" />
