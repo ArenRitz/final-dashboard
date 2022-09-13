@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import NewBookmark from "./NewBookmark";
 
 import NewCategory from "./NewCategory";
+import { BsTrashFill } from "react-icons/bs";
+import { AiOutlineEdit } from "react-icons/ai";
 
 const BookmarkList = (props) => {
   const [bookmarksItems, setBookmarksItems] = useState(props.bookmarkItems);
@@ -54,14 +56,30 @@ const BookmarkList = (props) => {
       <div className="flex flex-col items-center justify-center relative">
         {props.mode === "edit" && (
           <>
-           <div className="absolute right-2 -top-[4.5rem] -left-0 z-20 h-[25px] w-[45px] rounded-full bg-success" >
+          <div className="overflow-hidden flex w-full justify-between absolute -top-[42px] rounded-t-[21px] group h-[32px]">
+
+           <div className=" z-20 w-20 rounded-full h-full bg-success tranform -translate-x-[5rem] 
+               transition-all group-hover:transform group-hover:transition-all group-hover:-translate-x-[3rem] group-hover:after:translate-x-8 ">
             <button
-              className=" text-sm text-success-content"
+              className=" text-xl font-bold flex text-success-content justify-end items-center hover:bg-white/20 w-full h-full rounded-full"
               onClick={toggleEditCatMode}
             >
-              {" "}
-              EDIT{" "}
+              <div className="mr-2">
+              <AiOutlineEdit />
+              </div>
             </button>
+            </div>
+            <div className="  z-20 h-full w-20 rounded-full bg-error tranform translate-x-[6rem] 
+               transition-all group-hover:transform group-hover:transition-all group-hover:translate-x-[3rem] group-hover:after:translate-x-6" >
+            <button
+              className=" text-lg font-bold text-error-content hover:bg-white/20 w-full h-full rounded-full ml-2"
+              onClick={() =>
+                props.deleteCategory(props.id, props.categoryID)
+              }
+            >
+              <BsTrashFill/>
+            </button>
+            </div>
             </div>
             {editCatMode && (
               <NewCategory
@@ -77,6 +95,7 @@ const BookmarkList = (props) => {
         )}
 
         {bookmarkList}
+
 
         {props.mode === "edit" && (
           <>

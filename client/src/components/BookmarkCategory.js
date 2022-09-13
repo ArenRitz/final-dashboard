@@ -165,18 +165,7 @@ const handleMouseOut = () => {
           <h1 className="text-2xl font-bold rounded-t-3xl border-b-2 border-base-content text-accent bg-base-300 ">
             {category}
           </h1>
-          {props.mode === "edit" && (
-            <div className="absolute right-2 -top-8 h-[25px] w-[45px] rounded-full bg-error" >
-            <button
-              className=" text-sm text-error-content font-bold"
-              onClick={() =>
-                deleteCategory(props.userID, bookmarks[category][0].categoryID)
-              }
-            >
-              Del
-            </button>
-            </div>
-          )}
+
         </div>
         {isLoading && <p>Loading...</p>}
         {!isLoading && (
@@ -196,6 +185,7 @@ const handleMouseOut = () => {
               handleMouseOut={handleMouseOut}
               handleMouseOver={handleMouseOver}
               editClasses={editClasses}
+              deleteCategory={deleteCategory}
               />
           </div>
         )}

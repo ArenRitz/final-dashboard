@@ -19,7 +19,6 @@ import "./App.css";
 import SearchWidget from "./components/SearchWidget";
 
 function App() {
-
   const [show, setShow] = useState({
     Horoscope: true,
     Recipe: true,
@@ -69,9 +68,7 @@ function App() {
     setTheme(userData.theme);
     setUserID(user_id);
     getVisibility(user_id);
-
   }, [userID, userData]);
-
 
   const { currLocation } = useLocation();
 
@@ -84,8 +81,6 @@ function App() {
       [name]: !prevState[name],
     }));
   };
-
-
 
   // change mode based on value passed
   const changeMode = (value) => {
@@ -153,11 +148,11 @@ function App() {
   };
 
   return (
-    <div className="App h-[100vh] w-[100vw]">
+    <div className="App h-[100%] w-[100%]">
       {userID && (
-        <>
-          <div className="flex flex-row w-[100%] mt-2 justify-between">
-            <div className="w-[33.3%] flex justify-start">
+        <div>
+          <div className="flex flex-row w-[100%] h-[10%] mt-2 justify-between mb-2">
+            <div className="w-[33.3%]  flex justify-start">
               {show.Clock && (
                 <NewClock
                   click={hideComponent}
@@ -168,16 +163,17 @@ function App() {
                 />
               )}
             </div>
-            <div className="w-[33.4%] flex justify-center items-center">
-              <SearchWidget
-                click={hideComponent}
-                showBool={show.Search}
-                mode={mode}
-                searchEngine={userData.search_engine}
-                userID={userID}
-              />
-
-            </div>
+              <div className="w-[33.4%] flex justify-center items-center">
+            {show.Search && (
+                <SearchWidget
+                  click={hideComponent}
+                  showBool={show.Search}
+                  mode={mode}
+                  searchEngine={userData.search_engine}
+                  userID={userID}
+                />
+                )}
+              </div>
             <div className="w-[33.3%] flex justify-end pr-20">
               {show.Weather && (
                 <WeatherCustom
@@ -204,7 +200,7 @@ function App() {
               <br></br>
             </div> */}
 
-          <div className="flex flex-col items-center justify-center h-max">
+          <div className="flex flex-col items-center justify-center">
             <div className="flex flex-row">
               <div className="mr-2">
                 {show.Bookmarks && (
@@ -229,7 +225,7 @@ function App() {
                 )}
               </div>
             </div>
-            <div className="w-[100%]">
+            <div className="w-[100%] h-[30%]">
               <div className="flex flex-col items-center">
                 <div className="flex flex-row w-[100%] justify-center mt-2">
                   <div className="mx-2">
@@ -288,8 +284,6 @@ function App() {
             </div>
           </div>
 
-
-
           {show.Settings && (
             <Settings
               userData={userData}
@@ -317,7 +311,7 @@ function App() {
               )}
             </div>
           </div>
-        </>
+        </div>
       )}
       {!userID && (
         <>
