@@ -182,6 +182,20 @@ const Settings = (props) => {
               </div>
             </div>
             <div className="w-20 flex flex-row -right-32 relative my-4">
+              <p className="w-20 mr-20"> Transit </p>
+              <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
+                <input
+                  type="checkbox"
+                  className="toggle toggle-accent"
+                  onClick={() =>
+                    props.setVisibility("Transit", props.showBools.Transit)
+                  }
+                  name="Transit"
+                  checked={props.showBools.Transit}
+                />
+              </div>
+            </div>
+            <div className="w-20 flex flex-row -right-32 relative my-4">
               <p className="w-20 mr-20"> Search </p>
               <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
                 <input

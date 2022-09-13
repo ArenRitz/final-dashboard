@@ -169,7 +169,6 @@ const WidgetSpotifyList = (props) => {
           })
           }
       </div>
-      </div>
       <div className="flex justify-center w-full py-1 gap-2">
         { musicCount.map((item) => {
           return (
@@ -187,6 +186,7 @@ const WidgetSpotifyList = (props) => {
         <a href="#item7" className="btn btn-xs">8</a>
         <a href="#item8" className="btn btn-xs">9</a>
         <a href="#item9" className="btn btn-xs">10</a> */}
+      </div>
       </div>
     </div>
   );
