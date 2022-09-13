@@ -21,12 +21,13 @@ const BookmarkList = (props) => {
   };
 
   let bookmarkList = bookmarksItems.map((bookmark, index) => {
+
     return (
       <>
         {bookmark.title && (
-          <div key={index} className="relative w-full">
+          <div key={index} className="relative w-40">
             <div
-              className="my-1 bg-slate-400/20 rounded-full shadow-md shadow-black/50 group overflow-hidden w-full"
+              className="my-1 rounded-full shadow-md border-2 border-base-content shadow-base-content/10 bg-base-300 group overflow-hidden w-full hover:text-accent hover:border-accent"
               onMouseEnter={toggleEdit}
             >
               <BookmarkItem
@@ -46,18 +47,22 @@ const BookmarkList = (props) => {
     );
   });
 
+  //set listCount to count
+
   return (
     <>
       <div className="flex flex-col items-center justify-center relative">
         {props.mode === "edit" && (
           <>
+           <div className="absolute right-2 -top-[4.5rem] -left-0 z-20 h-[25px] w-[45px] rounded-full bg-success" >
             <button
-              className="btn btn-primary btn-sm absolute -top-8 -left-0 z-20"
+              className=" text-sm text-success-content"
               onClick={toggleEditCatMode}
             >
               {" "}
               EDIT{" "}
             </button>
+            </div>
             {editCatMode && (
               <NewCategory
                 type="editCat"
@@ -76,7 +81,7 @@ const BookmarkList = (props) => {
         {props.mode === "edit" && (
           <>
             <button
-              className="btn btn-primary btn-sm my-4"
+              className="btn btn-accent btn-sm my-4 rounded-full"
               onClick={() => setShowNewBookmark(!showNewBookmark)}
             >
               +

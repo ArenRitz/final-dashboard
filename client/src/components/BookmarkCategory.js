@@ -3,13 +3,13 @@ import BookmarkList from "./BookmarkList";
 import Button from "./Button";
 import axios from "axios";
 import NewCategory from "./NewCategory";
-
+import classNames from "classnames";
+const iconPath = process.env.PUBLIC_URL + '/svg/';
 const BookmarkCategory = (props) => {
   const [bookmarks, setBookmarks] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [addCatMode, setAddCatMode] = useState(false);
-
-
+  const [hover, setHover] = useState(false);
 
   const formatData = (data) => {
     let result = {};
@@ -93,7 +93,6 @@ const BookmarkCategory = (props) => {
         setIsLoading(false);
       });
   };
-  
 
   // function to add category to database for specific user id by category name and update bookmarks state
   const addCategory = (id, category_name) => {
@@ -111,10 +110,6 @@ const BookmarkCategory = (props) => {
   // function to edit category to database for specific user id by category name and update bookmarks state
   const editCategory = (id, category_id, category_name) => {
     setIsLoading(true);
-    console.log("EDIT CATEGORY FUNCTION CALLED");
-    console.log("ID", id);
-    console.log("CATEGORY ID", category_id);
-    console.log("CATEGORY NAME", category_name);
     axios
       .put(`http://localhost:8080/api/categories/${id}/${category_id}`, {
         category_name,
@@ -125,44 +120,84 @@ const BookmarkCategory = (props) => {
       });
   };
 
-
   // toggle add category mode
   const toggleAddCatMode = () => {
     setAddCatMode(!addCatMode);
   };
 
 
+let delClasses = classNames("delete", {
+  "absolute right-0 -top-10 btn btn-error btn-sm" : true,
+  "hidden" : !hover,
+  "visible" : hover
+})
+
+
+let editClasses = classNames("edit", {
+  "btn btn-success btn-sm absolute -top-[5rem] -left-0 z-20" : true,
+  "hidden" : !hover,
+  "visible" : hover
+})
+
+//function to handle onmouseover event and onmouseout event
+const handleMouseOver = () => {
+  setHover(true)
+}
+
+const handleMouseOut = () => {
+
+
+  setHover(false)
+ 
+}
 
 
 
 
   let category = Object.keys(bookmarks).map((category, index) => {
-    return (
-      <div key={index} className="mx-2 figma-bookmark-back text-center h-[380px] ">
-        <div  className="relative">
 
-        <h1 className="text-2xl font-bold figma-bookmark-label">{category}</h1>
-        { props.mode === 'edit' && <button className="absolute right-0 top-0 btn btn-primary btn-sm" onClick={() => deleteCategory(props.userID, bookmarks[category][0].categoryID)}> DEL </button> }
+    return (
+      <div
+        key={index}
+        className="mx-[8px] rounded-3xl w-[170px] text-center h-[380px] bg-base-200 border-2 border-base-content   "
+      >
+        <div className="relative  " onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+          <h1 className="text-2xl font-bold rounded-t-3xl border-b-2 border-base-content text-accent bg-base-300 ">
+            {category}
+          </h1>
+          {props.mode === "edit" && (
+            <div className="absolute right-2 -top-8 h-[25px] w-[45px] rounded-full bg-error" >
+            <button
+              className=" text-sm text-error-content font-bold"
+              onClick={() =>
+                deleteCategory(props.userID, bookmarks[category][0].categoryID)
+              }
+            >
+              Del
+            </button>
+            </div>
+          )}
         </div>
         {isLoading && <p>Loading...</p>}
         {!isLoading && (
-          <BookmarkList
-
-            category={category}
-            bookmarkItems={bookmarks[category]}
-            index={index}
-            deleteSingle={deleteBookmark}
-            addSingle={addBookmark}
-            editSingle={editBookmark}
-            id={props.userID}
-            state={bookmarks}
-            categoryID={bookmarks[category][0].categoryID}
-            mode={props.mode}
-
-            editCategory={editCategory}
-
-
-          />
+          <div className="mt-2">
+            <BookmarkList
+              category={category}
+              bookmarkItems={bookmarks[category]}
+              index={index}
+              deleteSingle={deleteBookmark}
+              addSingle={addBookmark}
+              editSingle={editBookmark}
+              id={props.userID}
+              state={bookmarks}
+              categoryID={bookmarks[category][0].categoryID}
+              mode={props.mode}
+              editCategory={editCategory}
+              handleMouseOut={handleMouseOut}
+              handleMouseOver={handleMouseOver}
+              editClasses={editClasses}
+              />
+          </div>
         )}
       </div>
     );
@@ -170,27 +205,29 @@ const BookmarkCategory = (props) => {
 
   return (
     <>
-      <div className="">
-        <div className="flex flex-row justify-between w-fit figma-bookmark-container px-5 py-5">
+      <div className=" relative">
+        <div className="flex flex-row justify-between w-fit  rounded-3xl  px-5 py-5">
           {category}
-         
-          {props.mode === "edit" && (
-        <button className="btn btn-primary btn-sm" onClick={toggleAddCatMode}> ADD </button>
-      )}
-      {addCatMode && (
-        <div className="relative">
-        <NewCategory
-          type="addCat"
-          id={props.userID}
-          addCategory={addCategory}
-          toggleAddCatMode={toggleAddCatMode}
-        />
-        </div>
-      )}
 
-        
-       
-        
+          {props.mode === "edit" && (
+            <button
+              className="btn btn-accent btn-xs rounded-full absolute right-4 top-[45%]"
+              onClick={toggleAddCatMode}
+            >
+              
+              +
+            </button>
+          )}
+          {addCatMode && (
+            <div className="relative">
+              <NewCategory
+                type="addCat"
+                id={props.userID}
+                addCategory={addCategory}
+                toggleAddCatMode={toggleAddCatMode}
+              />
+            </div>
+          )}
         </div>
       </div>
     </>
