@@ -5,10 +5,18 @@ import React from "react";
 export default function TransitList(props) {
 
   const [isLoading, setIsLoading] = useState(false);
+  const [tweets, setTweets] = useState({});
 
-  // useEffect(() => {
+  const twtterUser = "19025957"
+  const token =  process.env.REACT_APP_TWITTER_TOKEN 
+
+  useEffect(() => {
+    axios.get(`https://api.twitter.com/2/users/${twtterUser}/tweets?max_results=15`, {
+      Authorization: "Bearer RUk4OVMtY1NGV1VBOVQ0b2s3SGtJaFVZVV9EdmRfVzdDWlRfQkhia1Z0RmFPOjE2NjMwMzYxODI3NjA6MTowOmF0OjE"
+    })
+
   
-  // }, [])
+  }, [])
 
   return (
     <>
