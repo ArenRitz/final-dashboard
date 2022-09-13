@@ -151,7 +151,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App h-[100vh]">
       {userID && (
         <>
           <div className="flex flex-row w-[100%] mt-2 justify-between">
@@ -178,7 +178,7 @@ function App() {
           </div>
 
             <div className="flex flex-col items-center justify-center  h-max">
-              <div className="flex flex-row mt-[2.5rem]">
+              <div className="flex flex-row mt-[0.4rem]">
                 <div className="mr-2">
                   {show.Bookmarks && (
                     <BookmarkCategory
@@ -236,7 +236,7 @@ function App() {
                     )}
                   </div>
                 </div>
-                <div className="relative flex justify-center w-[80%] mt-2">
+                <div className="relative flex justify-center w-[80%] mt-[4px]">
                   {show.Twitch && (
                     <TwitchWidgetList
                       click={hideComponent}
