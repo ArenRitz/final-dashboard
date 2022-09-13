@@ -10,6 +10,7 @@ import WidgetSpotifyList from "./components/WidgetSpotifyList";
 import Settings from "./components/Settings";
 import Button from "./components/Button";
 import Maps from "./components/Maps";
+import TransitList from "./components/TransitList";
 import useUserData from "./hooks/useUserData";
 import useLocation from "./hooks/useLocation";
 import { default as Auth } from "./components/Auth/Index";
@@ -29,13 +30,13 @@ function App() {
     Spotify: true,
     Maps: true,
     Settings: false,
+    Transit: true,
     Search: true
   });
 
   const [mode, setMode] = useState("view");
-
-  const [focusTrack, setFocusTrack] = useState({});
-
+  const [focusTrack, setFocusTrack] = useState({})
+  const [focusTweet, setFocusTweet] = useState({})
 
   //function to update userID state when user logs in
   const handleLogin = (id) => {
@@ -258,6 +259,16 @@ function App() {
                         click={hideComponent}
                         showBool={show.Recipe}
                         mode={mode}
+                      />
+                    )}
+                  </div>
+                  <div className="mx-2">
+                    {show.Transit && (
+                      <TransitList
+                        click={hideComponent}
+                        showBool={show.Transit}
+                        mode={mode}
+                        setFocusTweet={setFocusTweet}
                       />
                     )}
                   </div>

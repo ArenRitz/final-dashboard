@@ -3,7 +3,7 @@ import React from 'react'
 const WidgetSpotifyItem = (props) => {
   return (
     <>
-      <div className='spotify-track-layout w-[400px] flex flex-row content-center items-center py-2 rounded-3xl'>
+      <div className='spotify-track-layout w-[400px] flex flex-row content-center items-center py-1 rounded-3xl'>
         <div className='spotify-image mx-2'>
           <img src={props.item.track.album.images[0].url} alt='album cover' width={100} height={100} className=' rounded-3xl'  />
         </div>
