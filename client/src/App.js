@@ -192,8 +192,8 @@ function App() {
               <br></br>
             </div> */}
 
-          <div className="flex flex-col items-center justify-center w-[50%] h-max">
-            <div className="flex flex-row mt-[7.5rem]">
+          <div className="flex flex-col items-center justify-center h-max">
+            <div className="flex flex-row mt-[0.2rem]">
               <div className="mr-2">
                 {show.Bookmarks && (
                   <BookmarkCategory
