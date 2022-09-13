@@ -15,6 +15,7 @@ import useLocation from "./hooks/useLocation";
 import { default as Auth } from "./components/Auth/Index";
 import axios from "axios";
 import "./App.css";
+import SearchWidget from "./components/SearchWidget";
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
     Spotify: true,
     Maps: true,
     Settings: false,
+    Search: true
   });
 
   const [mode, setMode] = useState("view");
@@ -156,7 +158,7 @@ function App() {
       {userID && (
         <>
           <div className="flex flex-row w-[100%] mt-2 justify-between">
-            <div className="w-[50%] flex justify-start">
+            <div className="w-[33.3%] flex justify-start">
               {show.Clock && (
                 <NewClock
                   click={hideComponent}
@@ -166,7 +168,17 @@ function App() {
                 />
               )}
             </div>
-            <div className="w-[50%] flex justify-end pr-20">
+            <div className="w-[33.4%] flex justify-center items-center">
+                <SearchWidget
+                  click={hideComponent}
+                  showBool={show.Search}
+                  mode={mode}
+                  searchEngine={userData.search_engine}
+                  userID={userID}
+                />
+
+            </div>
+            <div className="w-[33.3%] flex justify-end pr-20">
               {show.Weather && (
                 <WeatherCustom
                   currentLocation={currLocation}

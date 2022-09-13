@@ -11,6 +11,7 @@ CREATE TABLE users (
   "work_location" VARCHAR(255),
   "twitch_usernames" VARCHAR[],
   "theme" VARCHAR(255),
+  "search_engine" VARCHAR(255),
   "created_at" TIMESTAMP DEFAULT NOW(),
   "updated_at" TIMESTAMP DEFAULT NOW()
 );

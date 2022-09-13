@@ -108,7 +108,7 @@ export default function Maps(props) {
   }
   return (
     <>
-    <div className='card bg-base-200 border-2 border-base-content flex flex-col justify-between w-fit px-3 py-3 rounded-[40px]'>
+    <div className='card bg-base-200 flex flex-col justify-between w-fit px-3 py-3 rounded-[40px] shadow-md shadow-base-content/20'>
       <section>
         
         <div className='flex justify-between'>
