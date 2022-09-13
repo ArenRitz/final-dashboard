@@ -3,6 +3,7 @@ const router = require('express').Router();
 const users = require('../db/queries/users');
 const bookmarks = require('../db/queries/bookmarks');
 const widgets = require('../db/queries/widgets');
+const twitch = require('../db/queries/twitch');
 
 
 // put request for creating new user in database, returns user id to client or error if user with that email already exists
@@ -109,6 +110,13 @@ router.get('/widgets/:id', (req, res) => {
 //function to update the visibility widget by name and user ID
 router.put('/widgets/:id', (req, res) => {
   widgets.updateWidgetVisibility( req.body.name, req.body.visibility, req.params.id,).then(data => {
+    res.json(data);
+  })
+})
+
+//function to update twitch_usernames array in the database
+router.put('/twitch/:id', (req, res) => {
+  twitch.updateTwitchStreamers(req.body.streamers, req.params.id).then(data => {
     res.json(data);
   })
 })

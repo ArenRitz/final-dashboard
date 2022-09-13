@@ -1,15 +1,14 @@
 const db = require('../../configs/db.config');
 
-// function to update the twitch_streamers array in the database
+// function to update the twitch_usernames array in the database returning the updated array
 const updateTwitchStreamers = (streamers, id) => {
   return db.query(`
   UPDATE users
-  SET twitch_streamers = $1
-  WHERE users.id = $2;
+  SET twitch_usernames = $1
+  WHERE id = $2
+  RETURNING twitch_usernames;
   `, [streamers, id]).then(data => {
     return data.rows;
-  }).catch(err => {
-    return err;
   })
 }
 
@@ -22,8 +21,9 @@ const updateTwitchStreamers = (streamers, id) => {
 
 
 
-module.exports = {
 
+module.exports = {
+  updateTwitchStreamers
 }
 
 
