@@ -3,6 +3,7 @@ import { useState } from "react";
 
 const Settings = (props) => {
   const [selected, setSelected] = useState("bookmarks");
+  const [theme, setTheme] = useState("dark");
 
   const themeOptions = [
     "light",
@@ -40,6 +41,7 @@ const Settings = (props) => {
   const logUserData = () => {
     console.log(userInfo);
   }
+
 
   console.log("THIS IS USERDATA FROM SETTINGS:", userInfo);
 
