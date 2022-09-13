@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Horoscope from "./components/horoscopeWidget";
 import WidgetRecipe from "./components/WidgetRecipe";
-import Clock from "./components/digitalClock";
-import "./App.css";
+// import Clock from "./components/digitalClock";
 import BookmarkCategory from "./components/BookmarkCategory";
 import WeatherCustom from "./components/WeatherCustom";
 import TwitchWidgetList from "./components/TwitchWidgetList";
-
+import NewClock from "./components/WidgetTime";
 import WidgetSpotifyList from "./components/WidgetSpotifyList";
 import Settings from "./components/Settings";
 import Button from "./components/Button";
@@ -15,6 +14,7 @@ import useUserData from "./hooks/useUserData";
 import useLocation from "./hooks/useLocation";
 import { default as Auth } from "./components/Auth/Index";
 import axios from "axios";
+import "./App.css";
 
 function App() {
 
@@ -62,7 +62,7 @@ function App() {
       // redirect to login and
       return;
     }
- 
+
     setTheme(userData.theme);
     setUserID(user_id);
     getVisibility(user_id);
@@ -129,6 +129,7 @@ function App() {
     setUserID(null);
   };
 
+  const timezone = "Canada/Eastern";
 
   //function to update theme in database
   const setThemeInDB = (theme) => {
@@ -155,7 +156,31 @@ function App() {
       {userID && (
         <>
           <div className="flex flex-row w-[100%] mt-2 justify-between">
-              <div className="w-[50%] flex justify-start">
+            <div className="w-[50%] flex justify-start">
+              {show.Clock && (
+                <NewClock
+                  click={hideComponent}
+                  showBool={show.Clock}
+                  mode={mode}
+                  timezone={timezone}
+                />
+              )}
+            </div>
+            <div className="w-[50%] flex justify-end pr-40">
+              {show.Weather && (
+                <WeatherCustom
+                  currentLocation={currLocation}
+                  click={hideComponent}
+                  showBool={show.Weather}
+                  mode={mode}
+                />
+              )}
+            </div>
+            <br></br>
+          </div>
+
+          {/* <div className="flex flex-col w-[25%] h-max">
+              <div>
                 {show.Clock && (
                   <Clock
                     click={hideComponent}
@@ -164,46 +189,36 @@ function App() {
                   />
                 )}
               </div>
-              <div className="w-[50%] flex justify-end pr-40">
-                {show.Weather && (
-                  <WeatherCustom
-                    currentLocation={currLocation}
+              <br></br>
+            </div> */}
+
+          <div className="flex flex-col items-center justify-center w-[50%] h-max">
+            <div className="flex flex-row mt-[7.5rem]">
+              <div className="mr-2">
+                {show.Bookmarks && (
+                  <BookmarkCategory
                     click={hideComponent}
-                    showBool={show.Weather}
+                    showBool={show.Bookmarks}
+                    userID={userID}
                     mode={mode}
                   />
                 )}
               </div>
               <br></br>
-          </div>
-
-            <div className="flex flex-col items-center justify-center  h-max">
-              <div className="flex flex-row mt-[0.4rem]">
-                <div className="mr-2">
-                  {show.Bookmarks && (
-                    <BookmarkCategory
-                      click={hideComponent}
-                      showBool={show.Bookmarks}
-                      userID={userID}
-                      mode={mode}
-                    />
-                  )}
-                </div>
-                <br></br>
-                <div className="ml-2">
-                  {show.Maps && (
-                    <Maps
-                      userData={userData}
-                      currentLocation={currLocation}
-                      click={hideComponent}
-                      showBool={show.Maps}
-                      mode={mode}
-                    />
-                  )}
-                </div>
+              <div className="ml-2">
+                {show.Maps && (
+                  <Maps
+                    userData={userData}
+                    currentLocation={currLocation}
+                    click={hideComponent}
+                    showBool={show.Maps}
+                    mode={mode}
+                  />
+                )}
               </div>
-              <div className="w-[100%]">
-                <div className="flex flex-col items-center">
+            </div>
+            <div className="w-[100%]">
+              <div className="flex flex-col items-center">
                 <div className="flex flex-row w-[100%] justify-center mt-2">
                   <div className="mx-2">
                     {show.Horoscope && (
@@ -247,9 +262,9 @@ function App() {
                     />
                   )}
                 </div>
-                </div>
               </div>
             </div>
+          </div>
 
 
 
