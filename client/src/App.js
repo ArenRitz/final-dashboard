@@ -35,6 +35,7 @@ function App() {
   const [mode, setMode] = useState("view");
 
   const [focusTrack, setFocusTrack] = useState({})
+  const [focusTweet, setFocusTweet] = useState({})
 
   //function to update userID state when user logs in
   const handleLogin = (id) => {
@@ -210,6 +211,7 @@ function App() {
                       click={hideComponent}
                       showBool={show.Transit}
                       mode={mode}
+                      setFocusTweet={setFocusTweet}
                     />
                   )}
                 </div>

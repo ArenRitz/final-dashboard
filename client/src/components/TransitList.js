@@ -11,6 +11,7 @@ export default function TransitList(props) {
     twitterId: "19025957", 
     tweetList: []
   });
+  const [tweetCount, setTweetCount] = useState([0,1,2,3,4,5,6,7,8,9])
 
   const formatTweets = (tweetArr) => {
 
@@ -22,6 +23,9 @@ export default function TransitList(props) {
     return formattedArr
   }
 
+  const showTweet = (index) => {
+    props.setFocusTweet(tweets.tweetList[index])
+  }
 
   useEffect(() => {
     setIsLoading(true)
@@ -52,19 +56,31 @@ export default function TransitList(props) {
               </svg>
             </div>}
         {!isLoading &&
-          <div className="carousel">
-            
-              <h1>TTC Service Updates</h1>
+          <section className="flex-col w-full">
+            <div className="text-left text-accent text-sm">
+            TTC Service Alerts
+            </div>
+            <div className="carousel">
               {tweets.tweetList.map((item, index) => {
-              return (
-                <div id={index} className="carousel-item w-full">
-                  <div className="w-full">
-                    <TransitItem item={item} key={index}/>
+                return (
+                  <div id={"tweet" + index} className="carousel-item w-full">
+                    <div className="w-full">
+                      <TransitItem item={item} key={index}/>
+                    </div>
                   </div>
-                </div>
-              )})
-            }
-          </div>
+                )})
+              }
+            </div>
+            <div className="flex justify-center w-full py-1 gap-2">
+              {
+                tweetCount.map((item) => {
+                  return (
+                    <a href={`#tweet${item}`} className="btn btn-xs" onClick={() => showTweet(item)}>{item + 1}</a>
+                  )
+                })
+              }
+            </div>
+          </section>
         }
       </div>
     </>
