@@ -164,18 +164,19 @@ function App() {
                   click={hideComponent}
                   showBool={show.Clock}
                   mode={mode}
-                  // timezone={timezone}
+                  userID={userID}
+                  timezone={userData.timezone}
                 />
               )}
             </div>
             <div className="w-[33.4%] flex justify-center items-center">
-                <SearchWidget
-                  click={hideComponent}
-                  showBool={show.Search}
-                  mode={mode}
-                  searchEngine={userData.search_engine}
-                  userID={userID}
-                />
+              <SearchWidget
+                click={hideComponent}
+                showBool={show.Search}
+                mode={mode}
+                searchEngine={userData.search_engine}
+                userID={userID}
+              />
 
             </div>
             <div className="w-[33.3%] flex justify-end pr-20">
