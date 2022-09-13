@@ -17,7 +17,7 @@ import { default as Auth } from "./components/Auth/Index";
 import axios from "axios";
 
 function App() {
-  const [theme, setTheme] = useState("dark");
+
   const [show, setShow] = useState({
     Horoscope: true,
     Recipe: true,
@@ -40,12 +40,14 @@ function App() {
     setUserID(id);
   };
 
-  const html = document.querySelector("html");
-  html.setAttribute("data-theme", `${theme}`);
+  const [theme, setTheme] = useState("dark");
 
   const [userID, setUserID] = useState(null); // ******* CHANGE THIS TO NULL TO TEST LOGIN *******
 
   const { userData, setUserData } = useUserData(userID); //getter and setter for the current user's data in state(currently defaulted to user_id 1)
+
+  const html = document.querySelector("html");
+  html.setAttribute("data-theme", `${theme}`);
 
   useEffect(() => {
     console.log("Current userData: ", userData);
@@ -60,10 +62,13 @@ function App() {
       // redirect to login and
       return;
     }
+ 
+    setTheme(userData.theme);
     setUserID(user_id);
     getVisibility(user_id);
 
   }, [userID, userData]);
+
 
   const { currLocation } = useLocation();
 
@@ -77,11 +82,7 @@ function App() {
     }));
   };
 
-  //handle theme change via drop down menu
-  const handleThemeChange = (e) => {
-    const { value } = e.target;
-    setTheme(value);
-  };
+
 
   // change mode based on value passed
   const changeMode = (value) => {
@@ -126,6 +127,27 @@ function App() {
   const clearUserSession = () => {
     localStorage.removeItem("user_id");
     setUserID(null);
+  };
+
+
+  //function to update theme in database
+  const setThemeInDB = (theme) => {
+    axios
+      .put(`http://localhost:8080/api/theme/${userID}`, {
+        theme,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  //handle theme change via drop down menu
+  const handleThemeChange = (e) => {
+    const { value } = e.target;
+    setTheme(value);
+    setThemeInDB(value);
   };
 
   return (
@@ -243,6 +265,7 @@ function App() {
               setVisibility={handleVisibilityChange}
               userID={userID}
               logout={clearUserSession}
+              setThemeInDB={setThemeInDB}
             />
           )}
 
