@@ -69,23 +69,6 @@ const Horoscope = (props) => {
   return (
     <>
       <div className="w-[400px] bg-base-200 border-solid border-2 border-base-content rounded-3xl p-2 group h-[143px]">
-        {props.mode === "edit" && (
-          <div className="horoscope-dropdown">
-            <select
-              className="select select-bordered w-full max-w-xs"
-              onChange={pickHoroscope}
-            >
-              <option disabled selected>
-                Select Horoscope
-              </option>
-              {horoscopeList.map((horoscope) => (
-                <option key={horoscope[0]} value={horoscope[0]}>
-                  {horoscope[0]}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
         <div className="relative">
           <div className="flex flex-row">
             <div className="w-[110px] h-[110px]  ">
@@ -103,8 +86,26 @@ const Horoscope = (props) => {
               Lucky Time: {horoscope.response.lucky_time} <br />
               Color: {horoscope.response.color} <br />
               Mood: {horoscope.response.mood} <br />
+              {props.mode === "edit" && (
+                <div className="horoscope-dropdown">
+                  <select
+                    className="select select-bordered select-xs w-[200px]"
+                    onChange={pickHoroscope}
+                  >
+                    <option disabled selected>
+                      Select Horoscope
+                    </option>
+                    {horoscopeList.map((horoscope) => (
+                      <option key={horoscope[0]} value={horoscope[0]}>
+                        {horoscope[0]}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
             </div>
           </div>
+
           <div className="dropdown dropdown-top dropdown-hover absolute -bottom-[1.3rem] left-[9rem] ">
             <label
               tabIndex={0}
