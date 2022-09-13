@@ -45,10 +45,10 @@ const NewClock = (props) => {
   };
 
   return (
-    <div className="text-5xl bg-base-200 clock ml-16 pt-[12px] border-2 border-base-content rounded-3xl whitespace-nowrap w-fit pr-6 pl-6 h-26">
+    <div className="text-5xl bg-base-200 clock pt-[12px] border-2 border-base-content rounded-3xl whitespace-nowrap w-fit pr-6 pl-6 h-26">
 
       <Clock
-        format={'h:mm:ss A'}
+        format={'h:mm A'}
         ticking={true}
         timezone={timezone}
       />
@@ -58,9 +58,9 @@ const NewClock = (props) => {
       </div>
        )}
       {props.mode === "edit" && (
-        <div className="flex timezone-dropdown justify-center h-6">
+        <div className="flex timezone-dropdown justify-center">
           <select
-            className="text-center select select-bordered w-[200px] select-xs justify-center"
+            className="text-center select select-bordered w-[50%] select-xs justify-center"
             onChange={pickTimezone}
           >
             <option disabled selected>

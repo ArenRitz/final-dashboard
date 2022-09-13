@@ -181,6 +181,20 @@ const Settings = (props) => {
                 />
               </div>
             </div>
+            <div className="w-20 flex flex-row -right-32 relative my-4">
+              <p className="w-20 mr-20"> Search </p>
+              <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
+                <input
+                  type="checkbox"
+                  className="toggle toggle-accent"
+                  onClick={() =>
+                    props.setVisibility("Search", props.showBools.Search)
+                  }
+                  name="Search"
+                  checked={props.showBools.Search}
+                />
+              </div>
+            </div>
             <div className="flex justify justify-center">
               <button type="button" onClick={props.logout} class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">LOGOUT</button>
             </div>
