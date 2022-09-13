@@ -129,7 +129,7 @@ function App() {
     setUserID(null);
   };
 
-  const timezone = "Canada/Eastern";
+  // const timezone = GET FROM DB FOR LOGGED IN USER;
 
   //function to update theme in database
   const setThemeInDB = (theme) => {
@@ -162,7 +162,7 @@ function App() {
                   click={hideComponent}
                   showBool={show.Clock}
                   mode={mode}
-                  timezone={timezone}
+                  // timezone={timezone}
                 />
               )}
             </div>
