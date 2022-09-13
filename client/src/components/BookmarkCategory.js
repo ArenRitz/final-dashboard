@@ -159,10 +159,10 @@ const handleMouseOut = () => {
     return (
       <div
         key={index}
-        className="mx-[8px] rounded-3xl w-[170px] text-center h-[380px] bg-base-200 border-2 border-base-content   "
+        className="mx-[8px] rounded-3xl w-[170px] text-center h-[380px] bg-base-200 shadow-lg shadow-base-content/10   "
       >
         <div className="relative  " onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
-          <h1 className="text-2xl font-bold rounded-t-3xl border-b-2 border-base-content text-accent bg-base-300 ">
+          <h1 className="text-2xl font-bold rounded-t-3xl shadow-[] shadow-base-content/10 text-accent bg-base-300 ">
             {category}
           </h1>
 

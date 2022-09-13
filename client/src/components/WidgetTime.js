@@ -45,7 +45,7 @@ const NewClock = (props) => {
   };
 
   return (
-    <div className="text-5xl bg-base-200 clock pt-[12px] border-2 border-base-content rounded-3xl whitespace-nowrap w-fit pr-6 pl-6 h-26">
+    <div className="text-5xl bg-base-200 clock pt-[12px] shadow-lg shadow-base-content/10 rounded-3xl whitespace-nowrap w-fit pr-6 pl-6 h-26">
 
       <Clock
         format={'h:mm A'}

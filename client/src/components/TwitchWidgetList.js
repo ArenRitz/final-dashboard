@@ -41,7 +41,7 @@ const TwitchWidgetList = (props) => {
 
   return (
     <>
-      <div className="w-fit h-fit bg-base-200 border-base-content border-2 px-3  rounded-2xl flex relative">
+      <div className="w-fit h-fit bg-base-200 shadow-lg shadow-base-content/10 px-3  rounded-2xl flex relative">
         {streamersList}
 
         {props.mode === "edit" && (

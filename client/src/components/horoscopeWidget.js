@@ -78,16 +78,16 @@ const Horoscope = (props) => {
 
   return (
     <>
-      <div className="w-[400px] bg-base-200 border-solid border-2 border-base-content rounded-3xl p-2 group h-[143px]">
+      <div className="w-[400px] bg-base-200 shadow-lg shadow-base-content/10 rounded-3xl p-2 group h-[168px] relative">
         <div className="relative">
           <div className="flex flex-row">
-            <div className="w-[110px] h-[110px]  ">
+            <div className="w-[140px] h-[140px]  ">
               <img
                 src={`assets/zodiacs/${currentHoroscope}.jpeg`}
                 alt="zodiac"
-                width={110}
-                height={110}
-                className="rounded-3xl w-[110px] h-[110px]"
+                width={140}
+                height={140}
+                className="rounded-3xl w-[140px] h-[140px] "
               />
             </div>
             <div className="horoscope-info text-sm text-start ml-4">
@@ -116,7 +116,7 @@ const Horoscope = (props) => {
             </div>
           </div>
 
-          <div className="dropdown dropdown-top dropdown-hover absolute -bottom-[1.3rem] left-[9rem] ">
+          <div className="dropdown dropdown-top dropdown-hover absolute -bottom-[1.4rem] left-[9rem] ">
             <label
               tabIndex={0}
               className="btn btn-accent btn-xs rounded-full shadow  opacity-0 transition-all delay-75 group-hover:opacity-100"

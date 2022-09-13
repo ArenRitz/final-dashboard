@@ -82,7 +82,7 @@ export default function WeatherCustom(props) {
           </div>
         </div>}
         {!isLoading &&
-          <div className="flex w-fit bg-base-200 rounded-3xl px-2 py-2  shadow border-solid border-2 border-base-content">
+          <div className="flex w-fit bg-base-200 rounded-3xl px-2 py-2  shadow-lg shadow-base-content/10">
             <div>
               <h1 className=""> {weatherData.city_name} </h1>
               <div className="border-t border-accent" />
