@@ -46,7 +46,7 @@ const WidgetRecipe = (props) => {
   }, []);
 
   return (
-    <div className="text-center bg-base-200 px-4 py-4 border-solid border-2 border-base-content w-[380px] rounded-3xl h-[143px]">
+    <div className="text-center bg-base-200 px-4 py-4 border-solid border-2 border-base-content w-[380px] rounded-3xl h-[143px]  shadow-lg shadow-black/30">
       <div className="flex flex-row items-center">
         <div>
           <p>Type: {recipe.type}</p>

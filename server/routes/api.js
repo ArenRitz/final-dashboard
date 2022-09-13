@@ -129,6 +129,12 @@ router.put('/theme/:id', (req, res) => {
 })
 
 
+// function to update search engine
+router.put('/search/:id', (req, res) => {
+  users.updateSearchEngine(req.body.search_engine, req.params.id).then(data => {
+    res.json(data);
+  })
+})
 
 
 
