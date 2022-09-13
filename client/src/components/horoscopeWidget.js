@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Button from "./Button";
 
 const horoscopeList = [
   ["Aries", "aries"],
@@ -23,7 +22,7 @@ const Horoscope = (props) => {
   });
 
   const currentUserID = props.userID;
-  const currentHoroscope = props.horoscope;
+  const [currentHoroscope, setCurrentHoroscope] = useState(props.horoscope);
   // console.log("BEFORE USEFFECT", currentHoroscope);
 
   const pickHoroscope = (e) => {
@@ -42,17 +41,18 @@ const Horoscope = (props) => {
         horoscope: dbHoroscope,
       })
       .then((response) => {
-        console.log(response);
-        window.location.reload();
+        // console.log(dbHoroscope);
+        setCurrentHoroscope(dbHoroscope);
+        setHoroscope(horoscope);
+        fetchHoroscopeData(dbHoroscope);
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  useEffect(() => {
-    // console.log("INSIDE USEFFECT", currentHoroscope);
-    const URL = `https://aztro.sameerkumar.website/?sign=${currentHoroscope}&day=today`;
+  const fetchHoroscopeData = (horoscope) => {
+    const URL = `https://aztro.sameerkumar.website/?sign=${horoscope}&day=today`;
     fetch(URL, {
       method: "POST",
     })
@@ -62,7 +62,17 @@ const Horoscope = (props) => {
           response: json,
         });
       });
-  }, [currentHoroscope]);
+  }
+
+  useEffect(() => {
+    // console.log("INSIDE USEFFECT", currentHoroscope);
+    if (props.horoscope) {
+      setCurrentHoroscope(props.horoscope);
+    }
+
+    fetchHoroscopeData(props.horoscope);
+
+  }, [props.horoscope]);
 
   // console.log(horoscope)
 
@@ -127,5 +137,3 @@ const Horoscope = (props) => {
 };
 
 export default Horoscope;
-
-// Description: {horoscope.response.description} <br />

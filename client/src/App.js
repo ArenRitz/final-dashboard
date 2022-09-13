@@ -131,8 +131,6 @@ function App() {
     setUserID(null);
   };
 
-  // const timezone = GET FROM DB FOR LOGGED IN USER;
-
   //function to update theme in database
   const setThemeInDB = (theme) => {
     axios
@@ -154,7 +152,7 @@ function App() {
   };
 
   return (
-    <div className="App h-[100vh]">
+    <div className="App h-[100vh] w-[100vw]">
       {userID && (
         <>
           <div className="flex flex-row w-[100%] mt-2 justify-between">
