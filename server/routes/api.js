@@ -121,6 +121,14 @@ router.put('/twitch/:id', (req, res) => {
   })
 })
 
+//function to update theme
+router.put('/theme/:id', (req, res) => {
+  users.updateTheme(req.body.theme, req.params.id).then(data => {
+    res.json(data);
+  })
+})
+
+
 
 
 

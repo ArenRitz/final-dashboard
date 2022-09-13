@@ -56,6 +56,15 @@ const saveWorkHome = (data) => {
 
 }
 
+// update user theme in database
+const updateTheme = (theme, id) => {
+	return db.query("UPDATE users SET theme = $1 WHERE id = $2;", [theme, id]).then(data => {
+		return data.rows[0];
+	}).catch(err => {
+		return err;
+	})
+}
+
 
 
 module.exports = {
@@ -63,7 +72,8 @@ module.exports = {
 	getUserById,
 	createUser,
 	loginUser,
-	saveWorkHome
+	saveWorkHome,
+	updateTheme
 }
 
 
