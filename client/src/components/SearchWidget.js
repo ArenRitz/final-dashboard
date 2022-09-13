@@ -51,8 +51,7 @@ const SearchWidget = (props) => {
   
 
   return (
-    <>
-    {props.showBool && (
+
     <div className="w-fit flex flex-row border-2 border-base-content h-fit rounded-full">
       <form
         onSubmit={handleSubmit}
@@ -142,8 +141,7 @@ const SearchWidget = (props) => {
         </div>
       </form>
     </div>
-    )}
-    </>
+
   );
 };
 

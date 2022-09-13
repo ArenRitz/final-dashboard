@@ -61,7 +61,7 @@ const BookmarkList = (props) => {
            <div className=" z-20 w-20 rounded-full h-full bg-success tranform -translate-x-[5rem] 
                transition-all group-hover:transform group-hover:transition-all group-hover:-translate-x-[3rem] group-hover:after:translate-x-8 ">
             <button
-              className=" text-xl font-bold flex justify-end items-center hover:bg-white/20 w-full h-full rounded-full"
+              className=" text-xl font-bold flex text-success-content justify-end items-center hover:bg-white/20 w-full h-full rounded-full"
               onClick={toggleEditCatMode}
             >
               <div className="mr-2">
@@ -72,7 +72,7 @@ const BookmarkList = (props) => {
             <div className="  z-20 h-full w-20 rounded-full bg-error tranform translate-x-[6rem] 
                transition-all group-hover:transform group-hover:transition-all group-hover:translate-x-[3rem] group-hover:after:translate-x-6" >
             <button
-              className=" text-lg font-bold  hover:bg-white/20 w-full h-full rounded-full ml-2"
+              className=" text-lg font-bold text-error-content hover:bg-white/20 w-full h-full rounded-full ml-2"
               onClick={() =>
                 props.deleteCategory(props.id, props.categoryID)
               }

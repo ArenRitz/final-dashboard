@@ -18,7 +18,6 @@ import "./App.css";
 import SearchWidget from "./components/SearchWidget";
 
 function App() {
-
   const [show, setShow] = useState({
     Horoscope: true,
     Recipe: true,
@@ -29,13 +28,12 @@ function App() {
     Spotify: true,
     Maps: true,
     Settings: false,
-    Search: true
+    Search: true,
   });
 
   const [mode, setMode] = useState("view");
 
   const [focusTrack, setFocusTrack] = useState({});
-
 
   //function to update userID state when user logs in
   const handleLogin = (id) => {
@@ -68,9 +66,7 @@ function App() {
     setTheme(userData.theme);
     setUserID(user_id);
     getVisibility(user_id);
-
   }, [userID, userData]);
-
 
   const { currLocation } = useLocation();
 
@@ -83,8 +79,6 @@ function App() {
       [name]: !prevState[name],
     }));
   };
-
-
 
   // change mode based on value passed
   const changeMode = (value) => {
@@ -169,16 +163,17 @@ function App() {
                 />
               )}
             </div>
-            <div className="w-[33.4%] flex justify-center items-center">
-              <SearchWidget
-                click={hideComponent}
-                showBool={show.Search}
-                mode={mode}
-                searchEngine={userData.search_engine}
-                userID={userID}
-              />
-
-            </div>
+              <div className="w-[33.4%] flex justify-center items-center">
+            {show.Search && (
+                <SearchWidget
+                  click={hideComponent}
+                  showBool={show.Search}
+                  mode={mode}
+                  searchEngine={userData.search_engine}
+                  userID={userID}
+                />
+                )}
+              </div>
             <div className="w-[33.3%] flex justify-end pr-20">
               {show.Weather && (
                 <WeatherCustom
@@ -278,8 +273,6 @@ function App() {
               </div>
             </div>
           </div>
-
-
 
           {show.Settings && (
             <Settings

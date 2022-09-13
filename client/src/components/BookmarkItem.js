@@ -1,5 +1,8 @@
 import { useState } from "react";
 import NewBookmark from "./NewBookmark";
+import { BsTrashFill } from "react-icons/bs";
+import { AiOutlineEdit } from "react-icons/ai";
+
 
 const BookmarkItem = (props) => {
   const [showEdit, setShowEdit] = useState(false);
@@ -27,11 +30,13 @@ const BookmarkItem = (props) => {
         <div className="flex flex-row group ">
           <div className="mx-0 my-0 relative">
             <button
-              className="bg-success text-success-content z-10 absolute w-12 top-0 -left-20 pl-2 tranform
-               transition-all group-hover:transform group-hover:transition-all group-hover:translate-x-[4.8rem] group-hover:after:translate-x-8 text-end h-full text-sm rounded-r-full"
+              className="bg-success flex flex-row justify-end items-center text-success-content z-10 absolute w-10 top-0 -left-20 pl-2 tranform
+               transition-all group-hover:transform group-hover:transition-all group-hover:translate-x-[4.4rem] group-hover:after:translate-x-8 text-end h-full text-sm rounded-r-full"
               onClick={toggleEdit}
             >
-              Edit&nbsp;&nbsp;
+              <div className="mr-2">
+               <AiOutlineEdit />
+               </div>
             </button>
           </div>
 
@@ -46,12 +51,14 @@ const BookmarkItem = (props) => {
 
           <div className="mx-0 my-0 py-0 px-0 relative">
             <button
-              className=" bg-error w-12 h-full text-error-content z-10 absolute -right-16 -top-0 tranform transition-all group-hover:transform group-hover:transition-all group-hover:-translate-x-[3.8rem] pr-4 pl-0 group-hover:after:translate-x-8  text-start text-sm rounded-l-full"
+              className=" bg-error w-12 h-full text-error-content z-10 absolute -right-16 -top-0 tranform transition-all group-hover:transform group-hover:transition-all group-hover:-translate-x-[3rem] pr-4 pl-0 group-hover:after:translate-x-8  text-start text-sm rounded-l-full"
               onClick={() =>
                 props.deleteSingle(props.userID, props.categoryID, props.title)
               }
             >
-              &nbsp;&nbsp;Del
+              <div className="ml-2">
+              <BsTrashFill/>
+              </div>
             </button>
           </div>
           {showEdit && (
