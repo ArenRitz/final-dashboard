@@ -3,6 +3,7 @@ import { useState } from "react";
 
 const Settings = (props) => {
   const [selected, setSelected] = useState("bookmarks");
+  const [theme, setTheme] = useState("dark");
 
   const themeOptions = [
     "light",
@@ -40,6 +41,7 @@ const Settings = (props) => {
   const logUserData = () => {
     console.log(userInfo);
   }
+
 
   console.log("THIS IS USERDATA FROM SETTINGS:", userInfo);
 
@@ -176,6 +178,20 @@ const Settings = (props) => {
                   }
                   name="Maps"
                   checked={props.showBools.Maps}
+                />
+              </div>
+            </div>
+            <div className="w-20 flex flex-row -right-32 relative my-4">
+              <p className="w-20 mr-20"> Transit </p>
+              <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
+                <input
+                  type="checkbox"
+                  className="toggle toggle-accent"
+                  onClick={() =>
+                    props.setVisibility("Transit", props.showBools.Transit)
+                  }
+                  name="Transit"
+                  checked={props.showBools.Transit}
                 />
               </div>
             </div>

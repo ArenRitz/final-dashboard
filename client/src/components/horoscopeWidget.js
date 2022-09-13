@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Button from "./Button";
 
 const horoscopeList = [
   ["Aries", "aries"],
@@ -23,7 +22,7 @@ const Horoscope = (props) => {
   });
 
   const currentUserID = props.userID;
-  const currentHoroscope = props.horoscope;
+  const [currentHoroscope, setCurrentHoroscope] = useState(props.horoscope);
   // console.log("BEFORE USEFFECT", currentHoroscope);
 
   const pickHoroscope = (e) => {
@@ -42,17 +41,18 @@ const Horoscope = (props) => {
         horoscope: dbHoroscope,
       })
       .then((response) => {
-        console.log(response);
-        window.location.reload();
+        // console.log(dbHoroscope);
+        setCurrentHoroscope(dbHoroscope);
+        setHoroscope(horoscope);
+        fetchHoroscopeData(dbHoroscope);
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  useEffect(() => {
-    // console.log("INSIDE USEFFECT", currentHoroscope);
-    const URL = `https://aztro.sameerkumar.website/?sign=${currentHoroscope}&day=today`;
+  const fetchHoroscopeData = (horoscope) => {
+    const URL = `https://aztro.sameerkumar.website/?sign=${horoscope}&day=today`;
     fetch(URL, {
       method: "POST",
     })
@@ -62,30 +62,23 @@ const Horoscope = (props) => {
           response: json,
         });
       });
-  }, [currentHoroscope]);
+  }
+
+  useEffect(() => {
+    // console.log("INSIDE USEFFECT", currentHoroscope);
+    if (props.horoscope) {
+      setCurrentHoroscope(props.horoscope);
+    }
+
+    fetchHoroscopeData(props.horoscope);
+
+  }, [props.horoscope]);
 
   // console.log(horoscope)
 
   return (
     <>
       <div className="w-[400px] bg-base-200 border-solid border-2 border-base-content rounded-3xl p-2 group h-[143px]">
-        {props.mode === "edit" && (
-          <div className="horoscope-dropdown">
-            <select
-              className="select select-bordered w-full max-w-xs"
-              onChange={pickHoroscope}
-            >
-              <option disabled selected>
-                Select Horoscope
-              </option>
-              {horoscopeList.map((horoscope) => (
-                <option key={horoscope[0]} value={horoscope[0]}>
-                  {horoscope[0]}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
         <div className="relative">
           <div className="flex flex-row">
             <div className="w-[110px] h-[110px]  ">
@@ -103,8 +96,26 @@ const Horoscope = (props) => {
               Lucky Time: {horoscope.response.lucky_time} <br />
               Color: {horoscope.response.color} <br />
               Mood: {horoscope.response.mood} <br />
+              {props.mode === "edit" && (
+                <div className="horoscope-dropdown">
+                  <select
+                    className="select select-bordered select-xs w-[200px]"
+                    onChange={pickHoroscope}
+                  >
+                    <option disabled selected>
+                      Select Horoscope
+                    </option>
+                    {horoscopeList.map((horoscope) => (
+                      <option key={horoscope[0]} value={horoscope[0]}>
+                        {horoscope[0]}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
             </div>
           </div>
+
           <div className="dropdown dropdown-top dropdown-hover absolute -bottom-[1.3rem] left-[9rem] ">
             <label
               tabIndex={0}
@@ -126,5 +137,3 @@ const Horoscope = (props) => {
 };
 
 export default Horoscope;
-
-// Description: {horoscope.response.description} <br />

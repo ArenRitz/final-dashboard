@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Horoscope from "./components/horoscopeWidget";
 import WidgetRecipe from "./components/WidgetRecipe";
-import Clock from "./components/digitalClock";
-import "./App.css";
+// import Clock from "./components/digitalClock";
 import BookmarkCategory from "./components/BookmarkCategory";
 import WeatherCustom from "./components/WeatherCustom";
 import TwitchWidgetList from "./components/TwitchWidgetList";
-
+import NewClock from "./components/WidgetTime";
 import WidgetSpotifyList from "./components/WidgetSpotifyList";
 import Settings from "./components/Settings";
 import Button from "./components/Button";
@@ -16,9 +15,11 @@ import useUserData from "./hooks/useUserData";
 import useLocation from "./hooks/useLocation";
 import { default as Auth } from "./components/Auth/Index";
 import axios from "axios";
+import "./App.css";
+import SearchWidget from "./components/SearchWidget";
 
 function App() {
-  const [theme, setTheme] = useState("dark");
+
   const [show, setShow] = useState({
     Horoscope: true,
     Recipe: true,
@@ -30,10 +31,10 @@ function App() {
     Maps: true,
     Settings: false,
     Transit: true,
+    Search: true
   });
 
   const [mode, setMode] = useState("view");
-
   const [focusTrack, setFocusTrack] = useState({})
   const [focusTweet, setFocusTweet] = useState({})
 
@@ -42,12 +43,14 @@ function App() {
     setUserID(id);
   };
 
-  const html = document.querySelector("html");
-  html.setAttribute("data-theme", `${theme}`);
+  const [theme, setTheme] = useState("dark");
 
   const [userID, setUserID] = useState(null); // ******* CHANGE THIS TO NULL TO TEST LOGIN *******
 
   const { userData, setUserData } = useUserData(userID); //getter and setter for the current user's data in state(currently defaulted to user_id 1)
+
+  const html = document.querySelector("html");
+  html.setAttribute("data-theme", `${theme}`);
 
   useEffect(() => {
     console.log("Current userData: ", userData);
@@ -62,10 +65,13 @@ function App() {
       // redirect to login and
       return;
     }
-    setUserID(user_id)
+
+    setTheme(userData.theme);
+    setUserID(user_id);
     getVisibility(user_id);
 
   }, [userID, userData]);
+
 
   const { currLocation } = useLocation();
 
@@ -79,11 +85,7 @@ function App() {
     }));
   };
 
-  //handle theme change via drop down menu
-  const handleThemeChange = (e) => {
-    const { value } = e.target;
-    setTheme(value);
-  };
+
 
   // change mode based on value passed
   const changeMode = (value) => {
@@ -130,12 +132,66 @@ function App() {
     setUserID(null);
   };
 
+  //function to update theme in database
+  const setThemeInDB = (theme) => {
+    axios
+      .put(`http://localhost:8080/api/theme/${userID}`, {
+        theme,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  //handle theme change via drop down menu
+  const handleThemeChange = (e) => {
+    const { value } = e.target;
+    setTheme(value);
+    setThemeInDB(value);
+  };
+
   return (
-    <div className="App">
+    <div className="App h-[100vh] w-[100vw]">
       {userID && (
         <>
-          <div className="flex flex-row  w-[100%] h-[100vh] mt-2">
-            <div className="flex flex-col  w-[25%] h-max">
+          <div className="flex flex-row w-[100%] mt-2 justify-between">
+            <div className="w-[33.3%] flex justify-start">
+              {show.Clock && (
+                <NewClock
+                  click={hideComponent}
+                  showBool={show.Clock}
+                  mode={mode}
+                  userID={userID}
+                  timezone={userData.timezone}
+                />
+              )}
+            </div>
+            <div className="w-[33.4%] flex justify-center items-center">
+              <SearchWidget
+                click={hideComponent}
+                showBool={show.Search}
+                mode={mode}
+                searchEngine={userData.search_engine}
+                userID={userID}
+              />
+
+            </div>
+            <div className="w-[33.3%] flex justify-end pr-20">
+              {show.Weather && (
+                <WeatherCustom
+                  currentLocation={currLocation}
+                  click={hideComponent}
+                  showBool={show.Weather}
+                  mode={mode}
+                />
+              )}
+            </div>
+            <br></br>
+          </div>
+
+          {/* <div className="flex flex-col w-[25%] h-max">
               <div>
                 {show.Clock && (
                   <Clock
@@ -146,99 +202,92 @@ function App() {
                 )}
               </div>
               <br></br>
-            </div>
+            </div> */}
 
-            <div className="flex flex-col items-center justify-center w-[50%] h-max">
-              <div className="flex flex-row mt-[7.5rem]">
-                <div className="mr-2">
-                  {show.Bookmarks && (
-                    <BookmarkCategory
-                      click={hideComponent}
-                      showBool={show.Bookmarks}
-                      userID={userID}
-                      mode={mode}
-                    />
-                  )}
-                </div>
-                <br></br>
-                <div className="ml-2">
-                  {show.Maps && (
-                    <Maps
-                      userData={userData}
-                      currentLocation={currLocation}
-                      click={hideComponent}
-                      showBool={show.Maps}
-                      mode={mode}
-                    />
-                  )}
-                </div>
+          <div className="flex flex-col items-center justify-center h-max">
+            <div className="flex flex-row">
+              <div className="mr-2">
+                {show.Bookmarks && (
+                  <BookmarkCategory
+                    click={hideComponent}
+                    showBool={show.Bookmarks}
+                    userID={userID}
+                    mode={mode}
+                  />
+                )}
               </div>
-
-              <div className="flex flex-row w-[800px] justify-around mt-2">
-                <div className="mx-2">
-                  {show.Horoscope && (
-                    <Horoscope
-                      userID={userID}
-                      horoscope={userData.horoscope_sign}
-                      click={hideComponent}
-                      showBool={show.Horoscope}
-                      mode={mode}
-                    />
-                  )}
-                </div>
-                <div className="mx-2">
-                  {show.Spotify && (
-                    <WidgetSpotifyList
-                      click={hideComponent}
-                      showBool={show.Spotify}
-                      mode={mode}
-                      setFocusTrack={setFocusTrack}
-                    />
-                  )}
-                </div>
-                <div className="mx-2">
-                  {show.Recipe && (
-                    <WidgetRecipe
-                      click={hideComponent}
-                      showBool={show.Recipe}
-                      mode={mode}
-                    />
-                  )}
-                </div>
-                <div className="mx-2">
-                  {show.Recipe && (
-                    <TransitList
-                      click={hideComponent}
-                      showBool={show.Transit}
-                      mode={mode}
-                      setFocusTweet={setFocusTweet}
-                    />
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col items-center justify-center w-[25%] h-max">
-              <div>
-                {show.Weather && (
-                  <WeatherCustom
+              <br></br>
+              <div className="ml-2">
+                {show.Maps && (
+                  <Maps
+                    userData={userData}
                     currentLocation={currLocation}
                     click={hideComponent}
-                    showBool={show.Weather}
+                    showBool={show.Maps}
                     mode={mode}
                   />
                 )}
               </div>
             </div>
+            <div className="w-[100%]">
+              <div className="flex flex-col items-center">
+                <div className="flex flex-row w-[100%] justify-center mt-2">
+                  <div className="mx-2">
+                    {show.Horoscope && (
+                      <Horoscope
+                        userID={userID}
+                        horoscope={userData.horoscope_sign}
+                        click={hideComponent}
+                        showBool={show.Horoscope}
+                        mode={mode}
+                      />
+                    )}
+                  </div>
+                  <div className="mx-2">
+                    {show.Spotify && (
+                      <WidgetSpotifyList
+                        click={hideComponent}
+                        showBool={show.Spotify}
+                        mode={mode}
+                        setFocusTrack={setFocusTrack}
+                      />
+                    )}
+                  </div>
+                  <div className="mx-2">
+                    {show.Recipe && (
+                      <WidgetRecipe
+                        click={hideComponent}
+                        showBool={show.Recipe}
+                        mode={mode}
+                      />
+                    )}
+                  </div>
+                  <div className="mx-2">
+                    {show.Transit && (
+                      <TransitList
+                        click={hideComponent}
+                        showBool={show.Transit}
+                        mode={mode}
+                        setFocusTweet={setFocusTweet}
+                      />
+                    )}
+                  </div>
+                </div>
+                <div className="relative flex justify-center w-[80%] mt-[4px]">
+                  {show.Twitch && (
+                    <TwitchWidgetList
+                      click={hideComponent}
+                      showBool={show.Twitch}
+                      mode={mode}
+                      streamers={userData.twitch_usernames}
+                      userID={userID}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
 
-          {show.Twitch && (
-            <TwitchWidgetList
-              click={hideComponent}
-              showBool={show.Twitch}
-              mode={mode}
-              streamers={userData.twitch_usernames}
-            />
-          )}
 
 
           {show.Settings && (
@@ -253,6 +302,7 @@ function App() {
               setVisibility={handleVisibilityChange}
               userID={userID}
               logout={clearUserSession}
+              setThemeInDB={setThemeInDB}
             />
           )}
 
