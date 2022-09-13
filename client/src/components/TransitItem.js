@@ -8,7 +8,7 @@ const TransitItem = (props) => {
 
       <div className="w-[fit]">
         <p className="text-left">
-          {props.item.text.slice(0, props.item.text.indexOf(' http'))}
+          {props.item.text}
         </p>
         <div className="text-right text-secondary text-xs">
           <ReactTimeAgo date={Date.parse(props.item.created_at)} locale="en-US"/>  <a className="underline" href="https://twitter.com/ttcnotices">@TTCnotices</a>

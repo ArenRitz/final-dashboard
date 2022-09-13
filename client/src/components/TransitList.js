@@ -14,11 +14,21 @@ export default function TransitList(props) {
   const [tweetCount, setTweetCount] = useState([0,1,2,3,4,5,6,7,8,9])
 
   const formatTweets = (tweetArr) => {
+    const formattedArr= []
+    const maxLength = 135
+    tweetArr.forEach(element => {
+      let tweetText = element.text.slice(0, element.text.indexOf(' http'))
+       if (tweetText.length > maxLength) {
+        tweetText = tweetText.substring(0, maxLength) + "..."
+       }
+      formattedArr.push(
+        {created_at: element.created_at,
+        id:element.id,
+        text: tweetText
+      })
+    });
 
-    const formattedArr = tweetArr.map( {
-      //in progress
-    })
-    console.log(tweetArr)
+    console.log("formatTweets:", formattedArr)
 
     return formattedArr
   }
@@ -35,7 +45,7 @@ export default function TransitList(props) {
         console.log("frontend twitter response",res);
 
         setTweets({
-          tweetList:res.data.data
+          tweetList:formatTweets(res.data.data)
         })
         setIsLoading(false)
       })
