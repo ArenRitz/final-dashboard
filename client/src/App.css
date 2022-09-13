@@ -44,7 +44,13 @@
 
 .clock {
   font-family: 'technology';
-  font-size: 80px;
+  font-size: 70px;
+}
+
+.timezone-text {
+  font-family: 'Helvetica';
+  font-size: 15px;
+  padding-bottom: 0.5rem;
 }
 
 .spotify-header {

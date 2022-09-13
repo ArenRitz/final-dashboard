@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Horoscope from "./components/horoscopeWidget";
 import WidgetRecipe from "./components/WidgetRecipe";
-import Clock from "./components/digitalClock";
-import "./App.css";
+// import Clock from "./components/digitalClock";
 import BookmarkCategory from "./components/BookmarkCategory";
 import WeatherCustom from "./components/WeatherCustom";
 import TwitchWidgetList from "./components/TwitchWidgetList";
-
+import NewClock from "./components/WidgetTime";
 import WidgetSpotifyList from "./components/WidgetSpotifyList";
 import Settings from "./components/Settings";
 import Button from "./components/Button";
@@ -15,6 +14,7 @@ import useUserData from "./hooks/useUserData";
 import useLocation from "./hooks/useLocation";
 import { default as Auth } from "./components/Auth/Index";
 import axios from "axios";
+import "./App.css";
 
 function App() {
   const [theme, setTheme] = useState("dark");
@@ -127,12 +127,29 @@ function App() {
     setUserID(null);
   };
 
+  const timezone = "Canada/Eastern";
+
   return (
     <div className="App">
       {userID && (
         <>
-          <div className="flex flex-row  w-[100%] h-[100vh] mt-2">
-            <div className="flex flex-col  w-[25%] h-max">
+          <div className="flex flex-row w-[100%] h-[100vh] mt-2">
+
+            <div className="flex flex-col w-[25%] h-max">
+              <div>
+                {show.Clock && (
+                  <NewClock
+                    click={hideComponent}
+                    showBool={show.Clock}
+                    mode={mode}
+                    timezone={timezone}
+                  />
+                )}
+              </div>
+              <br></br>
+            </div>
+
+            {/* <div className="flex flex-col w-[25%] h-max">
               <div>
                 {show.Clock && (
                   <Clock
@@ -143,7 +160,7 @@ function App() {
                 )}
               </div>
               <br></br>
-            </div>
+            </div> */}
 
             <div className="flex flex-col items-center justify-center w-[50%] h-max">
               <div className="flex flex-row mt-[7.5rem]">
