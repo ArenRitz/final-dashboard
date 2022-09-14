@@ -17,7 +17,7 @@ const getUserById = id => {
 // function to create new user in database with username, email, password, horoscope_sign, home_location, work_location, twitch_usernames, theme, search_engine, timezone  and then create all widgets for that user in database, returns user id to client
 const createUser = (user) => {
 	console.log('creating user');
-	return db.query(`INSERT INTO users (username, email, password, horoscope_sign, home_location, work_location, twitch_usernames, theme, search_engine, timezone) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id;`, [user.username, user.email, user.password, 'leo', 'Toronto', 'Ottawa', ['shroud, xQc, summit1g'], 'dark', 'google', 'Canada/Eastern']).then(data => {
+	return db.query(`INSERT INTO users (username, email, password, horoscope_sign, home_location, work_location, twitch_usernames, theme, search_engine, timezone) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id;`, [user.username, user.email, user.password, 'leo', 'Toronto', 'Ottawa', '{shroud, xQc, summit1g}', 'dark', 'google', 'Canada/Eastern']).then(data => {
 		console.log('user created');
 		return data.rows[0].id;
 	}).then(id => {

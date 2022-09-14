@@ -158,7 +158,7 @@ function App() {
   };
 
   return (
-    <div className="App h-[100%] w-[100%]">
+    <div className="App h-[100%] w-[100%] transition-all transform">
       {userID && (
         <div>
           <div className="flex flex-row w-[100%] h-[10%] mt-4 justify-between mb-2">
