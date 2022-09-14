@@ -7,7 +7,7 @@ const Button = (props) => {
   const updateWidgetVisibility = (name, visibility, id) => {
     props.setVisibility(id, name, visibility);
   };
-
+  
   return (
     <>
       {props.type === "hide" && (
@@ -36,8 +36,7 @@ const Button = (props) => {
           onClick={() => props.click("edit")}
           name={props.name}
         >
-
-            <FiEdit  className="text-accent-content" />
+          <FiEdit  className="text-accent-content" />
 
         </button>
       )}

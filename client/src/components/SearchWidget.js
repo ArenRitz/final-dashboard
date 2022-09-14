@@ -9,15 +9,12 @@ const SearchWidget = (props) => {
 
   //on submit form reaplce spaces in input with + and redirect to google search
   
-
   useEffect(() => {
     if (props.searchEngine) {
       setSearchEngine(props.searchEngine);
     }
   }, [props.searchEngine]);
-  
-  
-  
+    
   const handleSubmit = (e) => {
     e.preventDefault();
     const search = e.target.search.value.replace(/ /g, "+");
@@ -42,14 +39,13 @@ const SearchWidget = (props) => {
     axios
       .put(`http://localhost:8080/api/search/${props.userID}`, { search_engine: e })
       .then((res) => {  
-        console.log(res);
+        // console.log(res);
       })
       .catch((err) => {
         console.log(err);
       });
   };
   
-
   return (
 
     <div className="w-[400px] flex flex-row border-2 border-base-content h-fit rounded-full">

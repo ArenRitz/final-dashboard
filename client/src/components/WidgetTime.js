@@ -14,8 +14,8 @@ const NewClock = (props) => {
   const currentUserId = props.userID;
   const currentTimezone = props.timezone;
 
-  console.log(currentUserId);
-  console.log(currentTimezone);
+  // console.log(currentUserId);
+  // console.log(currentTimezone);
 
   const [timezone, setTimezone] = useState(currentTimezone);
 
@@ -23,14 +23,14 @@ const NewClock = (props) => {
   // console.log(timezone);
 
   useEffect(() => {
-    console.log("********TIME USE EFFECT IS RUNNING********");
+    // console.log("********TIME USE EFFECT IS RUNNING********");
     if (currentTimezone) {
       setTimezone(currentTimezone);
     }
   }, [currentTimezone]);
 
   const pickTimezone = (e) => {
-    console.log("------------------RUNNING pickTimezone-----------------");
+    // console.log("------------------RUNNING pickTimezone-----------------");
     const selectedTimezone = e.target.value;
     setTimezone(selectedTimezone);
 
@@ -48,6 +48,10 @@ const NewClock = (props) => {
 
     // console.log(selectedTimezone);
   };
+
+  //set selected option
+
+
 
   return (
     <div className="text-5xl bg-base-200 clock pt-[12px] shadow-lg shadow-base-content/10 rounded-3xl whitespace-nowrap w-[250px]  h-26">

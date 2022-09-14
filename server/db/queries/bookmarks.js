@@ -1,25 +1,5 @@
 const db = require('../../configs/db.config');
 
-
-
-// getAllBookmarksForUser(); but also return bookmark id
-
-// query to get all bookmarks for specific user by user ID returning bookmark id, bookmark title, bookmark url, category name, and category ID
-// tables; users_categories, bookmarks
-// const getAllBookmarksForUser = (id) => {
-// 	return db.query(`
-// 	SELECT bookmarks.id, bookmarks.bookmark_title, bookmarks.bookmark_url, users_categories.category_name, users_categories.id AS user_category_id
-// 	FROM bookmarks
-// 	JOIN users_categories ON users_categories.id = bookmarks.user_category_id
-// 	WHERE users_categories.user_id = $1
-// 	`, [id]).then(data => {
-// 		return data.rows;
-// 	})
-// };
-
-
-
-
 // query to delete bookmark from database for specific by category ID and bookmark title
 const deleteBookmark = (category_id, title) => {
 	
@@ -27,7 +7,6 @@ const deleteBookmark = (category_id, title) => {
 		return data.rows;
 	})
 }
-
 
 //query to add new bookmark to database for specific user by category ID and bookmark title
 const addBookmark = (category_id, title, url) => {
@@ -43,14 +22,12 @@ const editBookmark = ( bookmark_id, title, url) => {
 	})
 }
 
-
 //delete category via user id and category id
 const deleteCategory = (user_id, category_id) => {
 	return db.query("DELETE FROM users_categories WHERE user_id = $1 AND id = $2;", [user_id, category_id]).then(data => {
 		return data.rows;
 	})
 }
-
 
 //add category via user id and category name
 const addCategory = (user_id, category_name) => {
@@ -66,7 +43,6 @@ const editCategory = (user_id, category_name, category_id) => {
 	})
 }
 
-
 const getAllBookmarksForUser = (id) => {
 	return db.query(`
 	SELECT bookmarks.id, bookmarks.bookmark_title, bookmarks.bookmark_url, users_categories.category_name, users_categories.id AS user_category_id
@@ -77,9 +53,5 @@ const getAllBookmarksForUser = (id) => {
 		return data.rows;
 	})
 };
-
-
-
-
 
 module.exports = {getAllBookmarksForUser, deleteBookmark, addBookmark, editBookmark, deleteCategory, addCategory, editCategory};

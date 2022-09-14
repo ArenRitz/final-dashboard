@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Horoscope from "./components/horoscopeWidget";
 import WidgetRecipe from "./components/WidgetRecipe";
-// import Clock from "./components/digitalClock";
 import BookmarkCategory from "./components/BookmarkCategory";
 import WeatherCustom from "./components/WeatherCustom";
 import TwitchWidgetList from "./components/TwitchWidgetList";
@@ -17,7 +16,6 @@ import { default as Auth } from "./components/Auth/Index";
 import axios from "axios";
 import "./App.css";
 import SearchWidget from "./components/SearchWidget";
-
 
 function App() {
   const [show, setShow] = useState({
@@ -44,16 +42,13 @@ function App() {
   };
 
   const [theme, setTheme] = useState("dark");
-
   const [userID, setUserID] = useState(null); // ******* CHANGE THIS TO NULL TO TEST LOGIN *******
-
   const { userData, setUserData } = useUserData(userID); //getter and setter for the current user's data in state from custom hook
 
   const html = document.querySelector("html");
   html.setAttribute("data-theme", `${theme}`);
 
   useEffect(() => {
-    console.log("Current userData: ", userData);
     const getVisibility = (userID) => {
       axios.get(`http://localhost:8080/api/widgets/${userID}`).then((res) => {
         const formattedVisibility = formatVisibility(res.data);
@@ -74,8 +69,6 @@ function App() {
   const { currLocation } = useLocation();
 
   const hideComponent = (e) => {
-    console.log(show.Bookmarks);
-    console.log("trying to delete");
     const { name } = e.target;
     setShow((prevState) => ({
       ...prevState,
@@ -118,7 +111,6 @@ function App() {
       Settings: !prevState.Settings,
     }));
   };
-
 
   //handle visibility change via toggle button in settings to update database and state
   const handleVisibilityChange = (widget, currentShowStatus) => {
@@ -196,20 +188,6 @@ function App() {
             </div>
             <br></br>
           </div>
-
-          {/* <div className="flex flex-col w-[25%] h-max">
-              <div>
-                {show.Clock && (
-                  <Clock
-                    click={hideComponent}
-                    showBool={show.Clock}
-                    mode={mode}
-                  />
-                )}
-              </div>
-              <br></br>
-            </div> */}
-
           <div className="flex flex-col items-center justify-center mt-8">
             <div className="flex flex-row">
               <div className="mr-2">
@@ -311,7 +289,6 @@ function App() {
               toggleSettings={toggleSettings}
             />
           )}
-
           <div className="fixed top-1/4 right-0 h-[400px] w-[80px] group ">
             <div className="bg-accent fixed top-1/2 -right-8 h-20 w-8 rounded-l-2xl tranform transition-all group-hover:transform group-hover:transition-all group-hover:-translate-x-8 group-hover:after:translate-x-8">
               <div className="w-full h-[50%] ">

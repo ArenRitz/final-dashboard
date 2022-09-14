@@ -4,7 +4,9 @@ import Button from "./Button";
 import axios from "axios";
 import NewCategory from "./NewCategory";
 import classNames from "classnames";
+
 const iconPath = process.env.PUBLIC_URL + '/svg/';
+
 const BookmarkCategory = (props) => {
   const [bookmarks, setBookmarks] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -76,9 +78,6 @@ const BookmarkCategory = (props) => {
       })
       .then((data) => {
         setBookmarks({ ...formatData(data.data) });
-        console.log(
-          "BOOKMARKS DONE LOADING **********************************************"
-        );
         setIsLoading(false);
       });
   };
@@ -125,13 +124,11 @@ const BookmarkCategory = (props) => {
     setAddCatMode(!addCatMode);
   };
 
-
 let delClasses = classNames("delete", {
   "absolute right-0 -top-10 btn btn-error btn-sm" : true,
   "hidden" : !hover,
   "visible" : hover
 })
-
 
 let editClasses = classNames("edit", {
   "btn btn-success btn-sm absolute -top-[5rem] -left-0 z-20" : true,
@@ -145,17 +142,10 @@ const handleMouseOver = () => {
 }
 
 const handleMouseOut = () => {
-
-
   setHover(false)
- 
+
 }
-
-
-
-
   let category = Object.keys(bookmarks).map((category, index) => {
-
     return (
       <div
         key={index}
@@ -198,13 +188,11 @@ const handleMouseOut = () => {
       <div className=" relative">
         <div className="flex flex-row justify-between w-fit  rounded-3xl  px-5 py-5">
           {category}
-
           {props.mode === "edit" && (
             <button
               className="btn btn-accent btn-xs rounded-full absolute right-4 top-[45%]"
               onClick={toggleAddCatMode}
             >
-              
               +
             </button>
           )}

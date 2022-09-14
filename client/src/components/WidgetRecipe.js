@@ -18,7 +18,7 @@ const WidgetRecipe = (props) => {
       .get(apiRandomRecipeUrl)
       .then((response) => {
         const recipeData = response.data.meals[0];
-        console.log(recipeData);
+        // console.log(recipeData);
         if (recipeData) {
           setRecipe({
             ...recipe,
@@ -60,8 +60,7 @@ const WidgetRecipe = (props) => {
         </div>
         <div className="w-[60%] h-[100%]  flex flex-col">
           <div className="h-[20%] w-[95%]">
-         
-          <h2 className="mt-2 mb-4 text-accent border-b-2 border-accent"> What Should I Cook?</h2>
+            <h2 className="mt-2 mb-4 text-accent border-b-2 border-accent"> What Should I Cook?</h2>
           </div>
         <div className=" h-[80%] text-start">
         <a href={recipe.source} className=" ">

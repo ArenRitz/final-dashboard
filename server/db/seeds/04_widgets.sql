@@ -1,12 +1,12 @@
-INSERT INTO widgets (user_id, name, visibility) VALUES (1, 'Horoscope', true);
-INSERT INTO widgets (user_id, name, visibility) VALUES (1, 'Twitch', true);
+INSERT INTO widgets (user_id, name, visibility) VALUES (1, 'Horoscope', false);
+INSERT INTO widgets (user_id, name, visibility) VALUES (1, 'Twitch', false);
 INSERT INTO widgets (user_id, name, visibility) VALUES (1, 'Recipe', false);
 INSERT INTO widgets (user_id, name, visibility) VALUES (1, 'Clock', true);
 INSERT INTO widgets (user_id, name, visibility) VALUES (1, 'Bookmarks', true);
 INSERT INTO widgets (user_id, name, visibility) VALUES (1, 'Weather', true);
-INSERT INTO widgets (user_id, name, visibility) VALUES (1, 'Spotify', true);
-INSERT INTO widgets (user_id, name, visibility) VALUES (1, 'Maps', true);
-INSERT INTO widgets (user_id, name, visibility) VALUES (1, 'Transit', true);
+INSERT INTO widgets (user_id, name, visibility) VALUES (1, 'Spotify', false);
+INSERT INTO widgets (user_id, name, visibility) VALUES (1, 'Maps', false);
+INSERT INTO widgets (user_id, name, visibility) VALUES (1, 'Transit', false);
 INSERT INTO widgets (user_id, name, visibility) VALUES (1, 'Search', true);
 INSERT INTO widgets (user_id, name, visibility) VALUES (2, 'Horoscope', false);
 INSERT INTO widgets (user_id, name, visibility) VALUES (2, 'Twitch', true);

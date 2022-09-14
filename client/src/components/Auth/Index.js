@@ -4,11 +4,6 @@ import LogIn from "./LogIn";
 import SignUp from "./SignUp";
 
 const Index = (props) => {
-
-
-  
-
-
   const [selection, setSelection] = useState("login");
 
   const signUpClass = classnames({
@@ -21,13 +16,9 @@ const Index = (props) => {
   });
 
   // change selection to "login" or "signup" on click when clicking on the login or signup button
-
   const changeStatus = (status) => {
     setSelection(status);
   };
-
-
-
 
   return (
     <div className=" flex flex-row justify-center mt-52">

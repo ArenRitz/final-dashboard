@@ -2,6 +2,7 @@ import Button from "./Button";
 import { useState } from "react";
 import { GrLogout } from "react-icons/gr";
 import { MdLogout } from "react-icons/md";
+
 const Settings = (props) => {
   const [selected, setSelected] = useState("bookmarks");
   const [theme, setTheme] = useState("dark");
@@ -30,12 +31,6 @@ const Settings = (props) => {
 
   const userInfo = props.userData;
 
-  const logUserData = () => {
-    console.log(userInfo);
-  };
-
-  console.log("THIS IS USERDATA FROM SETTINGS:", userInfo);
-
   return (
     <div className="fixed w-[100%] h-[100%] top-0 right-0 backdrop-blur-sm z-20">
       <button
@@ -61,8 +56,8 @@ const Settings = (props) => {
               <option disabled selected>
                 Select Theme
               </option>
-              {themeOptions.map((theme) => (
-                <option value={theme}>{theme}</option>
+              {themeOptions.map((theme, index) => (
+                <option key={index} value={theme}>{theme}</option>
               ))}
             </select>
           </>
@@ -212,7 +207,7 @@ const Settings = (props) => {
               <button
                 type="button"
                 onClick={props.logout}
-                class=" text-accent-content w-24 btn-accent focus:ring-4 focus:outline-none rounded-full font-medium  text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                className=" text-accent-content w-24 btn-accent focus:ring-4 focus:outline-none rounded-full font-medium  text-sm px-5 py-2.5 text-center mr-2 mb-2"
               >
                 <div className="flex items-center">
                   {" "}

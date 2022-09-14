@@ -35,9 +35,6 @@ const createUser = (user) => {
 	})
 }
 
-
-
-
 const loginUser = (user) => {
 	return db.query("SELECT id FROM users WHERE email = $1 AND password = $2;", [user.email, user.password]).then(data => {	
 		return data.rows[0].id;
@@ -79,9 +76,6 @@ const updateSearchEngine = (searchEngine, id) => {
 	})
 }
 
-
-
-
 module.exports = {
 	getAllUsers,
 	getUserById,
@@ -91,6 +85,3 @@ module.exports = {
 	updateTheme,
 	updateSearchEngine
 }
-
-
-

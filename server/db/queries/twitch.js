@@ -12,16 +12,6 @@ const updateTwitchStreamers = (streamers, id) => {
   })
 }
 
-
-
-
-
-
-
-
-
-
-
 module.exports = {
   updateTwitchStreamers
 }

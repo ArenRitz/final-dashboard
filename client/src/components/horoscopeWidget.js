@@ -92,7 +92,6 @@ const Horoscope = (props) => {
             <h3 className="text-accent text-center border-b-2 border-accent mb-2">Daily Horoscope</h3>
             </div>
             <div className="horoscope-info text-start ml-4">
-           
               <p className="text-sm">
                 Compatibility: {horoscope.response.compatibility}
               </p>

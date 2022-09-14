@@ -1,7 +1,5 @@
 const router = require('express').Router();
-
 const users = require('../db/queries/users');
-
 
 /* GET users listing. */
 router.get('/', (req, res) => {
@@ -16,6 +14,5 @@ router.get('/:id', (req, res) => {
     res.json(data);
   })
 });
-
 
 module.exports = router;

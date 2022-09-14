@@ -2,11 +2,6 @@ import axios from "axios"
 import { useState, useEffect } from "react";
 
 const useUserData = (user_id) => {
-
-  
-
-
-
   const [userData, setUserData] = useState({})
 
   useEffect(() => {

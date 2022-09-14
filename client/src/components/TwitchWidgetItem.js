@@ -25,7 +25,6 @@ const TwitchWidgetItem = (props) => {
 
     Promise.all([getStreamData(), getUserData()])
       .then((results) => {
-        // console.log('fetched initial streamer data')
         const streamData = results[0].data.data[0];
         const userData = results[1].data.data[0];
         if (streamData) {
@@ -49,7 +48,6 @@ const TwitchWidgetItem = (props) => {
     const refreshData = setInterval(() => {
       getStreamData()
         .then((results) => {
-          // console.log('refreshed streamer data')
           const streamData = results.data.data[0];
           if (streamData) {
             setState((prev) => ({
@@ -71,10 +69,8 @@ const TwitchWidgetItem = (props) => {
     return () => {
       clearInterval(refreshData);
     };
-
     // eslint-disable-next-line
   }, []);
-
 
   //function to delete streamer from array and then update database with new array
   const deleteStreamer = () => {
@@ -83,8 +79,6 @@ const TwitchWidgetItem = (props) => {
     );
     props.updateStreamers(newStreamerArray);
   };
-
-
 
   return (
     
@@ -127,8 +121,7 @@ const TwitchWidgetItem = (props) => {
           )}
         </a>
       </div>
-  
-  );
+    );
 };
 
 export default TwitchWidgetItem;

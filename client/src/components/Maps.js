@@ -5,7 +5,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { GoogleMap, useJsApiLoader, Marker, Autocomplete, DirectionsRenderer } from "@react-google-maps/api"
 import axios from "axios";
 
-
 export default function Maps(props) {
   const {userData, setUserData, currentLocation, click, showBool} = props 
 
@@ -20,24 +19,19 @@ export default function Maps(props) {
 
   const originRef = useRef() 
   const destinationRef = useRef()
-
   
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY,
     libraries,
   })
- 
- 
+  
   useEffect(() => {
     calculateRoute()
-
-
  }, [userData])
-
 
   async function calculateRoute() {
     // if no route user input, use the users's default route. If no default route, set to empty
-    console.log("********", userData)
+    // console.log("********", userData)
     if (originRef.current.value === '' || destinationRef.current.value === '') {
       originRef.current.value = (userData.home_location) ? userData.home_location : ""
       destinationRef.current.value = (userData.work_location) ? userData.work_location : ""
@@ -73,7 +67,6 @@ export default function Maps(props) {
     setDurationNoTraffic(resultsWithTraffic.rows[0].elements[0].duration.text)
   }
 
-
   function clearRoute() {
     setDirectionsResponse(null)
     setDistance('')
@@ -100,10 +93,9 @@ export default function Maps(props) {
 
     const data = {home_location, work_location, id:userData.id.toString()}
     axios.put(`http://localhost:8080/api/users/${data.id}`, data)
-    .then ((res) => 
-      console.log("saved home and work location. response:", res)
+    .then ((res) => {}
     )
-    .catch((err) => {
+      .catch((err) => {
       console.log(err);
     })
   }
@@ -115,14 +107,12 @@ export default function Maps(props) {
     <>
     <div className='card bg-base-200 flex flex-col justify-between w-fit px-3 py-3 rounded-[40px] shadow-lg shadow-base-content/20'>
       <section>
-        
         <div className='flex justify-between'>
           <svg width="30px" height="30px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path fill="currentcolor" d="M18.5 25.5v-9.25L24 12.6l5.5 3.65v9.25h-3v-6h-5v6ZM24 40.05q6.65-6.05 9.825-10.975Q37 24.15 37 20.4q0-5.9-3.775-9.65T24 7q-5.45 0-9.225 3.75Q11 14.5 11 20.4q0 3.75 3.25 8.675Q17.5 34 24 40.05ZM24 44q-8.05-6.85-12.025-12.725Q8 25.4 8 20.4q0-7.5 4.825-11.95Q17.65 4 24 4q6.35 0 11.175 4.45Q40 12.9 40 20.4q0 5-3.975 10.875T24 44Z"/></svg>
           <Autocomplete className="grow">
             <input className="placeholder:italic input input-bordered focus:outline-none focus:border-primary focus:ring-2 w-full mb-1 h-8" placeholder="Origin" type="text" name="origin" ref={originRef} />
           </Autocomplete>
         </div>
-
         <div className='flex justify-between'>
           <svg width="30px" height="30px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path fill="currentcolor" d="m26.35 42-5.7-14.65L6 21.65V19.5L42 6 28.5 42Zm.9-5.7 9.6-25.15-25.1 9.6 11.2 4.3Zm-4.3-11.25Z"/></svg>
           <Autocomplete className="grow">
@@ -143,7 +133,6 @@ export default function Maps(props) {
           <button className="btn btn-outline btn-accent btn-sm hover:outline-none font-normal normal-case mb-1" onClick={saveHomeAndWork}>Save Default Route</button>
         </div>
       </section>
-
       <section className="relative">
         {distance ? 
           <div className="overflow-x-auto">
@@ -165,7 +154,6 @@ export default function Maps(props) {
             </table>
           </div>
         : null}
-
         <GoogleMap
           zoom={15}
           center={currentLocation}
@@ -184,9 +172,7 @@ export default function Maps(props) {
           {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
         </GoogleMap>
       </section>
-
     </div>
     </>
   );
-
 }

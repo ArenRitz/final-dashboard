@@ -1,7 +1,6 @@
 import BookmarkItem from "./BookmarkItem";
 import React, { useState } from "react";
 import NewBookmark from "./NewBookmark";
-
 import NewCategory from "./NewCategory";
 import { BsTrashFill } from "react-icons/bs";
 import { AiOutlineEdit } from "react-icons/ai";
@@ -25,9 +24,9 @@ const BookmarkList = (props) => {
   let bookmarkList = bookmarksItems.map((bookmark, index) => {
 
     return (
-      <>
+      <div key={index}>
         {bookmark.title && (
-          <div key={index} className="relative w-40">
+          <div  className="relative w-40">
             <div
               className="my-1 rounded-full shadow-md border-b-2 border-base-content/20 shadow-base-content/10 bg-base-300 group overflow-hidden w-full hover:text-accent hover:border-accent"
               onMouseEnter={toggleEdit}
@@ -45,12 +44,11 @@ const BookmarkList = (props) => {
             </div>
           </div>
         )}
-      </>
+      </div>
     );
   });
 
   //set listCount to count
-
   return (
     <>
       <div className="flex flex-col items-center justify-center relative">
@@ -93,10 +91,7 @@ const BookmarkList = (props) => {
             )}
           </>
         )}
-
         {bookmarkList}
-
-
         {props.mode === "edit" && (
           <>
             <button

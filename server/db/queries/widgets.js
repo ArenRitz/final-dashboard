@@ -27,17 +27,7 @@ const updateWidgetVisibility = (name, visibility, id) => {
   })
 }
 
-
-
-
-
-
-
-
 module.exports = {
   getAllWidgetsByUserID, 
   updateWidgetVisibility
 }
-
-
-

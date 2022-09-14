@@ -5,12 +5,14 @@ import TransitItem from "./TransitItem";
 import { AiOutlineTwitter } from "react-icons/ai";
 
 export default function TransitList(props) {
+
   const [isLoading, setIsLoading] = useState(false);
   const [tweets, setTweets] = useState({
     twitterUser: "@ttcnotices",
     twitterId: "19025957",
     tweetList: [],
   });
+
   const [tweetCount, setTweetCount] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
   const [currentTweetIndex, setCurrentTweetIndex] = useState(0);
 
@@ -42,8 +44,7 @@ export default function TransitList(props) {
     axios
       .get(`http://localhost:8080/twitter/transit`) // twitter does not allow frontend requests. use backend route "/twitter/transit"
       .then((res) => {
-        console.log("frontend twitter response", res);
-
+        // console.log("frontend twitter response", res);
         setTweets({
           tweetList: formatTweets(res.data.data),
         });
@@ -61,7 +62,7 @@ export default function TransitList(props) {
           <div className="flex" role="status">
             <svg
               aria-hidden="true"
-              class="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-accent"
+              className="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-accent"
               viewBox="0 0 100 101"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -80,27 +81,27 @@ export default function TransitList(props) {
         {!isLoading && (
           <section className="flex-col w-full relative">
             <div className="absolute text-2xl right-0 text-accent">
-            <AiOutlineTwitter></AiOutlineTwitter>
+              <AiOutlineTwitter></AiOutlineTwitter>
             </div>
-
             <div className="text-accent text-center border-b-2 border-accent">
               <h3>TTC Service Alerts</h3>
             </div>
             <div className="carousel">
               {tweets.tweetList.map((item, index) => {
                 return (
-                  <div id={"tweet" + index} className="carousel-item w-full">
+                  <div key={index} id={"tweet" + index} className="carousel-item w-full">
                     <div className="w-full">
-                      <TransitItem item={item} key={index} />
+                      <TransitItem item={item}  />
                     </div>
                   </div>
                 );
               })}
             </div>
             <div className="flex justify-center w-full pt-4 gap-2">
-              {tweetCount.map((item) => {
+              {tweetCount.map((item, index) => {
                 return (
                   <a
+                    key={index}
                     href={`#tweet${item}`}
                     className={`btn btn-xs hover:bg-accent ${
                       item === currentTweetIndex ? "border border-accent" : ""

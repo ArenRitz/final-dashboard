@@ -41,7 +41,6 @@ const resetDB = async () => {
 		const client = new Client(connObj);
 		await client.connect();
 		console.log("connection established!\n");
-
 		console.log("-- Running Migrations --\n");
 		await runMigrations(client);
 		console.log('\n');

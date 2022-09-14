@@ -3,7 +3,6 @@ import NewBookmark from "./NewBookmark";
 import { BsTrashFill } from "react-icons/bs";
 import { AiOutlineEdit } from "react-icons/ai";
 
-
 const BookmarkItem = (props) => {
   const [showEdit, setShowEdit] = useState(false);
 
@@ -39,7 +38,6 @@ const BookmarkItem = (props) => {
                </div>
             </button>
           </div>
-
           <a
             className=" w-40 overflow-x-hidden text-center"
             href={props.URL}
@@ -48,7 +46,6 @@ const BookmarkItem = (props) => {
           >
             {props.title}
           </a>
-
           <div className="mx-0 my-0 py-0 px-0 relative">
             <button
               className=" bg-error w-12 h-full text-error-content z-10 absolute -right-16 -top-0 tranform transition-all group-hover:transform group-hover:transition-all group-hover:-translate-x-[3rem] pr-4 pl-0 group-hover:after:translate-x-8  text-start text-sm rounded-l-full"

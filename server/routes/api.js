@@ -1,10 +1,8 @@
 const router = require('express').Router();
-
 const users = require('../db/queries/users');
 const bookmarks = require('../db/queries/bookmarks');
 const widgets = require('../db/queries/widgets');
 const twitch = require('../db/queries/twitch');
-
 
 // put request for creating new user in database, returns user id to client or error if user with that email already exists
 
@@ -24,7 +22,6 @@ router.put('/users', (req, res) => {
       res.json({error: err});
     })
   })
-
 
 // put request for user's home and work location
 router.put('/users/:id', (req, res) => {
@@ -47,7 +44,6 @@ router.delete('/bookmarks/:id/:category_id/:title', (req, res) => {
   })
 })
 
-
 // function to add bookmark to database for specific user by category ID and bookmark title
 router.put('/bookmarks/:id/:category_id', (req, res) => {
   bookmarks.addBookmark(req.params.category_id, req.body.title, req.body.url).then(data => {
@@ -67,8 +63,6 @@ router.put('/bookmarks/:bookmark_id', (req, res) => {
     })
   })
 })
-
-
 
 //function to delete category from database for specific user id by category id
 router.delete('/categories/:id/:category_id', (req, res) => {
@@ -128,15 +122,12 @@ router.put('/theme/:id', (req, res) => {
   })
 })
 
-
 // function to update search engine
 router.put('/search/:id', (req, res) => {
   users.updateSearchEngine(req.body.search_engine, req.params.id).then(data => {
     res.json(data);
   })
 })
-
-
 
 module.exports = router;
 
