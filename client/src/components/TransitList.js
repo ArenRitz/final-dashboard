@@ -16,7 +16,7 @@ export default function TransitList(props) {
 
   const formatTweets = (tweetArr) => {
     const formattedArr = [];
-    const maxLength = 135;
+    const maxLength = 125;
     tweetArr.forEach((element) => {
       let tweetText = element.text.slice(0, element.text.indexOf(" http"));
       if (tweetText.length > maxLength) {
