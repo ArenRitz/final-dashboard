@@ -41,7 +41,7 @@ const BookmarkItem = (props) => {
           </div>
 
           <a
-            className="text-slate-100 w-40 overflow-x-hidden text-center"
+            className=" w-40 overflow-x-hidden text-center"
             href={props.URL}
             target="_blank"
             rel="noreferrer"

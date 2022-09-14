@@ -161,7 +161,7 @@ function App() {
     <div className="App h-[100%] w-[100%]">
       {userID && (
         <div>
-          <div className="flex flex-row w-[100%] h-[10%] mt-2 justify-between mb-2">
+          <div className="flex flex-row w-[100%] h-[10%] mt-4 justify-between mb-2">
             <div className="w-[33.3%]  flex justify-start pl-24">
               {show.Clock && (
                 <NewClock
@@ -210,7 +210,7 @@ function App() {
               <br></br>
             </div> */}
 
-          <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col items-center justify-center mt-8">
             <div className="flex flex-row">
               <div className="mr-2">
                 {show.Bookmarks && (
@@ -237,7 +237,7 @@ function App() {
             </div>
             <div className="w-[100%] h-[30%]">
               <div className="flex flex-col items-center">
-                <div className="flex flex-row w-[100%] justify-center mt-4 mb-2">
+                <div className="flex flex-row w-[100%] justify-center mt-8 mb-2">
                     {show.Horoscope && (
                   <div className="mx-2">
                       <Horoscope
@@ -279,7 +279,7 @@ function App() {
                   </div>
                     )}
                 </div>
-                <div className="relative flex justify-center w-[80%] mt-[4px]">
+                <div className="relative flex justify-center w-[80%] mt-6">
                   {show.Twitch && (
                     <TwitchWidgetList
                       click={hideComponent}
@@ -312,13 +312,19 @@ function App() {
           )}
 
           <div className="fixed top-1/4 right-0 h-[400px] w-[80px] group ">
-            <div className="bg-slate-500 fixed top-1/2 text-center justify-content -right-8 h-20 w-8 rounded-l-2xl flex flex-col justify-around tranform transition-all group-hover:transform group-hover:transition-all group-hover:-translate-x-8 group-hover:after:translate-x-8">
+            <div className="bg-accent fixed top-1/2 -right-8 h-20 w-8 rounded-l-2xl tranform transition-all group-hover:transform group-hover:transition-all group-hover:-translate-x-8 group-hover:after:translate-x-8">
+              <div className="w-full h-[50%] ">
               <Button type="settings" click={hideComponent} name="Settings" />
+              </div>
               {mode === "view" && (
+                 <div className="w-full h-[50%]">
                 <Button type="edit" click={changeMode} name="edit" />
+                </div>
               )}
               {mode === "edit" && (
+                 <div className="w-full h-[50%]">
                 <Button type="stopedit" click={changeMode} name="view" />
+                </div>
               )}
             </div>
           </div>
