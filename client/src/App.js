@@ -47,7 +47,7 @@ function App() {
 
   const [userID, setUserID] = useState(null); // ******* CHANGE THIS TO NULL TO TEST LOGIN *******
 
-  const { userData, setUserData } = useUserData(userID); //getter and setter for the current user's data in state(currently defaulted to user_id 1)
+  const { userData, setUserData } = useUserData(userID); //getter and setter for the current user's data in state from custom hook
 
   const html = document.querySelector("html");
   html.setAttribute("data-theme", `${theme}`);
@@ -227,6 +227,7 @@ function App() {
                 {show.Maps && (
                   <Maps
                     userData={userData}
+                    setUserData={setUserData}
                     currentLocation={currLocation}
                     click={hideComponent}
                     showBool={show.Maps}

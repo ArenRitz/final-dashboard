@@ -11,7 +11,7 @@ const TransitItem = (props) => {
           {props.item.text}
         </p>
         <div className="text-right text-secondary text-xs">
-          <ReactTimeAgo date={Date.parse(props.item.created_at)} locale="en-US"/>  <a className="underline" href="https://twitter.com/ttcnotices">@TTCnotices</a>
+          <ReactTimeAgo date={Date.parse(props.item.created_at)} locale="en-US"/>  <a className="underline" href="https://twitter.com/ttcnotices" target="_blank" rel="noopener noreferrer">@TTCnotices</a>
         </div>
       </div>
     </>

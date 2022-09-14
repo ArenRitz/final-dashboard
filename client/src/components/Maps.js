@@ -3,12 +3,11 @@
 // disable adblockers
 import React, { useEffect, useRef, useState } from "react";
 import { GoogleMap, useJsApiLoader, Marker, Autocomplete, DirectionsRenderer } from "@react-google-maps/api"
-import Button from "./Button";
 import axios from "axios";
 
 
 export default function Maps(props) {
-  const {userData, currentLocation, click, showBool} = props 
+  const {userData, setUserData, currentLocation, click, showBool} = props 
 
   const [map, setMap] = useState( /** @type google.maps.Map */(null)) //add autocompletions provided by google maps
   const [directionsResponse, setDirectionsResponse] = useState(null)
@@ -93,6 +92,12 @@ export default function Maps(props) {
       console.log("please set a route before saving")
       return 
     }
+    setUserData((prevState) => ({
+      ...prevState,
+      home_location: home_location,
+      work_location: work_location
+    }))
+
     const data = {home_location, work_location, id:userData.id.toString()}
     axios.put(`http://localhost:8080/api/users/${data.id}`, data)
     .then ((res) => 
@@ -121,7 +126,7 @@ export default function Maps(props) {
         <div className='flex justify-between'>
           <svg width="30px" height="30px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path fill="currentcolor" d="m26.35 42-5.7-14.65L6 21.65V19.5L42 6 28.5 42Zm.9-5.7 9.6-25.15-25.1 9.6 11.2 4.3Zm-4.3-11.25Z"/></svg>
           <Autocomplete className="grow">
-            <input className="placeholder:italic input input-bordered w-full focus:outline-none focus:border-primary focus:ring-2 mb-1 h-8" placeholder="Destination" type="text" name="destination" ref={destinationRef} />
+            <input className="placeholder:italic input input-bordered w-full focus:outline-none focus:border-primary focus:ring-2 mb-1 h-8" placeholder="Destination" type="text" name="destination" ref={destinationRef}/>
           </Autocomplete>
         </div>
         <div className='flex justify-between'>
