@@ -32,22 +32,22 @@ const Settings = (props) => {
   const userInfo = props.userData;
 
   return (
-    <div className="fixed w-[100%] h-[100%] top-0 right-0 backdrop-blur-sm z-20">
-      <button
-        type="button"
-        onClick={props.click}
-        className="z-40 btn-xs btn-error absolute top-[3.3rem] rounded-full right-[38%] border-base-300 border-2"
-        name="Settings"
-      >
-        X
-      </button>
+    <div className="fixed w-[100%] h-[100%] top-0 right-0 backdrop-blur-sm z-20 ">
       <div className="z-30 absolute top-12 left-1/3 bg-base-300 w-[450px] rounded-3xl flex flex-row border-2 border-base-content">
         <div className="w-full">
           <>
-            <div className="bg-base-300 rounded-t-[1.4rem] h-8 pt-[4px]">
-              <p className="text-center text-accent border-b-2 h-full border-b-base-content ">
+            <div className="bg-base-300 border-b-2 border-b-base-content relative rounded-t-[1.4rem] h-8 pt-[4px] flex justify-center">
+              <p className="text-center text-accent  h-full  ">
                 Settings
               </p>
+              <button
+                type="button"
+                onClick={props.click}
+                className="z-40 bg-error text-error-content flex justify-center items-center absolute rounded-full top-0 right-[1rem] w-[1.75rem] h-[1.75rem] border-base-300 border-2 before:content-[''] hover:before:content-['X']"
+                name="Settings"
+              >
+                
+              </button>
             </div>
             <select
               className="select select-bordered w-full max-w-xs mt-4"
@@ -57,7 +57,9 @@ const Settings = (props) => {
                 Select Theme
               </option>
               {themeOptions.map((theme, index) => (
-                <option key={index} value={theme}>{theme}</option>
+                <option key={index} value={theme}>
+                  {theme}
+                </option>
               ))}
             </select>
           </>
@@ -211,7 +213,7 @@ const Settings = (props) => {
               >
                 <div className="flex items-center">
                   {" "}
-                  <span className="">Logout</span> 
+                  <span className="">Logout</span>
                   <div className="ml-2 mt-[2px] text-accent-content inline">
                     <MdLogout></MdLogout>
                   </div>
