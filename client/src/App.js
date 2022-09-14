@@ -227,9 +227,9 @@ function App() {
             </div>
             <div className="w-[100%] h-[30%]">
               <div className="flex flex-col items-center">
-                <div className="flex flex-row w-[100%] justify-center mt-2">
-                  <div className="mx-2">
+                <div className="flex flex-row w-[100%] justify-center mt-4 mb-2">
                     {show.Horoscope && (
+                  <div className="mx-2">
                       <Horoscope
                         userID={userID}
                         horoscope={userData.horoscope_sign}
@@ -237,37 +237,37 @@ function App() {
                         showBool={show.Horoscope}
                         mode={mode}
                       />
-                    )}
                   </div>
-                  <div className="mx-2">
+                    )}
                     {show.Spotify && (
+                  <div className="mx-2">
                       <WidgetSpotifyList
                         click={hideComponent}
                         showBool={show.Spotify}
                         mode={mode}
                         setFocusTrack={setFocusTrack}
                       />
-                    )}
                   </div>
-                  <div className="mx-2">
+                    )}
                     {show.Recipe && (
+                  <div className="mx-2">
                       <WidgetRecipe
                         click={hideComponent}
                         showBool={show.Recipe}
                         mode={mode}
                       />
-                    )}
                   </div>
-                  <div className="mx-2">
+                    )}
                     {show.Transit && (
+                  <div className="mx-2">
                       <TransitList
                         click={hideComponent}
                         showBool={show.Transit}
                         mode={mode}
                         setFocusTweet={setFocusTweet}
                       />
-                    )}
                   </div>
+                    )}
                 </div>
                 <div className="relative flex justify-center w-[80%] mt-[4px]">
                   {show.Twitch && (

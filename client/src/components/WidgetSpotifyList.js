@@ -139,8 +139,8 @@ const WidgetSpotifyList = (props) => {
   }, [playlist]);
 
   return (
-    <div className="w-[400px] transform transition-all ">
-      <div className='border-solid  bg-base-200 border-2 border-base-content rounded-3xl relative'>
+    <div className="w-[400px] transform transition-all  ">
+      <div className='border-solid  bg-base-200 shadow-lg shadow-base-content/10 rounded-3xl relative'>
       {props.mode === "edit" && (
       <div className='pt-[2px]'>
         <select className="select select-xs select-bordered w-[200px]  max-w-xs" onChange={pickPlaylist}>
