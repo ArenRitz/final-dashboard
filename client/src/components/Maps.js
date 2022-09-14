@@ -24,10 +24,6 @@ export default function Maps(props) {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY,
     libraries,
   })
-  
-  useEffect(() => {
-    calculateRoute()
- }, [userData])
 
   async function calculateRoute() {
     // if no route user input, use the users's default route. If no default route, set to empty
@@ -36,9 +32,6 @@ export default function Maps(props) {
       originRef.current.value = (userData.home_location) ? userData.home_location : ""
       destinationRef.current.value = (userData.work_location) ? userData.work_location : ""
     }
-    // console.log("home prop :", userData.home_location)
-    // console.log("originRef Look at .current.value:", originRef)
-    // console.log("userData in Maps", userData)
 
     // get directions, route and distance from DirectionsService
     // eslint-disable-next-line no-undef
@@ -67,6 +60,10 @@ export default function Maps(props) {
     setDurationNoTraffic(resultsWithTraffic.rows[0].elements[0].duration.text)
   }
 
+  useEffect(() => {
+    if (originRef.current) calculateRoute()
+ }, [userData])
+
   function clearRoute() {
     setDirectionsResponse(null)
     setDistance('')
@@ -90,12 +87,11 @@ export default function Maps(props) {
       home_location: home_location,
       work_location: work_location
     }))
-
     const data = {home_location, work_location, id:userData.id.toString()}
     axios.put(`http://localhost:8080/api/users/${data.id}`, data)
     .then ((res) => {}
     )
-      .catch((err) => {
+    .catch((err) => {
       console.log(err);
     })
   }
