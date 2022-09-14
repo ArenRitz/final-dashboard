@@ -38,7 +38,7 @@ const WidgetSpotifyList = (props) => {
   });
 
   const [musicCount, setMusicCount] = useState([0,1,2,3,4,5,6,7,8,9])
-
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0)
   // console.log("------------------CHECKING PLAYLIST STATE-----------------");
 
   const pickPlaylist = (e) => {
@@ -54,6 +54,7 @@ const WidgetSpotifyList = (props) => {
   };
 
   const setTopSong = (index) => {
+    setCurrentTrackIndex(index)
     props.setFocusTrack(music.tracks[index])
   }
 
@@ -172,7 +173,11 @@ const WidgetSpotifyList = (props) => {
       <div className="flex justify-center w-full py-1 gap-2">
         { musicCount.map((item) => {
           return (
-            <a href={`#item${item}`} className="btn btn-xs" onClick={() => setTopSong(item)}>{item + 1}</a>
+            <a 
+              href={`#item${item}`} 
+              className={`btn btn-xs hover:bg-accent ${item === currentTrackIndex ? "border border-accent" : ""}`}
+              onClick={() => setTopSong(item)}
+            >{item + 1}</a>
           )
          })
         }

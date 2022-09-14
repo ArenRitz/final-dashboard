@@ -12,6 +12,7 @@ export default function TransitList(props) {
     tweetList: []
   });
   const [tweetCount, setTweetCount] = useState([0,1,2,3,4,5,6,7,8,9])
+  const [currentTweetIndex, setCurrentTweetIndex] = useState(0)
 
   const formatTweets = (tweetArr) => {
     const formattedArr= []
@@ -28,15 +29,14 @@ export default function TransitList(props) {
       })
     });
 
-    console.log("formatTweets:", formattedArr)
-
     return formattedArr
   }
 
   const showTweet = (index) => {
+    setCurrentTweetIndex(index)
     props.setFocusTweet(tweets.tweetList[index])
   }
-
+  
   useEffect(() => {
     setIsLoading(true)
     axios
@@ -85,7 +85,11 @@ export default function TransitList(props) {
               {
                 tweetCount.map((item) => {
                   return (
-                    <a href={`#tweet${item}`} className="btn btn-xs" onClick={() => showTweet(item)}>{item + 1}</a>
+                    <a 
+                      href={`#tweet${item}`} 
+                      className={`btn btn-xs hover:bg-accent ${item === currentTweetIndex ? "border border-accent" : ""}`}
+                      onClick={() => {showTweet(item)}}
+                    >{item + 1}</a>
                   )
                 })
               }
