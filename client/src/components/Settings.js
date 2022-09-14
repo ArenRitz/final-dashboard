@@ -48,8 +48,9 @@ const Settings = (props) => {
     <div className="fixed w-[100%] h-[100%] top-0 right-0 backdrop-blur-sm z-20">
       <button
         type="button"
-        onClick={() => props.toggleSettings()}
-        className="z-40 btn-xs btn-error absolute top-[3.3rem] rounded-full right-[35%]"
+        onClick={props.click}
+        className="z-40 btn-xs btn-error absolute top-[3.3rem] rounded-full right-[38%] border-base-300 border-2"
+        name="Settings"
       >
         X
       </button>

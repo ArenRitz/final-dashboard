@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import TwitchWidgetItem from "./TwitchWidgetItem";
 import axios from "axios";
 import UpdateTwitchList from "./UpdateTwitchList";
+import {FiTwitch} from "react-icons/fi";
 
 const TwitchWidgetList = (props) => {
   const [streamers, setStreamers] = useState([]);
@@ -42,6 +43,10 @@ const TwitchWidgetList = (props) => {
   return (
     <>
       <div className="w-fit h-fit bg-base-200 shadow-lg shadow-base-content/10 px-3  rounded-2xl flex relative">
+      <div className="text-4xl text-accent flex items-center justify-center border-r-2 pl-[0.4rem] pr-[1rem] my-[5px] border-accent" >
+      <FiTwitch/>
+      </div>
+
         {streamersList}
 
         {props.mode === "edit" && (
