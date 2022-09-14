@@ -16,7 +16,7 @@ export default function Maps(props) {
   const [durationTraffic, setDurationTraffic] = useState(null)
   const [durationNoTraffic, setDurationNoTraffic] = useState(null)
   const [libraries] = useState(['places']); //prevents console warnings
-
+  
   const originRef = useRef() 
   const destinationRef = useRef()
   
