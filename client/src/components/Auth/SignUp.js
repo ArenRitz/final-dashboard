@@ -26,6 +26,7 @@ const SignUp = (props) => {
     })
     .then((res) => {
       props.handleLogin(res.data.id);
+      localStorage.setItem("user_id", res.data.id);
     })
     .catch((err) => {
       console.log(err);

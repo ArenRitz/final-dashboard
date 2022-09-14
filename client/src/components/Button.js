@@ -26,7 +26,7 @@ const Button = (props) => {
           name={props.name}
         >
 
-          <FiSettings className=" text-accent-content" />
+          <FiSettings className=" text-accent-content" style={{pointerEvents: 'none'}}/>
      
         </button>
       )}
