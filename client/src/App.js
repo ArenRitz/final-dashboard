@@ -18,6 +18,7 @@ import axios from "axios";
 import "./App.css";
 import SearchWidget from "./components/SearchWidget";
 
+
 function App() {
   const [show, setShow] = useState({
     Horoscope: true,
@@ -110,6 +111,15 @@ function App() {
       });
   };
 
+  //toggle settings menu
+  const toggleSettings = () => {
+    setShow((prevState) => ({
+      ...prevState,
+      Settings: !prevState.Settings,
+    }));
+  };
+
+
   //handle visibility change via toggle button in settings to update database and state
   const handleVisibilityChange = (widget, currentShowStatus) => {
     const name = widget;
@@ -152,7 +162,7 @@ function App() {
       {userID && (
         <div>
           <div className="flex flex-row w-[100%] h-[10%] mt-2 justify-between mb-2">
-            <div className="w-[33.3%]  flex justify-start">
+            <div className="w-[33.3%]  flex justify-start pl-24">
               {show.Clock && (
                 <NewClock
                   click={hideComponent}
@@ -297,10 +307,11 @@ function App() {
               userID={userID}
               logout={clearUserSession}
               setThemeInDB={setThemeInDB}
+              toggleSettings={toggleSettings}
             />
           )}
 
-          <div className="fixed top-1/3 right-0 h-1/3 w-1/6 group">
+          <div className="fixed top-1/4 right-0 h-[400px] w-[80px] group ">
             <div className="bg-slate-500 fixed top-1/2 text-center justify-content -right-8 h-20 w-8 rounded-l-2xl flex flex-col justify-around tranform transition-all group-hover:transform group-hover:transition-all group-hover:-translate-x-8 group-hover:after:translate-x-8">
               <Button type="settings" click={hideComponent} name="Settings" />
               {mode === "view" && (

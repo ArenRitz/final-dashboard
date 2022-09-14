@@ -29,7 +29,7 @@ const BookmarkList = (props) => {
         {bookmark.title && (
           <div key={index} className="relative w-40">
             <div
-              className="my-1 rounded-full shadow-md border-2 border-base-content shadow-base-content/10 bg-base-300 group overflow-hidden w-full hover:text-accent hover:border-accent"
+              className="my-1 rounded-full shadow-md border-b-2 border-base-content/20 shadow-base-content/10 bg-base-300 group overflow-hidden w-full hover:text-accent hover:border-accent"
               onMouseEnter={toggleEdit}
             >
               <BookmarkItem

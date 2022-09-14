@@ -62,7 +62,7 @@ const Horoscope = (props) => {
           response: json,
         });
       });
-  }
+  };
 
   useEffect(() => {
     // console.log("INSIDE USEFFECT", currentHoroscope);
@@ -71,35 +71,43 @@ const Horoscope = (props) => {
     }
 
     fetchHoroscopeData(props.horoscope);
-
   }, [props.horoscope]);
 
   // console.log(horoscope)
 
   return (
     <>
-      <div className="w-[400px] bg-base-200 shadow-lg shadow-base-content/10 rounded-3xl p-2 group h-[168px] relative">
-        <div className="relative">
-          <div className="flex flex-row">
-            <div className="w-[140px] h-[140px]  ">
+      <div className="w-[400px] bg-base-200 shadow-lg shadow-base-content/10 rounded-3xl p-2 group h-[168px]">
+        <div className="relative w-full h-full">
+          <div className="flex flex-row w-full h-full">
+            <div className=" w-[35%]">
               <img
                 src={`assets/zodiacs/${currentHoroscope}.jpeg`}
                 alt="zodiac"
-                width={140}
-                height={140}
-                className="rounded-3xl w-[140px] h-[140px] "
+                className="rounded-3xl w-full h-full "
               />
             </div>
-            <div className="horoscope-info text-sm text-start ml-4">
-              Highly Compatible With: {horoscope.response.compatibility} <br />
-              Lucky Number: {horoscope.response.lucky_number} <br />
-              Lucky Time: {horoscope.response.lucky_time} <br />
-              Color: {horoscope.response.color} <br />
-              Mood: {horoscope.response.mood} <br />
+            <div className="flex flex-col w-[65%] items-center">
+            <div className="w-[95%] ml-2 ">
+            <h3 className="text-accent text-center border-b-2 border-accent mb-2">Daily Horoscope</h3>
+            </div>
+            <div className="horoscope-info text-start ml-4">
+           
+              <p className="text-sm">
+                Compatibility: {horoscope.response.compatibility}
+              </p>
+              <p className="text-sm">
+                Lucky Number: {horoscope.response.lucky_number}{" "}
+              </p>
+              <p className="text-sm">
+                Lucky Time: {horoscope.response.lucky_time}{" "}
+              </p>
+              <p className="text-sm"> Color: {horoscope.response.color}</p>
+              <p className="text-sm"> Mood: {horoscope.response.mood}</p>
               {props.mode === "edit" && (
-                <div className="horoscope-dropdown">
+                <div className="horoscope-dropdown flex justify-center  ">
                   <select
-                    className="select select-bordered select-xs w-[200px]"
+                    className="select select-bordered select-xs w-[150px]"
                     onChange={pickHoroscope}
                   >
                     <option disabled selected>
@@ -114,9 +122,10 @@ const Horoscope = (props) => {
                 </div>
               )}
             </div>
+            </div>
           </div>
-
-          <div className="dropdown dropdown-top dropdown-hover absolute -bottom-[1.4rem] left-[9rem] ">
+          {props.mode !== "edit" && (              
+          <div className="dropdown dropdown-top dropdown-hover absolute -bottom-[1.4rem] left-[13rem] ">
             <label
               tabIndex={0}
               className="btn btn-accent btn-xs rounded-full shadow  opacity-0 transition-all delay-75 group-hover:opacity-100"
@@ -125,11 +134,12 @@ const Horoscope = (props) => {
             </label>
             <ul
               tabIndex={0}
-              className="dropdown-content -left-20 menu p-2 shadow bg-base-100 rounded-box  border-2 border-base-content w-80 text-sm"
+              className="dropdown-content -left-36 menu p-2 shadow bg-base-100 rounded-box  border-2 border-base-content w-80 text-sm"
             >
               {horoscope.response.description} <br />
             </ul>
           </div>
+          )}
         </div>
       </div>
     </>

@@ -46,7 +46,7 @@ export default function WeatherCustom(props) {
           const responseData = {
             temp: Math.round(res.data.main.temp),
             city_name: res.data.name,
-            weather: { description: res.data.weather[0].description, icon: res.data.weather[0].icon }
+            weather: { description: res.data.weather[0].description.split(' ').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' '), icon: res.data.weather[0].icon }
           }
 
           setWeatherData(() => responseData)
@@ -67,9 +67,9 @@ export default function WeatherCustom(props) {
         {isLoading && <div className="flex w-fit bg-base-200 rounded-3xl px-2 py-2 my-1 shadow border-solid border-2 border-base-content">
           <div>
             <h1 className="">&nbsp;</h1>
-            <div className="border-t border-accent" />
+            <div className="border-t-2 border-accent" />
             <h1 className="" >Weather</h1>
-            <div className="border-t border-accent" />
+            <div className="border-t-2 border-accent" />
             <h1 className="">&nbsp;</h1>
           </div>
           <div className=" w-[5rem] flex justify-center items-center">
@@ -82,15 +82,15 @@ export default function WeatherCustom(props) {
           </div>
         </div>}
         {!isLoading &&
-          <div className="flex w-fit bg-base-200 rounded-3xl px-2 py-2  shadow-lg shadow-base-content/10">
-            <div>
+          <div className="flex w-[250px] bg-base-200 rounded-3xl px-2 py-2  shadow-lg shadow-base-content/10">
+            <div className="w-[60%]">
               <h1 className=""> {weatherData.city_name} </h1>
-              <div className="border-t border-accent" />
+              <div className="border-t-2 border-accent" />
               <h1 className=" " > {weatherData.temp} °C</h1>
-              <div className="border-t border-accent" />
+              <div className="border-t-2 border-accent" />
               <h1 className=""> {weatherData.weather.description}</h1>
             </div>
-            <div className=" w-[4rem] flex justify-center items-center">
+            <div className=" w-[40%] flex justify-center items-center">
               <img alt="icon" className=" w-[4rem]" src={`http://openweathermap.org/img/w/${weatherData.weather.icon}.png`} />
             </div>
           </div>
