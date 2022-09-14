@@ -8,7 +8,7 @@ const WidgetSpotifyItem = (props) => {
           <img src={props.item.track.album.images[0].url} alt='album cover' width={100} height={100} className=' rounded-3xl'  />
         </div>
         <div className='truncate text-start'>
-          <a href={props.item.track.external_urls.spotify} className="text-accent hover:text-accent-focus">
+          <a href={props.item.track.external_urls.spotify} className="text-secondary hover:text-secondary-focus ">
             {props.item.track.name.lenght > 15 ? props.item.track.name.substring(0, 15) + '...' : props.item.track.name}
           </a>
           <p>

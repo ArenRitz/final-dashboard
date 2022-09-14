@@ -52,10 +52,10 @@ const SearchWidget = (props) => {
 
   return (
 
-    <div className="w-fit flex flex-row border-2 border-base-content h-fit rounded-full">
+    <div className="w-[400px] flex flex-row border-2 border-base-content h-fit rounded-full">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-row h-8 items-center p-2"
+        className="flex flex-row w-full h-8 items-center p-2"
       >
         <div className="rounded-full hover:bg-white/10 mr-2 ">
           <div className="dropdown">
@@ -131,7 +131,7 @@ const SearchWidget = (props) => {
           type="text"
           placeholder="Search"
           name="search"
-          className="bg-inherit w-full  outline-button focus:outline-none"
+          className="bg-inherit w-[100%]  outline-button focus:outline-none"
           autoComplete="on"
         /> 
         <div className="rounded-full hover:bg-white/10 ml-2 px-2 py-[2px]">

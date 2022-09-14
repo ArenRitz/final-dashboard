@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import Clock from 'react-live-clock';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import Clock from "react-live-clock";
+import axios from "axios";
 
-const timezoneList = ["Canada/Eastern", "Canada/Pacific", "US/Central", "UTC", "GMT"];
+const timezoneList = [
+  "Canada/Eastern",
+  "Canada/Pacific",
+  "US/Central",
+  "UTC",
+  "GMT",
+];
 
 const NewClock = (props) => {
-
   const currentUserId = props.userID;
   const currentTimezone = props.timezone;
 
@@ -45,35 +50,32 @@ const NewClock = (props) => {
   };
 
   return (
-    <div className="text-5xl bg-base-200 clock pt-[12px] shadow-lg shadow-base-content/10 rounded-3xl whitespace-nowrap w-fit pr-6 pl-6 h-26">
-
-      <Clock
-        format={'h:mm A'}
-        ticking={true}
-        timezone={timezone}
-      />
-      {props.mode === "view" && (
-      <div className="timezone-text pl-4 h-6" >
-        Timezone: {timezone}
+    <div className="text-5xl bg-base-200 clock pt-[12px] shadow-lg shadow-base-content/10 rounded-3xl whitespace-nowrap w-[250px]  h-26">
+      <div className="px-6 overflow-clip">
+        <Clock format={"h:mm A"} ticking={true} timezone={timezone} />
       </div>
-       )}
+      {props.mode === "view" && (
+        <div className="timezone-text h-6 ">{timezone}</div>
+      )}
       {props.mode === "edit" && (
         <div className="flex timezone-dropdown justify-center">
           <select
-            className="text-center select select-bordered w-[50%] select-xs justify-center"
+            className="text-center select select-bordered w-[60%] select-xs justify-center"
             onChange={pickTimezone}
           >
             <option disabled selected>
               Select Timezone
             </option>
             {timezoneList.map((timezone) => (
-              <option key={timezone} value={timezone}>{timezone}</option>
+              <option key={timezone} value={timezone}>
+                {timezone}
+              </option>
             ))}
           </select>
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
 export default NewClock;
