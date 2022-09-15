@@ -1,11 +1,6 @@
-import Button from "./Button";
-import { useState } from "react";
-import { GrLogout } from "react-icons/gr";
 import { MdLogout } from "react-icons/md";
 
 const Settings = (props) => {
-  const [selected, setSelected] = useState("bookmarks");
-  const [theme, setTheme] = useState("dark");
   const themeOptions = [
     "light",
     "dark",
@@ -37,17 +32,13 @@ const Settings = (props) => {
         <div className="w-full">
           <>
             <div className="bg-base-300 border-b-2 border-b-base-content relative rounded-t-[1.4rem] h-8 pt-[4px] flex justify-center">
-              <p className="text-center text-accent  h-full  ">
-                Settings
-              </p>
+              <p className="text-center text-accent  h-full  ">Settings</p>
               <button
                 type="button"
                 onClick={props.click}
                 className="z-40 bg-error text-error-content flex justify-center items-center absolute rounded-full top-0 right-[1rem] w-[1.75rem] h-[1.75rem] border-base-300 border-2 before:content-[''] hover:before:content-['X']"
                 name="Settings"
-              >
-                
-              </button>
+              ></button>
             </div>
             <select
               className="select select-bordered w-full max-w-xs mt-4"
@@ -66,20 +57,6 @@ const Settings = (props) => {
           <h2 className="text-center w-full mt-2 ">Toggle Visibility</h2>
           <div className="w-full flex-col">
             <div className="w-20 flex flex-row -right-32 relative my-4">
-              <p className="w-20 mr-20"> Bookmarks </p>
-              <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
-                <input
-                  type="checkbox"
-                  className="toggle toggle-accent"
-                  onClick={() =>
-                    props.setVisibility("Bookmarks", props.showBools.Bookmarks)
-                  }
-                  name="Bookmarks"
-                  checked={props.showBools.Bookmarks}
-                />
-              </div>
-            </div>
-            <div className="w-20 flex flex-row -right-32 relative my-4">
               <p className="w-20 mr-20"> Clock </p>
               <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
                 <input
@@ -93,20 +70,67 @@ const Settings = (props) => {
                 />
               </div>
             </div>
+
             <div className="w-20 flex flex-row -right-32 relative my-4">
-              <p className="w-20 mr-20"> Twitch </p>
+              <p className="w-20 mr-20"> Search </p>
               <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
                 <input
                   type="checkbox"
                   className="toggle toggle-accent"
                   onClick={() =>
-                    props.setVisibility("Twitch", props.showBools.Twitch)
+                    props.setVisibility("Search", props.showBools.Search)
                   }
-                  name="Twitch"
-                  checked={props.showBools.Twitch}
+                  name="Search"
+                  checked={props.showBools.Search}
                 />
               </div>
             </div>
+
+            <div className="w-20 flex flex-row -right-32 relative my-4">
+              <p className="w-20 mr-20"> Weather </p>
+              <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
+                <input
+                  type="checkbox"
+                  className="toggle toggle-accent"
+                  onClick={() =>
+                    props.setVisibility("Weather", props.showBools.Weather)
+                  }
+                  name="Weather"
+                  checked={props.showBools.Weather}
+                />
+              </div>
+            </div>
+
+            <div className="w-20 flex flex-row -right-32 relative my-4">
+              <p className="w-20 mr-20"> Bookmarks </p>
+              <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
+                <input
+                  type="checkbox"
+                  className="toggle toggle-accent"
+                  onClick={() =>
+                    props.setVisibility("Bookmarks", props.showBools.Bookmarks)
+                  }
+                  name="Bookmarks"
+                  checked={props.showBools.Bookmarks}
+                />
+              </div>
+            </div>
+
+            <div className="w-20 flex flex-row -right-32 relative my-4">
+              <p className="w-20 mr-20"> Maps </p>
+              <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
+                <input
+                  type="checkbox"
+                  className="toggle toggle-accent"
+                  onClick={() =>
+                    props.setVisibility("Maps", props.showBools.Maps)
+                  }
+                  name="Maps"
+                  checked={props.showBools.Maps}
+                />
+              </div>
+            </div>
+
             <div className="w-20 flex flex-row -right-32 relative my-4">
               <p className="w-20 mr-20"> Horoscope </p>
               <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
@@ -135,20 +159,7 @@ const Settings = (props) => {
                 />
               </div>
             </div>
-            <div className="w-20 flex flex-row -right-32 relative my-4">
-              <p className="w-20 mr-20"> Weather </p>
-              <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
-                <input
-                  type="checkbox"
-                  className="toggle toggle-accent"
-                  onClick={() =>
-                    props.setVisibility("Weather", props.showBools.Weather)
-                  }
-                  name="Weather"
-                  checked={props.showBools.Weather}
-                />
-              </div>
-            </div>
+
             <div className="w-20 flex flex-row -right-32 relative my-4">
               <p className="w-20 mr-20"> Spotify </p>
               <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
@@ -163,20 +174,7 @@ const Settings = (props) => {
                 />
               </div>
             </div>
-            <div className="w-20 flex flex-row -right-32 relative my-4">
-              <p className="w-20 mr-20"> Maps </p>
-              <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
-                <input
-                  type="checkbox"
-                  className="toggle toggle-accent"
-                  onClick={() =>
-                    props.setVisibility("Maps", props.showBools.Maps)
-                  }
-                  name="Maps"
-                  checked={props.showBools.Maps}
-                />
-              </div>
-            </div>
+
             <div className="w-20 flex flex-row -right-32 relative my-4">
               <p className="w-20 mr-20"> Transit </p>
               <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
@@ -191,17 +189,18 @@ const Settings = (props) => {
                 />
               </div>
             </div>
+
             <div className="w-20 flex flex-row -right-32 relative my-4">
-              <p className="w-20 mr-20"> Search </p>
+              <p className="w-20 mr-20"> Twitch </p>
               <div className="flex flex-row mt-2 -right-32 px-8 absolute -top-2">
                 <input
                   type="checkbox"
                   className="toggle toggle-accent"
                   onClick={() =>
-                    props.setVisibility("Search", props.showBools.Search)
+                    props.setVisibility("Twitch", props.showBools.Twitch)
                   }
-                  name="Search"
-                  checked={props.showBools.Search}
+                  name="Twitch"
+                  checked={props.showBools.Twitch}
                 />
               </div>
             </div>
